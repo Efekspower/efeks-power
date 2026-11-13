@@ -248,7 +248,10 @@
   .sidx a:hover::after,.sidx a.on::after{transform:scaleX(1)}
   .sidx a.on svg,.sidx a:hover svg{opacity:1;transform:none}
   .sidx a:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
-  @media (max-width:820px){.sidx{display:none}}
+  @media (max-width:1199px){.sidx{display:none}
+    .fig.pin{width:84px}.fig.pin figcaption,.fig.pin .vbtn{display:none}}
+  .rift{transition:opacity .6s ease}
+  .rift.away{opacity:0;pointer-events:none}
   /* Garis: eight framed plates in a box, like the specimens */
   .garis-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:34px 24px}
   .gp{width:calc((100% - 96px) / 5)}
@@ -327,7 +330,7 @@
     .hero .meta{grid-template-columns:1fr}
     .works a{grid-template-columns:36px minmax(0,1fr);row-gap:4px}
     .works .c{grid-column:2}.works .y{display:none}
-    .studio{grid-template-columns:1fr}
+    .studio{grid-template-columns:minmax(0,1fr)}
     #cur{display:none}
   }
   @media (max-width:520px){.bar nav a:not(:last-child){display:none}}
@@ -348,7 +351,7 @@
     .fig.pin figcaption,.fig.pin .vbtn{display:none}
     .hero .fig{right:30px}
     .hero{padding-top:34px}
-    .hero h1{margin-bottom:auto;z-index:1}
+    .hero h1{margin-bottom:auto;z-index:16}
     .hero .meta{z-index:1}
     .chartbox{padding:12px 12px 4px}
   }
@@ -1092,8 +1095,9 @@
       var hr=hero.getBoundingClientRect(),titleTop=h1.offsetTop;
       var sk=document.getElementById('sky'),ap=sk.createSVGPoint();ap.x=60;ap.y=170;
       var aY=ap.matrixTransform(sk.getScreenCTM()).y-hr.top;
-      var top=Math.max(110,aY+40),avail=titleTop-36-top;
-      if(avail<110){rift.style.display='none';return;}
+      if(titleTop<aY){var mt=hero.querySelector('.meta');if(mt)titleTop=mt.offsetTop;}
+      var sm=innerWidth<=560,top=Math.max(sm?90:110,aY+(sm?26:40)),avail=titleTop-(sm?18:36)-top;
+      if(avail<(sm?80:110)){rift.style.display='none';return;}
       rift.style.display='';
       var h=Math.min(avail,300),w=Math.round(h*.78);
       /* fixed to the screen at the spot it occupies when the page is at the top, so it freezes there while scrolling */
@@ -1173,14 +1177,27 @@
   (function(){
     var h=document.getElementById('wireH');if(!h)return;var col=h.nextElementSibling;
     function fit(){
-      if(innerWidth<=820){h.style.fontSize='';return;}
       h.style.fontSize='100px';
       var lines=[].slice.call(h.querySelectorAll('.ln2')),wid=Math.max.apply(null,lines.map(function(l){return l.getBoundingClientRect().width;}));
-      var k=Math.min(col.offsetHeight/h.offsetHeight,h.clientWidth/wid);
+      var k=innerWidth<=820?Math.min(h.parentNode.clientWidth/wid,1.1):Math.min(col.offsetHeight/h.offsetHeight,h.clientWidth/wid);
       h.style.fontSize=(100*k).toFixed(1)+'px';
     }
     fit();addEventListener('resize',function(){clearTimeout(fit.t);fit.t=setTimeout(fit,150);});addEventListener('load',fit);
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+  })();
+  /* small screens: the rift has no free margin, so it fades out once you scroll past the hero */
+  (function(){
+    var rift=document.querySelector('.rift'),hero=document.querySelector('.hero');if(!rift||!hero)return;
+    function chk(){rift.classList.toggle('away',innerWidth<1200&&scrollY>hero.offsetHeight*.45);}
+    addEventListener('scroll',chk,{passive:true});addEventListener('resize',chk);chk();
+  })();
+  /* hero title never runs off the screen, whatever the device */
+  (function(){
+    var h1=document.getElementById('title');if(!h1)return;
+    function fit(){h1.style.fontSize='';var avail=h1.clientWidth;
+      var w=h1.scrollWidth;if(w>avail){var fs=parseFloat(getComputedStyle(h1).fontSize);h1.style.fontSize=(fs*avail/w*.98).toFixed(1)+'px';}}
+    fit();addEventListener('resize',function(){clearTimeout(fit.t);fit.t=setTimeout(fit,150);});addEventListener('load',fit);
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);setTimeout(fit,1600);
   })();
   /* frozen side index: appears with the pinned Fig. 01, highlights the section in view */
   (function(){
