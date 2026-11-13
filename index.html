@@ -223,8 +223,9 @@
   /* enlarged card */
   .clb{position:fixed;inset:0;z-index:82;display:grid;place-items:center;background:color-mix(in srgb,var(--bg) 93%,transparent);backdrop-filter:blur(3px);cursor:zoom-out;opacity:0;transition:opacity .5s ease}
   .clb[hidden]{display:none}.clb.open{opacity:1}
-  .clb figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:12px;cursor:default}
-  .clb img{display:block;height:min(84vh,1600px);width:auto;max-width:90vw;object-fit:contain;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+  .clb figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:12px}
+  #clbClose{position:fixed;top:max(14px,env(safe-area-inset-top));right:16px;z-index:2;padding:0 14px;border:.5px solid var(--hair2);background:color-mix(in srgb,var(--bg) 70%,transparent)}
+  .clb img{display:block;width:auto;height:auto;max-height:min(80vh,80dvh,1600px);max-width:90vw;cursor:zoom-out;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
   .clb figcaption{display:flex;gap:24px;align-items:center;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--fine)}
   .clb button{font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--ink);background:none;border:0;min-height:44px;cursor:pointer}
   @media (max-width:700px){.spread{display:flex;flex-wrap:wrap;justify-content:center}.card{width:28vw}}
@@ -640,7 +641,7 @@
 <audio id="bed" loop preload="auto" src="media/0fdaadc5a3.mp3"></audio>
 
 <div class="clb" id="clb" role="dialog" aria-modal="true" aria-label="Artwork, enlarged" hidden>
-  <figure><img id="clbImg" alt=""><figcaption><span id="clbCap"></span><button type="button" id="clbClose">Close</button></figcaption></figure>
+  <figure><img id="clbImg" alt=""><figcaption><span id="clbCap"></span><button type="button" id="clbClose" aria-label="Close">✕ Close</button></figcaption></figure>
 </div>
 
 <svg id="cur" viewBox="-7 -7 14 14" aria-hidden="true"><path class="fi" d="M0 -7 Q0 0 7 0 Q0 0 0 7 Q0 0 -7 0 Q0 0 0 -7 Z"/></svg>
@@ -1159,10 +1160,10 @@
       clb.hidden=false;void clb.offsetWidth;clb.classList.add('open');
       (img.complete?Promise.resolve():new Promise(function(r){img.onload=r;})).then(function(){fl(c,img,false);});
       cls.focus();document.body.style.overflow='hidden';}
-    function close(){if(!from)return;clb.classList.remove('open');fl(from,img,true,function(){clb.hidden=true;});document.body.style.overflow='';from.focus();}
+    function close(){if(!from)return;var f=from;from=null;clb.classList.remove('open');fl(f,img,true,function(){clb.hidden=true;});document.body.style.overflow='';f.focus({preventScroll:true});}
     cards.forEach(function(c){c.addEventListener('click',function(){open(c);});});
     [].forEach.call(document.querySelectorAll('.gp-frame'),function(c){c.addEventListener('click',function(){open(c);});});
-    cls.onclick=close;clb.addEventListener('click',function(e){if(e.target===clb)close();});
+    cls.onclick=function(e){e.stopPropagation();close();};clb.addEventListener('click',function(e){if(e.target!==cls)close();});
     document.addEventListener('keydown',function(e){if(!clb.hidden&&e.key==='Escape')close();});
   })();
   /* workshop: heading grows to the same height as the chart + text column */
