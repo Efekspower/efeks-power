@@ -106,7 +106,10 @@
   /* specimen gallery */
   .gallery{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:34px 26px}
   .fig.gfig{position:relative;top:auto;right:auto;width:auto;margin:0;opacity:1;animation:none}
-  .fig.gfig video{background:#202020}
+  .fig.gfig video{background:#202020;filter:saturate(.6) brightness(.58) contrast(.98);transition:filter .6s ease}
+  .fig.gfig .grain{opacity:.26;transition:opacity .6s ease}
+  .fig.gfig:hover video,.fig.gfig .frame:focus-within video{filter:none}
+  .fig.gfig:hover .grain,.fig.gfig .frame:focus-within .grain{opacity:.08}
   .fig.gfig figcaption span{display:inline}
   .fig.gfig figcaption .no{color:var(--fine);opacity:.7}
   @media (max-width:1000px){.gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -250,6 +253,25 @@
   .sidx a:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
   @media (max-width:1199px){.sidx{display:none}
     .fig.pin{width:84px}.fig.pin figcaption,.fig.pin .vbtn{display:none}}
+  .pinrow{display:none}
+  @media (max-width:1199px){
+    .pinrow{position:fixed;left:0;right:0;top:60px;height:100px;z-index:19;display:flex;align-items:center;gap:12px;padding:0 20px;
+      background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(6px);border-bottom:.5px solid var(--hair);
+      opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .5s ease,transform .5s cubic-bezier(.2,.8,.2,1)}
+    .pinrow.show{opacity:1;transform:none}
+    .pinrow.show{pointer-events:auto}
+    .pr-idx{width:min(240px,calc(100% - 150px))}
+    .pr-lbl{display:block;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--fine);padding-bottom:5px;border-bottom:.5px solid var(--hair)}
+    .pr-list{list-style:none;margin:0;padding:0}
+    .pr-list a{display:flex;align-items:center;gap:10px;height:var(--prh,22px);border-bottom:.5px solid color-mix(in srgb,var(--ink) 18%,transparent);position:relative}
+    .pr-list .pr-n{font-size:9px;letter-spacing:.18em;color:var(--fine);width:18px}
+    .pr-list .pr-t{white-space:nowrap;font-family:'Big Shoulders Display',sans-serif;font-weight:200;font-size:var(--prf,15px);letter-spacing:.06em;text-transform:uppercase;color:var(--fine);transition:color .4s,transform .5s cubic-bezier(.2,.8,.2,1)}
+    .pr-list svg{width:8px;height:8px;margin-left:auto;opacity:0;transform:scale(.2) rotate(-90deg);transition:all .5s cubic-bezier(.3,1.8,.5,1)}
+    .pr-list a::after{content:"";position:absolute;left:28px;right:14px;bottom:-.5px;height:.5px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+    .pr-list a.on .pr-t{color:var(--ink);transform:translateX(3px)}
+    .pr-list a.on::after{transform:scaleX(1)}.pr-list a.on svg{opacity:1;transform:none}
+    @media (min-width:700px){.pinrow{--prh:28px;--prf:19px}.pr-idx{width:min(440px,calc(100% - 240px))}}
+  }
   .rift{transition:opacity .6s ease}
   .rift.away{opacity:0;pointer-events:none}
   /* Garis: eight framed plates in a box, like the specimens */
@@ -307,6 +329,9 @@
   .chart{margin-top:6px}
   .studio h2{margin:0;font-size:clamp(54px,8vw,128px)}
   .studio h2 .ln2{display:table;white-space:nowrap}
+  .studio h2#wireH .ln2{display:inline}.studio h2#wireH .ln2+.ln2::before{content:" "}
+  .studio h2#wireH{font-size:13px!important;line-height:1.7;letter-spacing:.24em;align-self:start;margin-top:2px}
+  .studio{align-items:start}
   .studio p{max-width:420px;margin:0 0 18px}
   .chart{width:100%;height:auto;margin-top:26px}
 
@@ -333,9 +358,11 @@
     .studio{grid-template-columns:minmax(0,1fr)}
     #cur{display:none}
   }
-  @media (max-width:520px){.bar nav a:not(:last-child){display:none}}
+  @media (max-width:1199px){.coords{display:none}.bar{flex-wrap:wrap;row-gap:0}}
+  @media (max-width:699px){.bar nav{display:none}}
   /* phone */
   html,body{overflow-x:clip}
+  @media (max-width:1199px){section{scroll-margin-top:var(--pinrow,170px)}}
   @media (max-width:560px){
     .bar{flex-wrap:nowrap;gap:6px;padding:10px 14px}
     .bar .logo{flex-shrink:0;margin:0 26px 0 18px}
@@ -351,6 +378,7 @@
     .fig.pin figcaption,.fig.pin .vbtn{display:none}
     .hero .fig{right:30px}
     .hero{padding-top:34px}
+    .hero .meta{margin-top:330px}
     .hero h1{margin-bottom:auto;z-index:16}
     .hero .meta{z-index:1}
     .chartbox{padding:12px 12px 4px}
@@ -376,6 +404,8 @@
     <input type="range" class="vol" id="vol" min="0" max="100" step="1" value="20" aria-label="Music volume">
     <nav aria-label="Main">
       <a href="#specimens">Specimens</a>
+      <a href="#drawings">Garis</a>
+      <a href="#dimensionless">Dimensionless</a>
       <a href="#studio">Workshop</a>
       <a href="#contact">Nightfall</a>
     </nav>
@@ -622,6 +652,8 @@
   <figcaption><span>Fig. 01 · The Listener</span></figcaption>
 </div>
 </figure>
+
+<nav class="pinrow" id="pinRow" aria-label="Sections"><div class="pr-idx"><span class="pr-lbl">Index</span><ol class="pr-list"><li><a href="#specimens" data-sec="specimens"><span class="pr-n">01</span><span class="pr-t">Specimens</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#drawings" data-sec="drawings"><span class="pr-n">02</span><span class="pr-t">Garis</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#dimensionless" data-sec="dimensionless"><span class="pr-n">03</span><span class="pr-t">Dimensionless</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#studio" data-sec="studio"><span class="pr-n">04</span><span class="pr-t">The Workshop</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#contact" data-sec="contact"><span class="pr-n">05</span><span class="pr-t">Nightfall</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li></ol></div></nav>
 
 <nav class="sidx" id="sidx" aria-label="Index">
   <span class="sidx-lbl">Index</span>
@@ -1175,7 +1207,7 @@
   })();
   /* workshop: heading grows to the same height as the chart + text column */
   (function(){
-    var h=document.getElementById('wireH');if(!h)return;var col=h.nextElementSibling;
+    var h=document.getElementById('wireH');if(!h||getComputedStyle(h).fontSize==='13px')return;var col=h.nextElementSibling;
     function fit(){
       h.style.fontSize='100px';
       var lines=[].slice.call(h.querySelectorAll('.ln2')),wid=Math.max.apply(null,lines.map(function(l){return l.getBoundingClientRect().width;}));
@@ -1198,6 +1230,27 @@
       var w=h1.scrollWidth;if(w>avail){var fs=parseFloat(getComputedStyle(h1).fontSize);h1.style.fontSize=(fs*avail/w*.98).toFixed(1)+'px';}}
     fit();addEventListener('resize',function(){clearTimeout(fit.t);fit.t=setTimeout(fit,150);});addEventListener('load',fit);
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);setTimeout(fit,1600);
+  })();
+  /* phones & tablets: a frozen row under the header that holds the pinned Fig. 01 and names the section you're in */
+  (function(){
+    var row=document.getElementById('pinRow'),pin=document.getElementById('pinFig'),hd=document.querySelector('header');if(!row||!pin)return;
+    var secs=[['specimens','01','Specimens'],['drawings','02','Garis'],['dimensionless','03','Dimensionless'],['studio','04','The Workshop'],['contact','05','Nightfall']];
+    var idx=row.querySelector('.pr-idx');
+    function lay(){
+      if(innerWidth>=1200){pin.style.top='';pin.style.width='';pin.style.right='';return;}
+      var hh=Math.round(hd.getBoundingClientRect().height),ih=idx.offsetHeight,pad=innerWidth<700?14:20,rh=ih+pad*2;
+      row.style.top=hh+'px';row.style.height=rh+'px';row.style.paddingLeft=row.style.paddingRight=pad+6+'px';
+      /* Fig. 01 frame is square-ish: match its height to the index */
+      pin.style.width=Math.round(ih*.98)+'px';pin.style.right=(pad+6)+'px';
+      var ph=pin.offsetHeight;pin.style.top=Math.round(hh+(rh-ph)/2)+'px';
+      document.documentElement.style.setProperty('--pinrow',(hh+rh)+'px');
+    }
+    var links=[].slice.call(row.querySelectorAll('a'));
+    function cur(){var y=innerHeight*.45,c=null;secs.forEach(function(q){var e=document.getElementById(q[0]);if(e&&e.getBoundingClientRect().top<y)c=q[0];});
+      links.forEach(function(a){a.classList.toggle('on',a.dataset.sec===c);});}
+    new MutationObserver(function(){row.classList.toggle('show',pin.classList.contains('show'));lay();}).observe(pin,{attributes:true,attributeFilter:['class']});
+    lay();cur();addEventListener('resize',lay);addEventListener('scroll',cur,{passive:true});
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(lay);
   })();
   /* frozen side index: appears with the pinned Fig. 01, highlights the section in view */
   (function(){
