@@ -1010,12 +1010,18 @@
       else if(!out&&pinned){pinned=false;box.classList.remove('show');handoff(pinF,orig);}
     },{threshold:0,rootMargin:'-80px 0px 0px 0px'}).observe(heroFig);
   })();
-  /* gallery videos play only while on screen */
+  /* Specimens videos: show a still frame, play only while hovered (or focused) */
   if('IntersectionObserver' in window){
     var vio=new IntersectionObserver(function(es){es.forEach(function(en){var v=en.target;
-      if(en.isIntersecting&&!RM&&lb.hidden){if(v.preload!=='auto')v.preload='auto';var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}else if(!en.isIntersecting)v.pause();});},{threshold:.2});
+      if(en.isIntersecting){if(v.preload!=='auto')v.preload='auto';}else v.pause();});},{rootMargin:'300px 0px'});
     figs.forEach(function(f){if(f.lazy)vio.observe(f.vid);});
   }
+  figs.forEach(function(f){if(!f.lazy)return;var host=f.vid.closest('.gfig')||f.vid.parentNode;
+    var canHover=matchMedia('(hover:hover) and (pointer:fine)');
+    function on(e){if(RM||!lb.hidden)return;if(e&&e.type==='mouseenter'&&!canHover.matches)return;if(f.vid.preload!=='auto')f.vid.preload='auto';var pr=f.vid.play();if(pr&&pr.catch)pr.catch(function(){});}
+    function off(){f.vid.pause();}
+    host.addEventListener('mouseenter',on);host.addEventListener('mouseleave',off);
+    host.addEventListener('focusin',on);host.addEventListener('focusout',off);});
 
   /* click a figure: it grows out of its place to a balanced size */
   var inner=document.getElementById('lbInner'),lv=document.getElementById('lbVid'),closeB=document.getElementById('lbClose'),active=null;
@@ -1042,7 +1048,7 @@
     var f=active;if(!f)return;
     f.vid.currentTime=lv.currentTime;
     lb.classList.remove('open');
-    flip(f.frame,inner.querySelector('.frame'),true,function(){lb.hidden=true;lv.pause();if(!RM)f.vid.play();f.vs();});
+    flip(f.frame,inner.querySelector('.frame'),true,function(){lb.hidden=true;lv.pause();var host=f.vid.closest('.gfig');if(!RM&&(!f.lazy||(host&&host.matches(':hover')&&matchMedia('(hover:hover) and (pointer:fine)').matches)))f.vid.play();f.vs();});
     document.body.style.overflow='';f.open.focus();
   }
   figs.forEach(function(f){f.open.onclick=function(){openLb(f);};});
