@@ -292,6 +292,19 @@
   .gp-frame:focus-visible{outline:1px solid var(--ink);outline-offset:6px}
   .gp figcaption{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--fine)}
   .garisbox + .varbox{margin-top:48px}
+  .txbox{display:flex;justify-content:center;padding:34px 20px 30px}
+  .tx{margin:0;width:min(340px,100%);display:flex;flex-direction:column;gap:10px}
+  .tx-frame{cursor:zoom-in}
+  .tx-frame img{aspect-ratio:560/887}
+  .tx-gl{position:absolute;inset:6px;overflow:hidden;pointer-events:none}
+  .tx-gl i{position:absolute;left:0;right:0;background-repeat:no-repeat;will-change:transform;filter:saturate(.6) brightness(.58) contrast(.98)}
+  .tx-gl b{position:absolute;inset:0;background-size:cover;mix-blend-mode:screen;opacity:0;filter:sepia(1) saturate(6) hue-rotate(-50deg)}
+  .tx-cap{display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--fine)}
+  .tx-nm{flex:1;color:var(--ink);font-family:'Big Shoulders Display',sans-serif;font-weight:200;font-size:17px;letter-spacing:.14em}
+  .tx-nav{background:none;border:.5px solid var(--hair);color:var(--ink);width:26px;height:26px;padding:0;font-size:14px;line-height:1;cursor:pointer;transition:border-color .3s}
+  .tx-nav:hover,.tx-nav:focus-visible{border-color:var(--ink)}
+  .tx-prog{display:block;height:.5px;background:var(--hair);position:relative}
+  .tx-prog i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--ink)}
   .varbox .spread{padding:6px 0 26px}
   .varbox{padding-bottom:22px}
   .gp-frame .grain,.card .grain{inset:6px;opacity:.26;transition:opacity .6s ease}
@@ -371,6 +384,8 @@
   @media (min-width:1800px){.bar{max-width:1520px}}
   @media (min-width:561px){.bar .logo{margin-right:14px}}
   @media (max-width:699px){.bar nav{display:none}}
+  @media (min-width:700px){.bar nav{gap:0}.bar nav a{padding:0 9px;letter-spacing:.2em}}
+  @media (min-width:700px) and (max-width:1100px){.bar nav a{padding:0 6px;font-size:10px;letter-spacing:.14em}}
   /* phone */
   html,body{overflow-x:clip}
   @media (max-width:1199px){section{scroll-margin-top:var(--pinrow,170px)}}
@@ -417,6 +432,7 @@
       <a href="#specimens">Specimens</a>
       <a href="#drawings">Garis</a>
       <a href="#dimensionless">Dimensionless</a>
+      <a href="#transmissions">Transmissions</a>
       <a href="#studio">Workshop</a>
       <a href="#contact">Nightfall</a>
     </nav>
@@ -626,8 +642,20 @@
   </section>
 
 
+  <section id="transmissions">
+    <div class="sec-head rv"><span class="label">04 · Transmissions</span><div class="hairline"></div></div>
+    <div class="galbox txbox" id="txBox"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i>
+      <figure class="tx rv">
+        <button type="button" class="gp-frame tx-frame" id="txFrame" data-no="01" data-name="Spaceship" aria-label="Enlarge poster"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i><i class="grain" aria-hidden="true"></i><img id="txImg" src="media/a59e2337e2.webp" alt="Spaceship, a poster by Efeks Power" decoding="async"><span class="tx-gl" id="txGl" aria-hidden="true"></span></button>
+        <figcaption class="tx-cap"><button type="button" class="tx-nav" id="txPrev" aria-label="Previous poster">‹</button><span class="tx-no" id="txNo">01 / 20</span><span class="tx-nm" id="txNm">Spaceship</span><button type="button" class="tx-nav" id="txNext" aria-label="Next poster">›</button></figcaption>
+        <i class="tx-prog" aria-hidden="true"><i id="txBar"></i></i>
+      </figure>
+    </div>
+  </section>
+
+
   <section id="studio">
-    <div class="sec-head rv"><span class="label">04 · The workshop</span><div class="hairline"></div></div>
+    <div class="sec-head rv"><span class="label">05 · The workshop</span><div class="hairline"></div></div>
     <div class="studio">
       <h2 class="tall rv" id="wireH" aria-label="Machines that dream in wire."><span class="ln2" aria-hidden="true">Machines</span><span class="ln2" aria-hidden="true">that dream</span><span class="ln2" aria-hidden="true">in wire.</span></h2>
       <div class="rv">
@@ -643,7 +671,7 @@
   </section>
 
   <section id="contact" class="contact">
-    <div class="sec-head rv"><span class="label">05 · Nightfall</span><div class="hairline"></div></div>
+    <div class="sec-head rv"><span class="label">06 · Nightfall</span><div class="hairline"></div></div>
     <span class="label rv">Commission a machine, or come and see one move</span>
   </section>
 </main>
@@ -664,7 +692,7 @@
 </div>
 </figure>
 
-<nav class="pinrow" id="pinRow" aria-label="Sections"><div class="pr-idx"><span class="pr-lbl">Index</span><ol class="pr-list"><li><a href="#specimens" data-sec="specimens"><span class="pr-n">01</span><span class="pr-t">Specimens</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#drawings" data-sec="drawings"><span class="pr-n">02</span><span class="pr-t">Garis</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#dimensionless" data-sec="dimensionless"><span class="pr-n">03</span><span class="pr-t">Dimensionless</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#studio" data-sec="studio"><span class="pr-n">04</span><span class="pr-t">The Workshop</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#contact" data-sec="contact"><span class="pr-n">05</span><span class="pr-t">Nightfall</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li></ol></div></nav>
+<nav class="pinrow" id="pinRow" aria-label="Sections"><div class="pr-idx"><span class="pr-lbl">Index</span><ol class="pr-list"><li><a href="#specimens" data-sec="specimens"><span class="pr-n">01</span><span class="pr-t">Specimens</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#drawings" data-sec="drawings"><span class="pr-n">02</span><span class="pr-t">Garis</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#dimensionless" data-sec="dimensionless"><span class="pr-n">03</span><span class="pr-t">Dimensionless</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#transmissions" data-sec="transmissions"><span class="pr-n">04</span><span class="pr-t">Transmissions</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#studio" data-sec="studio"><span class="pr-n">05</span><span class="pr-t">The Workshop</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#contact" data-sec="contact"><span class="pr-n">06</span><span class="pr-t">Nightfall</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li></ol></div></nav>
 
 <nav class="sidx" id="sidx" aria-label="Index">
   <span class="sidx-lbl">Index</span>
@@ -672,8 +700,9 @@
     <li><a href="#specimens" data-sec="specimens"><span class="n">01</span><span class="t">Specimens</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
     <li><a href="#drawings" data-sec="drawings"><span class="n">02</span><span class="t">Garis</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
     <li><a href="#dimensionless" data-sec="dimensionless"><span class="n">03</span><span class="t">Dimensionless</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
-    <li><a href="#studio" data-sec="studio"><span class="n">04</span><span class="t">The Workshop</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
-    <li><a href="#contact" data-sec="contact"><span class="n">05</span><span class="t">Nightfall</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
+    <li><a href="#transmissions" data-sec="transmissions"><span class="n">04</span><span class="t">Transmissions</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
+    <li><a href="#studio" data-sec="studio"><span class="n">05</span><span class="t">The Workshop</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
+    <li><a href="#contact" data-sec="contact"><span class="n">06</span><span class="t">Nightfall</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
   </ol>
 </nav>
 
@@ -985,7 +1014,7 @@
     var DRAW=4.2;
     var sv=el('svg',{'class':'traces','aria-hidden':'true'});main.insertBefore(sv,main.firstChild);
     var path=el('path',{'class':'ln trace',pathLength:1},sv),dots=el('g',{},sv),route=[];
-    var spark=el('path',{d:star(0,0,5.5),'class':'fa',opacity:0},sv),spark2=el('path',{d:star(0,0,5.5),'class':'fa',opacity:0},sv),route2=[],spark3=el('path',{d:star(0,0,5.5),'class':'fa',opacity:0},sv),route3=[],spark4=el('path',{d:star(0,0,5.5),'class':'fa',opacity:0},sv),route4=[];
+    var spark=el('path',{d:star(0,0,5.5),'class':'fa',opacity:0},sv),spark2=el('path',{d:star(0,0,5.5),'class':'fa',opacity:0},sv),route2=[],spark3=el('path',{d:star(0,0,5.5),'class':'fa',opacity:0},sv),route3=[],spark4=el('path',{d:star(0,0,5.5),'class':'fa',opacity:0},sv),route4=[],spark5=el('path',{d:star(0,0,5.5),'class':'fa',opacity:0},sv),route5=[];
     path.style.transitionDuration=DRAW+'s';
     function pos(n){var x=0,y=0;while(n&&n!==main){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent;}return {x:x,y:y};}
     var marks=[];
@@ -1030,7 +1059,12 @@
           if(db){var v4=pos(db),bx4=Math.round(v4.x+db.offsetWidth)+.5,by4=Math.round(v4.y+db.offsetHeight/2)+.5;
             d+=' M'+gx+' '+by3+' V'+by4;var L4=L3+(by4-by3);mark('star',gx,by4,L4);
             d+=' H'+bx4;L4+=gx-bx4;mark('dot',bx4,by4,L4);
-            route4=[[gx,by3],[gx,by4],[bx4,by4]];L=L4;}}}
+            route4=[[gx,by3],[gx,by4],[bx4,by4]];L=L4;
+            var tb=document.getElementById('txBox');
+            if(tb){var v5=pos(tb),bx5=Math.round(v5.x+tb.offsetWidth)+.5,by5=Math.round(v5.y+tb.offsetHeight/2)+.5;
+              d+=' M'+gx+' '+by4+' V'+by5;var L5=L4+(by5-by4);mark('star',gx,by5,L5);
+              d+=' H'+bx5;L5+=gx-bx5;mark('dot',bx5,by5,L5);
+              route5=[[gx,by4],[gx,by5],[bx5,by5]];L=L5;}}}}
       path.setAttribute('d',d);
       marks.forEach(function(m){m.g.style.animationDelay=(m.d/L*DRAW).toFixed(2)+'s';});
     }
@@ -1052,7 +1086,9 @@
         if(route3.length>1){var u3=((now-t0)/1000/(SP*.7)+.7)%1,p3=along(u3,route3);
           spark3.setAttribute('transform','translate('+p3[0].toFixed(1)+' '+p3[1].toFixed(1)+')');spark3.setAttribute('opacity',1);}
         if(route4.length>1){var u4=((now-t0)/1000/(SP*.75)+.15)%1,p4=along(u4,route4);
-          spark4.setAttribute('transform','translate('+p4[0].toFixed(1)+' '+p4[1].toFixed(1)+')');spark4.setAttribute('opacity',1);}}
+          spark4.setAttribute('transform','translate('+p4[0].toFixed(1)+' '+p4[1].toFixed(1)+')');spark4.setAttribute('opacity',1);}
+        if(route5.length>1){var u5=((now-t0)/1000/(SP*.8)+.45)%1,p5=along(u5,route5);
+          spark5.setAttribute('transform','translate('+p5[0].toFixed(1)+' '+p5[1].toFixed(1)+')');spark5.setAttribute('opacity',1);}}
       requestAnimationFrame(sparkLoop);
     }
     function startSpark(){if(!RM)setTimeout(function(){requestAnimationFrame(sparkLoop);},DRAW*1000);}
@@ -1254,7 +1290,7 @@
   /* phones & tablets: a frozen row under the header that holds the pinned Fig. 01 and names the section you're in */
   (function(){
     var row=document.getElementById('pinRow'),pin=document.getElementById('pinFig'),hd=document.querySelector('header');if(!row||!pin)return;
-    var secs=[['specimens','01','Specimens'],['drawings','02','Garis'],['dimensionless','03','Dimensionless'],['studio','04','The Workshop'],['contact','05','Nightfall']];
+    var secs=[['specimens','01','Specimens'],['drawings','02','Garis'],['dimensionless','03','Dimensionless'],['transmissions','04','Transmissions'],['studio','05','The Workshop'],['contact','06','Nightfall']];
     var idx=row.querySelector('.pr-idx');
     function lay(){
       if(innerWidth>=1200){pin.style.top='';pin.style.width='';pin.style.right='';return;}
@@ -1271,6 +1307,33 @@
     new MutationObserver(function(){row.classList.toggle('show',pin.classList.contains('show'));lay();}).observe(pin,{attributes:true,attributeFilter:['class']});
     lay();cur();addEventListener('resize',lay);addEventListener('scroll',cur,{passive:true});
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(lay);
+  })();
+  /* Transmissions: 20 posters, glitch-slice change every few seconds */
+  (function(){
+    var P=[["Spaceship", "media/a59e2337e2.webp"], ["Silence", "media/b2864657ca.webp"], ["Future", "media/3addeb4326.webp"], ["Doom", "media/a4b0424879.webp"], ["Hell", "media/ddde2252e4.webp"], ["Darkness", "media/d85f2697e7.webp"], ["Blind", "media/afac5e85da.webp"], ["Entangled", "media/2e38690292.webp"], ["Stand", "media/9b47ef3050.webp"], ["Seed", "media/c394db083b.webp"], ["Ahead", "media/06e572307c.webp"], ["Splendid", "media/0c2b37e2f1.webp"], ["Crazy", "media/ee1279d8b9.webp"], ["Paused", "media/2ac9c95af4.webp"], ["Hatred", "media/07561857f5.webp"], ["Butterfly", "media/6014047055.webp"], ["Computer", "media/cbaa811aeb.webp"], ["Abstract", "media/0002b3201f.webp"], ["Moon", "media/11e60502d4.webp"], ["Angry", "media/3e056170e7.webp"]];
+    var fr=document.getElementById('txFrame'),im=document.getElementById('txImg'),gl=document.getElementById('txGl'),no=document.getElementById('txNo'),nm=document.getElementById('txNm'),bar=document.getElementById('txBar');
+    if(!fr)return;var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,i=0,busy=false,hold=false,vis=false,T=4800,t0=performance.now(),acc=0,last=t0;
+    P.forEach(function(p){var x=new Image();x.src=p[1];});
+    var sl=[];for(var k=0;k<10;k++){var e=document.createElement('i');gl.appendChild(e);sl.push(e);}var rgb=document.createElement('b');gl.appendChild(rgb);
+    var C='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    function label(n){var W=P[n][0].toUpperCase(),f=0;no.textContent=(n<9?'0':'')+(n+1)+' / 20';
+      var iv=setInterval(function(){nm.textContent=W.split('').map(function(c,j){return f>j*2+4?c:C[Math.random()*C.length|0];}).join('');if(++f>W.length*2+6){clearInterval(iv);nm.textContent=P[n][0];}},40);}
+    function setTo(n){i=(n+P.length)%P.length;im.src=P[i][1];im.alt=P[i][0]+', a poster by Efeks Power';fr.dataset.no=(i<9?'0':'')+(i+1);fr.dataset.name=P[i][0];label(i);}
+    function go(n){if(busy)return;n=(n+P.length)%P.length;acc=0;
+      if(RM){setTo(n);return;}busy=true;var src=P[n][1],W=gl.clientWidth,H=gl.clientHeight,t=0;
+      rgb.style.backgroundImage='url('+src+')';
+      var f=setInterval(function(){
+        sl.forEach(function(e){var y=Math.random()*H,h=4+Math.random()*(t<4?26:H/5);e.style.top=y+'px';e.style.height=h+'px';e.style.backgroundImage='url('+(Math.random()<t/7?src:im.src)+')';
+          e.style.backgroundSize=W+'px '+H+'px';e.style.backgroundPosition='0 '+(-y)+'px';e.style.transform='translateX('+((Math.random()-.5)*44)+'px)';e.style.opacity=1;});
+        rgb.style.opacity=.3;rgb.style.transform='translateX('+((Math.random()-.5)*12)+'px)';
+        if(t===4)setTo(n);
+        if(++t>8){clearInterval(f);sl.forEach(function(e){e.style.opacity=0;});rgb.style.opacity=0;busy=false;}},65);}
+    document.getElementById('txNext').onclick=function(){go(i+1);};document.getElementById('txPrev').onclick=function(){go(i-1);};
+    fr.addEventListener('mouseenter',function(){hold=true;});fr.addEventListener('mouseleave',function(){hold=false;});
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;},{threshold:.2}).observe(fr);else vis=true;
+    (function lp(t){var dt=t-last;last=t;if(vis&&!hold&&!busy&&document.getElementById('clb').hidden){acc+=dt;if(acc>=T)go(i+1);}
+      bar.style.width=Math.min(100,acc/T*100)+'%';requestAnimationFrame(lp);})(t0);
+    label(0);
   })();
   /* frozen side index: appears with the pinned Fig. 01, highlights the section in view */
   (function(){
