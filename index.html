@@ -292,8 +292,16 @@
   .gp-frame:focus-visible{outline:1px solid var(--ink);outline-offset:6px}
   .gp figcaption{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--fine)}
   .garisbox + .varbox{margin-top:48px}
+  .sec-note{max-width:620px;margin:-26px 0 34px;font-size:11px;line-height:1.8;letter-spacing:.04em;color:var(--fine)}
   .tx-clip{position:relative;display:block;overflow:hidden}
   .tx-liq{display:block}
+  .gp-frame .tx-full{position:absolute;inset:0;width:100%;height:100%;filter:none;clip-path:inset(0 0 100% 0);pointer-events:none}
+  .tx-trace{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+  .tx-trace .tl{fill:none;stroke:var(--ink);stroke-width:1.4;opacity:.8;vector-effect:non-scaling-stroke}
+  .tx-trace .td{fill:var(--accent);filter:drop-shadow(0 0 3px var(--accent))}
+  .tx-trace .tm{fill:var(--ink);opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.2);transition:opacity .4s,transform .5s cubic-bezier(.3,1.8,.5,1)}
+  .tx-trace .tm.on{opacity:1;transform:none}
+  .tx-bar{position:absolute;left:0;right:0;top:0;height:1px;background:var(--ink);box-shadow:0 0 10px 2px color-mix(in srgb,var(--ink) 45%,transparent);opacity:0;pointer-events:none}
   .gp-frame .tx-full{position:absolute;inset:0;width:100%;height:100%;filter:none;clip-path:inset(0 0 100% 0);pointer-events:none}
   .tx-bar{position:absolute;left:0;right:0;top:0;height:1px;background:var(--ink);box-shadow:0 0 10px 2px color-mix(in srgb,var(--ink) 45%,transparent);opacity:0;pointer-events:none}
   .tx-gl{position:absolute;inset:6px;overflow:hidden;pointer-events:none}
@@ -647,6 +655,7 @@
 
   <section id="transmissions">
     <div class="sec-head rv"><span class="label">04 · Transmissions</span><div class="hairline"></div></div>
+    <p class="sec-note rv">Transmission — the passage of light, energy and celestial influence across the cosmic field, where stars, asterisms and their spatial relationships become expressions of connection, movement and exchange.</p>
     <div class="galbox txbox" id="txBox"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i>
     <div class="garis-grid tx-grid">
       <figure class="gp tx rv" data-k="0" data-mode="glitch" style="transition-delay:0.00s">
@@ -662,6 +671,11 @@
       <figure class="gp tx rv" data-k="2" data-mode="scan" style="transition-delay:0.20s">
         <button type="button" class="gp-frame tx-frame" data-no="01" data-name="Tomorrow" aria-label="Enlarge poster"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i><i class="grain" aria-hidden="true"></i><span class="tx-clip"><span class="tx-liq"><img src="media/bf0a1867c2.webp" alt="Tomorrow, a poster by Efeks Power" decoding="async"></span><img class="tx-full" alt="" aria-hidden="true" src="media/bf0a1867c2.webp"><i class="tx-bar" aria-hidden="true"></i></span><span class="tx-gl" aria-hidden="true"></span></button>
         <figcaption class="tx-cap"><button type="button" class="tx-nav tx-prev" aria-label="Previous poster">‹</button><span class="tx-lbl"><span class="tx-no">01</span> · <span class="tx-nm">Tomorrow</span></span><button type="button" class="tx-nav tx-next" aria-label="Next poster">›</button></figcaption>
+        <i class="tx-prog" aria-hidden="true"><i></i></i>
+      </figure>
+      <figure class="gp tx rv" data-k="3" data-mode="trace" style="transition-delay:0.30s">
+        <button type="button" class="gp-frame tx-frame" data-no="01" data-name="Flow" aria-label="Enlarge poster"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i><i class="grain" aria-hidden="true"></i><span class="tx-clip"><span class="tx-liq"><img src="media/53c2c17f80.webp" alt="Flow, a poster by Efeks Power" decoding="async"></span><svg class="tx-trace" viewBox="0 0 560 840" aria-hidden="true"></svg></span><span class="tx-gl" aria-hidden="true"></span></button>
+        <figcaption class="tx-cap"><button type="button" class="tx-nav tx-prev" aria-label="Previous poster">‹</button><span class="tx-lbl"><span class="tx-no">01</span> · <span class="tx-nm">Flow</span></span><button type="button" class="tx-nav tx-next" aria-label="Next poster">›</button></figcaption>
         <i class="tx-prog" aria-hidden="true"><i></i></i>
       </figure>
     </div>
@@ -1325,7 +1339,7 @@
   })();
   /* Transmissions: row of slots, each cycles 20 posters; every change is a glitch-slice cut, idle motion differs per slot */
   (function(){
-    var SETS=[[["Spaceship", "media/3cf86f7a81.webp"], ["Silence", "media/233eb5c103.webp"], ["Future", "media/8ceb9a675e.webp"], ["Doom", "media/1e4e493bc2.webp"], ["Hell", "media/e5d78d3803.webp"], ["Darkness", "media/a5189c273e.webp"], ["Blind", "media/f8dc970660.webp"], ["Entangled", "media/5020fb97ef.webp"], ["Stand", "media/aef9fd9ff5.webp"], ["Seed", "media/d173ba93a9.webp"], ["Ahead", "media/141c57dd2a.webp"], ["Splendid", "media/f8ec2f664c.webp"], ["Crazy", "media/a4797abc6d.webp"], ["Paused", "media/a708f19e74.webp"], ["Hatred", "media/4e8643a05f.webp"], ["Butterfly", "media/9a68aea69d.webp"], ["Computer", "media/109648f278.webp"], ["Abstract", "media/4a7575712f.webp"], ["Moon", "media/cc3a14de00.webp"], ["Angry", "media/85ec68cbf0.webp"]], [["Waiting", "media/79bd30e9da.webp"], ["Brutal", "media/9914537994.webp"], ["Machines", "media/3b5476bd61.webp"], ["Remember", "media/dd4f1df251.webp"], ["Tear", "media/50f8ced0af.webp"], ["Eyes", "media/c723a7e248.webp"], ["Alive", "media/48bac21911.webp"], ["Desire", "media/f25147eeb7.webp"], ["Difficult", "media/c509c6692c.webp"], ["Existence", "media/e3639b5f35.webp"], ["Attitude", "media/3a3c69a95d.webp"], ["Spirit", "media/a010980719.webp"], ["Waves", "media/c058029ed1.webp"], ["Mission", "media/868a89ad2e.webp"], ["Promises", "media/864bcf78c8.webp"], ["Something", "media/d14319f325.webp"], ["Fear", "media/fd6d4ae9b9.webp"], ["Sleeping", "media/f620b676ac.webp"], ["Live", "media/5de3b244ee.webp"], ["Daybreak", "media/f85f9158e7.webp"]], [["Tomorrow", "media/bf0a1867c2.webp"], ["Dawn", "media/f39e791f3e.webp"], ["Return", "media/c5493d8f42.webp"], ["Someday", "media/226309c152.webp"], ["Hurt", "media/0581800c7c.webp"], ["Words", "media/2f57510893.webp"], ["Mind", "media/0c9ff8a641.webp"], ["Talks", "media/c923134670.webp"], ["Strength", "media/c60ea65afa.webp"], ["Ways", "media/3b1444b9a2.webp"], ["Run", "media/05523025d9.webp"], ["Explain", "media/88834b8944.webp"], ["Listen", "media/1ef26c5559.webp"], ["Fire", "media/553ca80add.webp"], ["Time", "media/b178eb6e30.webp"], ["Fate", "media/77c46926d6.webp"], ["Who", "media/6a38f82a6d.webp"], ["Sorry", "media/b921416595.webp"], ["Coming", "media/4b84a1cc38.webp"], ["Leaving", "media/6a9ffbff53.webp"]]];
+    var SETS=[[["Spaceship", "media/3cf86f7a81.webp"], ["Silence", "media/233eb5c103.webp"], ["Future", "media/8ceb9a675e.webp"], ["Doom", "media/1e4e493bc2.webp"], ["Hell", "media/e5d78d3803.webp"], ["Darkness", "media/a5189c273e.webp"], ["Blind", "media/f8dc970660.webp"], ["Entangled", "media/5020fb97ef.webp"], ["Stand", "media/aef9fd9ff5.webp"], ["Seed", "media/d173ba93a9.webp"], ["Ahead", "media/141c57dd2a.webp"], ["Splendid", "media/f8ec2f664c.webp"], ["Crazy", "media/a4797abc6d.webp"], ["Paused", "media/a708f19e74.webp"], ["Hatred", "media/4e8643a05f.webp"], ["Butterfly", "media/9a68aea69d.webp"], ["Computer", "media/109648f278.webp"], ["Abstract", "media/4a7575712f.webp"], ["Moon", "media/cc3a14de00.webp"], ["Angry", "media/85ec68cbf0.webp"]], [["Waiting", "media/79bd30e9da.webp"], ["Brutal", "media/9914537994.webp"], ["Machines", "media/3b5476bd61.webp"], ["Remember", "media/dd4f1df251.webp"], ["Tear", "media/50f8ced0af.webp"], ["Eyes", "media/c723a7e248.webp"], ["Alive", "media/48bac21911.webp"], ["Desire", "media/f25147eeb7.webp"], ["Difficult", "media/c509c6692c.webp"], ["Existence", "media/e3639b5f35.webp"], ["Attitude", "media/3a3c69a95d.webp"], ["Spirit", "media/a010980719.webp"], ["Waves", "media/c058029ed1.webp"], ["Mission", "media/868a89ad2e.webp"], ["Promises", "media/864bcf78c8.webp"], ["Something", "media/d14319f325.webp"], ["Fear", "media/fd6d4ae9b9.webp"], ["Sleeping", "media/f620b676ac.webp"], ["Live", "media/5de3b244ee.webp"], ["Daybreak", "media/f85f9158e7.webp"]], [["Tomorrow", "media/bf0a1867c2.webp"], ["Dawn", "media/f39e791f3e.webp"], ["Return", "media/c5493d8f42.webp"], ["Someday", "media/226309c152.webp"], ["Hurt", "media/0581800c7c.webp"], ["Words", "media/2f57510893.webp"], ["Mind", "media/0c9ff8a641.webp"], ["Talks", "media/c923134670.webp"], ["Strength", "media/c60ea65afa.webp"], ["Ways", "media/3b1444b9a2.webp"], ["Run", "media/05523025d9.webp"], ["Explain", "media/88834b8944.webp"], ["Listen", "media/1ef26c5559.webp"], ["Fire", "media/553ca80add.webp"], ["Time", "media/b178eb6e30.webp"], ["Fate", "media/77c46926d6.webp"], ["Who", "media/6a38f82a6d.webp"], ["Sorry", "media/b921416595.webp"], ["Coming", "media/4b84a1cc38.webp"], ["Leaving", "media/6a9ffbff53.webp"]], [["Flow", "media/53c2c17f80.webp"], ["Process", "media/60fe429452.webp"], ["Futuristic", "media/e296730ccc.webp"], ["Progress", "media/82f9eca7bb.webp"], ["Space", "media/220d225f7c.webp"], ["Digital", "media/77f4a42fb2.webp"], ["Transcend", "media/b5bc8d6e8b.webp"], ["Quantum", "media/e62f60f0e8.webp"], ["Futurism", "media/c79a4c64eb.webp"], ["Vision", "media/468a156972.webp"], ["Cyber", "media/0a50b97ec7.webp"], ["Virtual", "media/70dcfcce1b.webp"], ["High-Tech", "media/3a763678ec.webp"], ["Retro", "media/a4a6f4b88f.webp"], ["Vigor", "media/9fc8455da3.webp"], ["Neo", "media/f6adac3c7d.webp"], ["Synthesis", "media/0483545eb9.webp"], ["Luminary", "media/6102faac69.webp"], ["Infinity", "media/2e6e577ce4.webp"], ["Epoch", "media/048b446217.webp"]]];
     var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,T=5200,ns='http://www.w3.org/2000/svg',C='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     var defs=document.createElementNS(ns,'svg');defs.setAttribute('width',0);defs.setAttribute('height',0);defs.style.position='absolute';document.body.appendChild(defs);
     [].forEach.call(document.querySelectorAll('.tx'),function(fig,k){
@@ -1349,6 +1363,21 @@
           if(q<.42){u=q/.42;full.style.clipPath='inset(0 0 '+(100-u*100).toFixed(1)+'% 0)';sbar.style.top=(u*100)+'%';sbar.style.opacity=.85;}
           else if(q<.7){full.style.clipPath='inset(0 0 0 0)';sbar.style.opacity=0;}
           else{u=(q-.7)/.3;full.style.clipPath='inset('+(u*100).toFixed(1)+'% 0 0 0)';sbar.style.top=(u*100)+'%';sbar.style.opacity=.45;}
+          requestAnimationFrame(lp);})(s0);}
+      if(mode==='trace'&&!RM){var sv=fr.querySelector('.tx-trace');
+        var Q=[[51,31],[409,31],[488,110],[488,789],[450,827],[210,827],[51,667]];
+        var pa=document.createElementNS(ns,'path');pa.setAttribute('class','tl');pa.setAttribute('d','M'+Q.map(function(p){return p.join(' ');}).join(' L')+' Z');sv.appendChild(pa);
+        var L=pa.getTotalLength(),cum=[0];for(var j=1;j<Q.length;j++)cum.push(cum[j-1]+Math.hypot(Q[j][0]-Q[j-1][0],Q[j][1]-Q[j-1][1]));
+        pa.style.strokeDasharray=L;pa.style.strokeDashoffset=L;
+        var mk=Q.map(function(p){var m=document.createElementNS(ns,'path'),x=p[0],y=p[1],r=16;m.setAttribute('class','tm');
+          m.setAttribute('d','M'+x+' '+(y-r)+' Q'+x+' '+y+' '+(x+r)+' '+y+' Q'+x+' '+y+' '+x+' '+(y+r)+' Q'+x+' '+y+' '+(x-r)+' '+y+' Q'+x+' '+y+' '+x+' '+(y-r)+'Z');sv.appendChild(m);return m;});
+        var DOTS=[[0,1,10],[.2,-1.3,7],[.4,.8,8],[.55,-.7,6],[.75,1.5,7],[.9,-1,6],[.33,.55,5]].map(function(d){var c=document.createElementNS(ns,'circle');c.setAttribute('class','td');c.setAttribute('r',d[2]);c.style.opacity=0;sv.appendChild(c);return {o:d[0],v:d[1],c:c};});
+        var s0=performance.now();
+        (function lp(t){if(vis){var q=((t-s0)/9000)%1,sec=(t-s0)/1000,draw=Math.min(1,q/.3);
+          pa.style.strokeDashoffset=(L-draw*L).toFixed(1);var d=draw*L;mk.forEach(function(m,j){m.classList.toggle('on',q<.96&&cum[j]<=d+1);});
+          if(q>.96)pa.style.strokeDashoffset=L;
+          DOTS.forEach(function(D){var u=((D.o+sec*D.v/9)%1+1)%1,P=pa.getPointAtLength(u*L),vis2=q<.3?(u*L<=d):(q<.96);
+            D.c.setAttribute('cx',P.x.toFixed(1));D.c.setAttribute('cy',P.y.toFixed(1));D.c.style.opacity=vis2?1:0;});}
           requestAnimationFrame(lp);})(s0);}
       /* change: glitch slices */
       var sl=[];for(var q=0;q<10;q++){var e=document.createElement('i');gl.appendChild(e);sl.push(e);}var rgb=document.createElement('b');gl.appendChild(rgb);
