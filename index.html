@@ -292,18 +292,19 @@
   .gp-frame:focus-visible{outline:1px solid var(--ink);outline-offset:6px}
   .gp figcaption{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--fine)}
   .garisbox + .varbox{margin-top:48px}
-  .txbox{display:flex;justify-content:center;padding:34px 20px 30px}
-  .tx{margin:0;width:min(340px,100%);display:flex;flex-direction:column;gap:10px}
-  .tx-frame{cursor:zoom-in}
-  .tx-frame img{aspect-ratio:560/887}
+  .tx-clip{position:relative;display:block;overflow:hidden}
+  .tx-liq{display:block}
   .tx-gl{position:absolute;inset:6px;overflow:hidden;pointer-events:none}
   .tx-gl i{position:absolute;left:0;right:0;background-repeat:no-repeat;will-change:transform;filter:saturate(.6) brightness(.58) contrast(.98)}
   .tx-gl b{position:absolute;inset:0;background-size:cover;mix-blend-mode:screen;opacity:0;filter:sepia(1) saturate(6) hue-rotate(-50deg)}
-  .tx-cap{display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--fine)}
-  .tx-nm{flex:1;color:var(--ink);font-family:'Big Shoulders Display',sans-serif;font-weight:200;font-size:17px;letter-spacing:.14em}
-  .tx-nav{background:none;border:.5px solid var(--hair);color:var(--ink);width:26px;height:26px;padding:0;font-size:14px;line-height:1;cursor:pointer;transition:border-color .3s}
+  .tx[data-mode=liquid] .tx-liq img{transform:scale(1.07)}
+  .tx-cap{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--fine)}
+  .tx-lbl{flex:1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tx-nm{color:var(--ink)}
+  @media (max-width:560px){.tx-cap{gap:4px;letter-spacing:.06em;font-size:9px}.tx-nav{width:18px;height:18px;font-size:11px}}
+  .tx-nav{flex:none;background:none;border:.5px solid var(--hair);color:var(--ink);width:22px;height:22px;padding:0;font-size:13px;line-height:1;cursor:pointer;transition:border-color .3s}
   .tx-nav:hover,.tx-nav:focus-visible{border-color:var(--ink)}
-  .tx-prog{display:block;height:.5px;background:var(--hair);position:relative}
+  .tx-prog{display:block;height:.5px;background:var(--hair);position:relative;margin-top:-2px}
   .tx-prog i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--ink)}
   .varbox .spread{padding:6px 0 26px}
   .varbox{padding-bottom:22px}
@@ -645,11 +646,18 @@
   <section id="transmissions">
     <div class="sec-head rv"><span class="label">04 · Transmissions</span><div class="hairline"></div></div>
     <div class="galbox txbox" id="txBox"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i>
-      <figure class="tx rv">
-        <button type="button" class="gp-frame tx-frame" id="txFrame" data-no="01" data-name="Spaceship" aria-label="Enlarge poster"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i><i class="grain" aria-hidden="true"></i><img id="txImg" src="media/a59e2337e2.webp" alt="Spaceship, a poster by Efeks Power" decoding="async"><span class="tx-gl" id="txGl" aria-hidden="true"></span></button>
-        <figcaption class="tx-cap"><button type="button" class="tx-nav" id="txPrev" aria-label="Previous poster">‹</button><span class="tx-no" id="txNo">01 / 20</span><span class="tx-nm" id="txNm">Spaceship</span><button type="button" class="tx-nav" id="txNext" aria-label="Next poster">›</button></figcaption>
-        <i class="tx-prog" aria-hidden="true"><i id="txBar"></i></i>
+    <div class="garis-grid tx-grid">
+      <figure class="gp tx rv" data-k="0" data-mode="glitch" style="transition-delay:0.00s">
+        <button type="button" class="gp-frame tx-frame" data-no="01" data-name="Spaceship" aria-label="Enlarge poster"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i><i class="grain" aria-hidden="true"></i><span class="tx-clip"><span class="tx-liq"><img src="media/3cf86f7a81.webp" alt="Spaceship, a poster by Efeks Power" decoding="async"></span></span><span class="tx-gl" aria-hidden="true"></span></button>
+        <figcaption class="tx-cap"><button type="button" class="tx-nav tx-prev" aria-label="Previous poster">‹</button><span class="tx-lbl"><span class="tx-no">01</span> · <span class="tx-nm">Spaceship</span></span><button type="button" class="tx-nav tx-next" aria-label="Next poster">›</button></figcaption>
+        <i class="tx-prog" aria-hidden="true"><i></i></i>
       </figure>
+      <figure class="gp tx rv" data-k="1" data-mode="liquid" style="transition-delay:0.10s">
+        <button type="button" class="gp-frame tx-frame" data-no="01" data-name="Waiting" aria-label="Enlarge poster"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i><i class="grain" aria-hidden="true"></i><span class="tx-clip"><span class="tx-liq"><img src="media/79bd30e9da.webp" alt="Waiting, a poster by Efeks Power" decoding="async"></span></span><span class="tx-gl" aria-hidden="true"></span></button>
+        <figcaption class="tx-cap"><button type="button" class="tx-nav tx-prev" aria-label="Previous poster">‹</button><span class="tx-lbl"><span class="tx-no">01</span> · <span class="tx-nm">Waiting</span></span><button type="button" class="tx-nav tx-next" aria-label="Next poster">›</button></figcaption>
+        <i class="tx-prog" aria-hidden="true"><i></i></i>
+      </figure>
+    </div>
     </div>
   </section>
 
@@ -1308,32 +1316,45 @@
     lay();cur();addEventListener('resize',lay);addEventListener('scroll',cur,{passive:true});
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(lay);
   })();
-  /* Transmissions: 20 posters, glitch-slice change every few seconds */
+  /* Transmissions: one row of slots, each cycles 20 posters with its own motion */
   (function(){
-    var P=[["Spaceship", "media/a59e2337e2.webp"], ["Silence", "media/b2864657ca.webp"], ["Future", "media/3addeb4326.webp"], ["Doom", "media/a4b0424879.webp"], ["Hell", "media/ddde2252e4.webp"], ["Darkness", "media/d85f2697e7.webp"], ["Blind", "media/afac5e85da.webp"], ["Entangled", "media/2e38690292.webp"], ["Stand", "media/9b47ef3050.webp"], ["Seed", "media/c394db083b.webp"], ["Ahead", "media/06e572307c.webp"], ["Splendid", "media/0c2b37e2f1.webp"], ["Crazy", "media/ee1279d8b9.webp"], ["Paused", "media/2ac9c95af4.webp"], ["Hatred", "media/07561857f5.webp"], ["Butterfly", "media/6014047055.webp"], ["Computer", "media/cbaa811aeb.webp"], ["Abstract", "media/0002b3201f.webp"], ["Moon", "media/11e60502d4.webp"], ["Angry", "media/3e056170e7.webp"]];
-    var fr=document.getElementById('txFrame'),im=document.getElementById('txImg'),gl=document.getElementById('txGl'),no=document.getElementById('txNo'),nm=document.getElementById('txNm'),bar=document.getElementById('txBar');
-    if(!fr)return;var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,i=0,busy=false,hold=false,vis=false,T=4800,t0=performance.now(),acc=0,last=t0;
-    P.forEach(function(p){var x=new Image();x.src=p[1];});
-    var sl=[];for(var k=0;k<10;k++){var e=document.createElement('i');gl.appendChild(e);sl.push(e);}var rgb=document.createElement('b');gl.appendChild(rgb);
-    var C='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    function label(n){var W=P[n][0].toUpperCase(),f=0;no.textContent=(n<9?'0':'')+(n+1)+' / 20';
-      var iv=setInterval(function(){nm.textContent=W.split('').map(function(c,j){return f>j*2+4?c:C[Math.random()*C.length|0];}).join('');if(++f>W.length*2+6){clearInterval(iv);nm.textContent=P[n][0];}},40);}
-    function setTo(n){i=(n+P.length)%P.length;im.src=P[i][1];im.alt=P[i][0]+', a poster by Efeks Power';fr.dataset.no=(i<9?'0':'')+(i+1);fr.dataset.name=P[i][0];label(i);}
-    function go(n){if(busy)return;n=(n+P.length)%P.length;acc=0;
-      if(RM){setTo(n);return;}busy=true;var src=P[n][1],W=gl.clientWidth,H=gl.clientHeight,t=0;
-      rgb.style.backgroundImage='url('+src+')';
-      var f=setInterval(function(){
-        sl.forEach(function(e){var y=Math.random()*H,h=4+Math.random()*(t<4?26:H/5);e.style.top=y+'px';e.style.height=h+'px';e.style.backgroundImage='url('+(Math.random()<t/7?src:im.src)+')';
-          e.style.backgroundSize=W+'px '+H+'px';e.style.backgroundPosition='0 '+(-y)+'px';e.style.transform='translateX('+((Math.random()-.5)*44)+'px)';e.style.opacity=1;});
-        rgb.style.opacity=.3;rgb.style.transform='translateX('+((Math.random()-.5)*12)+'px)';
-        if(t===4)setTo(n);
-        if(++t>8){clearInterval(f);sl.forEach(function(e){e.style.opacity=0;});rgb.style.opacity=0;busy=false;}},65);}
-    document.getElementById('txNext').onclick=function(){go(i+1);};document.getElementById('txPrev').onclick=function(){go(i-1);};
-    fr.addEventListener('mouseenter',function(){hold=true;});fr.addEventListener('mouseleave',function(){hold=false;});
-    if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;},{threshold:.2}).observe(fr);else vis=true;
-    (function lp(t){var dt=t-last;last=t;if(vis&&!hold&&!busy&&document.getElementById('clb').hidden){acc+=dt;if(acc>=T)go(i+1);}
-      bar.style.width=Math.min(100,acc/T*100)+'%';requestAnimationFrame(lp);})(t0);
-    label(0);
+    var SETS=[[["Spaceship", "media/3cf86f7a81.webp"], ["Silence", "media/233eb5c103.webp"], ["Future", "media/8ceb9a675e.webp"], ["Doom", "media/1e4e493bc2.webp"], ["Hell", "media/e5d78d3803.webp"], ["Darkness", "media/a5189c273e.webp"], ["Blind", "media/f8dc970660.webp"], ["Entangled", "media/5020fb97ef.webp"], ["Stand", "media/aef9fd9ff5.webp"], ["Seed", "media/d173ba93a9.webp"], ["Ahead", "media/141c57dd2a.webp"], ["Splendid", "media/f8ec2f664c.webp"], ["Crazy", "media/a4797abc6d.webp"], ["Paused", "media/a708f19e74.webp"], ["Hatred", "media/4e8643a05f.webp"], ["Butterfly", "media/9a68aea69d.webp"], ["Computer", "media/109648f278.webp"], ["Abstract", "media/4a7575712f.webp"], ["Moon", "media/cc3a14de00.webp"], ["Angry", "media/85ec68cbf0.webp"]], [["Waiting", "media/79bd30e9da.webp"], ["Brutal", "media/9914537994.webp"], ["Machines", "media/3b5476bd61.webp"], ["Remember", "media/dd4f1df251.webp"], ["Tear", "media/50f8ced0af.webp"], ["Eyes", "media/c723a7e248.webp"], ["Alive", "media/48bac21911.webp"], ["Desire", "media/f25147eeb7.webp"], ["Difficult", "media/c509c6692c.webp"], ["Existence", "media/e3639b5f35.webp"], ["Attitude", "media/3a3c69a95d.webp"], ["Spirit", "media/a010980719.webp"], ["Waves", "media/c058029ed1.webp"], ["Mission", "media/868a89ad2e.webp"], ["Promises", "media/864bcf78c8.webp"], ["Something", "media/d14319f325.webp"], ["Fear", "media/fd6d4ae9b9.webp"], ["Sleeping", "media/f620b676ac.webp"], ["Live", "media/5de3b244ee.webp"], ["Daybreak", "media/f85f9158e7.webp"]]];
+    var RM=matchMedia('(prefers-reduced-motion:reduce)').matches,T=5200,ns='http://www.w3.org/2000/svg',C='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var defs=document.createElementNS(ns,'svg');defs.setAttribute('width',0);defs.setAttribute('height',0);defs.style.position='absolute';document.body.appendChild(defs);
+    [].forEach.call(document.querySelectorAll('.tx'),function(fig,k){
+      var P=SETS[k],mode=fig.dataset.mode,fr=fig.querySelector('.tx-frame'),im=fr.querySelector('img'),liq=fr.querySelector('.tx-liq'),gl=fr.querySelector('.tx-gl'),
+        no=fig.querySelector('.tx-no'),nm=fig.querySelector('.tx-nm'),bar=fig.querySelector('.tx-prog i'),i=0,busy=false,hold=false,vis=false,acc=-k*T*.5,last=performance.now();
+      P.forEach(function(p){var x=new Image();x.src=p[1];});
+      function label(n){var W=P[n][0].toUpperCase(),f=0;no.textContent=(n<9?'0':'')+(n+1);
+        var iv=setInterval(function(){nm.textContent=W.split('').map(function(c,j){return f>j*2+4?c:C[Math.random()*C.length|0];}).join('');if(++f>W.length*2+6){clearInterval(iv);nm.textContent=P[n][0];}},40);}
+      function setTo(n){i=(n+P.length)%P.length;im.src=P[i][1];im.alt=P[i][0]+', a poster by Efeks Power';fr.dataset.no=(i<9?'0':'')+(i+1);fr.dataset.name=P[i][0];label(i);}
+      var go;
+      if(mode==='liquid'){
+        var id='txLiq'+k,f=document.createElementNS(ns,'filter');f.id=id;f.setAttribute('x','-5%');f.setAttribute('y','-5%');f.setAttribute('width','110%');f.setAttribute('height','110%');
+        var tb=document.createElementNS(ns,'feTurbulence');tb.setAttribute('type','fractalNoise');tb.setAttribute('numOctaves','2');tb.setAttribute('seed',3+k);
+        var dm=document.createElementNS(ns,'feDisplacementMap');dm.setAttribute('in','SourceGraphic');dm.setAttribute('scale','10');f.appendChild(tb);f.appendChild(dm);defs.appendChild(f);
+        if(!RM)liq.style.filter='url(#'+id+')';
+        var boost=0,t0=performance.now();
+        (function lp(t){if(vis&&!RM){var s=(t-t0)/1000;tb.setAttribute('baseFrequency',(0.009+0.003*Math.sin(s*.5)).toFixed(4)+' '+(0.015+0.004*Math.cos(s*.37)).toFixed(4));dm.setAttribute('scale',(10+boost).toFixed(1));}requestAnimationFrame(lp);})(t0);
+        go=function(n){if(busy)return;acc=0;n=(n+P.length)%P.length;if(RM){setTo(n);return;}busy=true;var s0=performance.now();
+          (function up(t){var u=Math.min(1,(t-s0)/650);boost=80*u*u;if(u<1)requestAnimationFrame(up);else{setTo(n);var s1=performance.now();
+            (function dn(t){var v=Math.min(1,(t-s1)/900);boost=80*(1-v)*(1-v);if(v<1)requestAnimationFrame(dn);else{boost=0;busy=false;}})(s1);}})(s0);};
+      }else{
+        var sl=[];for(var q=0;q<10;q++){var e=document.createElement('i');gl.appendChild(e);sl.push(e);}var rgb=document.createElement('b');gl.appendChild(rgb);
+        go=function(n){if(busy)return;n=(n+P.length)%P.length;acc=0;if(RM){setTo(n);return;}busy=true;var src=P[n][1],W=gl.clientWidth,H=gl.clientHeight,t=0;
+          rgb.style.backgroundImage='url('+src+')';
+          var iv=setInterval(function(){sl.forEach(function(e){var y=Math.random()*H,h=3+Math.random()*(t<4?18:H/5);e.style.top=y+'px';e.style.height=h+'px';e.style.backgroundImage='url('+(Math.random()<t/7?src:im.src)+')';
+              e.style.backgroundSize=W+'px '+H+'px';e.style.backgroundPosition='0 '+(-y)+'px';e.style.transform='translateX('+((Math.random()-.5)*30)+'px)';e.style.opacity=1;});
+            rgb.style.opacity=.3;rgb.style.transform='translateX('+((Math.random()-.5)*8)+'px)';if(t===4)setTo(n);
+            if(++t>8){clearInterval(iv);sl.forEach(function(e){e.style.opacity=0;});rgb.style.opacity=0;busy=false;}},65);};
+      }
+      fig.querySelector('.tx-next').onclick=function(){go(i+1);};fig.querySelector('.tx-prev').onclick=function(){go(i-1);};
+      fr.addEventListener('mouseenter',function(){hold=true;});fr.addEventListener('mouseleave',function(){hold=false;});
+      if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;},{threshold:.2}).observe(fr);else vis=true;
+      (function lp(t){var dt=t-last;last=t;if(vis&&!hold&&!busy&&document.getElementById('clb').hidden){acc+=dt;if(acc>=T)go(i+1);}
+        bar.style.width=Math.max(0,Math.min(100,acc/T*100))+'%';requestAnimationFrame(lp);})(last);
+      label(0);
+    });
   })();
   /* frozen side index: appears with the pinned Fig. 01, highlights the section in view */
   (function(){
