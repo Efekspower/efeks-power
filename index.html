@@ -359,6 +359,13 @@
     #cur{display:none}
   }
   @media (max-width:1199px){.coords{display:none}.bar{flex-wrap:wrap;row-gap:0}}
+  /* large tablets & laptops: keep side gutters wide enough for the frozen Fig. 01 + index (right) and the hanging gear (left) */
+  @media (min-width:1200px){
+    section,.hero,footer{max-width:min(1240px,calc(100vw - 380px))}
+  }
+  @media (max-width:1799px){.coords,.scheme-name{display:none}}
+  @media (min-width:1800px){.bar{max-width:1520px}}
+  @media (min-width:561px){.bar .logo{margin-right:14px}}
   @media (max-width:699px){.bar nav{display:none}}
   /* phone */
   html,body{overflow-x:clip}
