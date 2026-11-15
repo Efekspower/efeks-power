@@ -1223,7 +1223,8 @@
   }
   function closeLb(){
     var f=active;if(!f)return;
-    f.vid.currentTime=lv.currentTime;
+    /* phones: leave the small Specimens video untouched so its cover image stays (seeking an unplayed video blanks it on iPhone) */
+    if(!f.lazy||matchMedia('(hover:hover) and (pointer:fine)').matches)f.vid.currentTime=lv.currentTime;
     lb.classList.remove('open');
     flip(f.frame,inner.querySelector('.frame'),true,function(){lb.hidden=true;lv.pause();var host=f.vid.closest('.gfig');if(!RM&&(!f.lazy||(host&&host.matches(':hover')&&matchMedia('(hover:hover) and (pointer:fine)').matches)))f.vid.play();f.vs();});
     document.body.style.overflow='';f.open.focus();
