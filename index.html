@@ -508,7 +508,7 @@
   html.loading body>*:not(#loader),html.loading body>*:not(#loader) *{animation-play-state:paused!important}
   html.loading,html.loading body{overflow:hidden}
 .bar.t1{gap:10px!important}.bar.t1 .logo{margin-right:0!important}.bar.t1 nav a{padding:0 4px!important;letter-spacing:.1em!important}.bar.t2 .snd .snd-l{display:none}.bar.t3 .vol{width:40px!important}.bar.t3 nav a{padding:0 2px!important;letter-spacing:.04em!important}.bar.t4 .scheme-name{display:none}@media (min-width:700px){.bar{justify-content:center;gap:32px}.bar>*{height:24px;margin:0!important;display:flex;align-items:center}.bar .logo{line-height:24px}.bar nav{margin-left:0!important;gap:0}.bar nav a{min-height:24px;height:24px}.snd{min-height:24px;height:24px;padding:0}.vol{height:24px}.theme{height:24px}}
-.snd .bars{border:0!important;width:auto!important;height:12px!important;padding:0!important;align-self:center}.theme{border:0!important;padding:0!important}.snd .vinyl{flex-shrink:0;width:14px;height:14px;border:.5px solid currentColor;border-radius:50%;position:relative;display:inline-block}.snd .vinyl::before{content:"";position:absolute;inset:4px;border:.5px solid currentColor;border-radius:50%}.snd .vinyl::after{content:"";position:absolute;left:50%;top:1px;width:1px;height:4px;background:currentColor;transform:translateX(-50%)}.snd[aria-pressed="true"] .vinyl{animation:vinylSpin 2.4s linear infinite}@keyframes vinylSpin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.snd[aria-pressed="true"] .vinyl{animation-duration:8s}}html.loading .snd .vinyl{animation-play-state:paused}.volw{position:relative;flex-shrink:0;width:58px;height:24px;display:flex;align-items:center}.vseg{display:flex;align-items:center;gap:2px;width:100%;pointer-events:none}.vseg i{flex:1;height:9px;background:color-mix(in srgb,var(--ink) 20%,transparent);transition:background .15s}.vseg i.on{background:var(--ink)}.volw:hover .vseg i:not(.on){background:color-mix(in srgb,var(--ink) 32%,transparent)}.bar .volw .vol{position:absolute;inset:0;width:100%!important;height:100%;margin:0;opacity:0;cursor:pointer}.volw:has(.vol:focus-visible){outline:1px solid var(--ink);outline-offset:3px}.bar.t3 .volw{width:44px}@media (max-width:560px){.volw{display:none!important}}</style>
+.snd .bars{border:0!important;width:auto!important;height:12px!important;padding:0!important;align-self:center}.theme{border:0!important;padding:0!important}.snd .vinyl{flex-shrink:0;width:14px;height:14px;border:.5px solid currentColor;border-radius:50%;position:relative;display:inline-block}.snd .vinyl::before{content:"";position:absolute;inset:4px;border:.5px solid currentColor;border-radius:50%}.snd .vinyl::after{content:"";position:absolute;left:50%;top:1px;width:1px;height:4px;background:currentColor;transform:translateX(-50%)}.snd[aria-pressed="true"] .vinyl{animation:vinylSpin 2.4s linear infinite}@keyframes vinylSpin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.snd[aria-pressed="true"] .vinyl{animation-duration:8s}}html.loading .snd .vinyl{animation-play-state:paused}.volw{position:relative;flex-shrink:0;width:58px;height:24px;display:flex;align-items:center}.vseg{display:flex;align-items:center;gap:2px;width:100%;pointer-events:none}.vseg i{flex:1;height:9px;background:color-mix(in srgb,var(--ink) 20%,transparent);transition:background .15s}.vseg i.on{background:var(--ink)}.volw:hover .vseg i:not(.on){background:color-mix(in srgb,var(--ink) 32%,transparent)}.bar .volw .vol{position:absolute;inset:0;width:100%!important;height:100%;margin:0;opacity:0;cursor:pointer}.volw:has(.vol:focus-visible){outline:1px solid var(--ink);outline-offset:3px}.bar.t3 .volw{width:44px}@media (max-width:560px){.volw{display:none!important}}@media (hover:none),(pointer:coarse){.fig.gfig:hover video,.fig.gfig .frame:focus-within video{filter:saturate(.6) brightness(.58) contrast(.98)}.fig.gfig:hover .grain,.fig.gfig .frame:focus-within .grain{opacity:.26}.fig.gfig:hover .frame,.fig.gfig .frame:focus-within{transform:none}.fig.gfig:hover{z-index:auto}}</style>
 </head>
 <body>
 <div id="loader" role="status" aria-live="polite" aria-label="Loading Efeks Power">
@@ -689,7 +689,7 @@
       <figure class="fig gfig rv" style="transition-delay:0.16s">
         <div class="frame"><i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
           <button type="button" class="figOpen" id="gOpen9" aria-label="Enlarge Fig. 09, Teal"></button>
-          <video id="gVid9" poster="media/b3ea1cd358.webp" muted loop playsinline preload="metadata" aria-label="Looping animation of a Psychedeliiks robot head on a teal background" src="media/e0ce743cea.mp4"></video>
+          <video id="gVid9" poster="media/362d96ee65.webp" muted loop playsinline preload="metadata" aria-label="Looping animation of a Psychedeliiks robot head on a teal background" src="media/f8b7dd84a3.mp4"></video>
           <i class="grain" aria-hidden="true"></i>
         </div>
         <figcaption><span>Fig. 09 · Teal</span><span class="no">27</span></figcaption>
@@ -1195,7 +1195,7 @@
   }
   figs.forEach(function(f){if(!f.lazy)return;var host=f.vid.closest('.gfig')||f.vid.parentNode;
     var canHover=matchMedia('(hover:hover) and (pointer:fine)');
-    function on(e){if(RM||!lb.hidden)return;if(e&&e.type==='mouseenter'&&!canHover.matches)return;if(f.vid.preload!=='auto')f.vid.preload='auto';var pr=f.vid.play();if(pr&&pr.catch)pr.catch(function(){});}
+    function on(e){if(RM||!lb.hidden)return;if(e&&!canHover.matches&&(e.type==='mouseenter'||!(e.target&&e.target.matches&&e.target.matches(':focus-visible'))))return;if(f.vid.preload!=='auto')f.vid.preload='auto';var pr=f.vid.play();if(pr&&pr.catch)pr.catch(function(){});}
     function off(){f.vid.pause();}
     host.addEventListener('mouseenter',on);host.addEventListener('mouseleave',off);
     host.addEventListener('focusin',on);host.addEventListener('focusout',off);});
@@ -1227,7 +1227,7 @@
     if(!f.lazy||matchMedia('(hover:hover) and (pointer:fine)').matches)f.vid.currentTime=lv.currentTime;
     lb.classList.remove('open');
     flip(f.frame,inner.querySelector('.frame'),true,function(){lb.hidden=true;lv.pause();var host=f.vid.closest('.gfig');if(!RM&&(!f.lazy||(host&&host.matches(':hover')&&matchMedia('(hover:hover) and (pointer:fine)').matches)))f.vid.play();f.vs();});
-    document.body.style.overflow='';f.open.focus();
+    document.body.style.overflow='';if(matchMedia('(hover:hover) and (pointer:fine)').matches)f.open.focus();else if(document.activeElement)document.activeElement.blur();
   }
   figs.forEach(function(f){f.open.onclick=function(){openLb(f);};});
   closeB.onclick=closeLb;
