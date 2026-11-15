@@ -517,10 +517,26 @@
     <div class="ld-figw" id="ldfw"><i class="ld-hang" aria-hidden="true"></i><img class="ld-gh ld-g1" alt="" aria-hidden="true"><img class="ld-gh ld-g2" alt="" aria-hidden="true"><img class="ld-fig" id="ldfig" src="media/f3d7093d06.webp" alt="" aria-hidden="true"><i class="ld-noise" id="ldnoise"></i></div>
     <div class="ld-name" id="ldname" aria-hidden="true">EFEKS POWER</div>
     <div class="ld-bar"><i id="ldbar"></i></div>
+    <audio id="ldSnd" preload="auto" aria-hidden="true" src="media/acf9de40c1.mp3"></audio>
     <div class="ld-row"><span id="ldmsg">Aligning the stars</span><span class="ld-pct" id="ldpct">0%</span></div>
   </div>
 </div>
 <script>
+/* loading sound (M1 · The drop, from Chasing Echoes): its drop lands as the neon lines hit Fig. 01.
+   Browsers only allow it once the visitor has interacted with the site before; otherwise the loader stays silent. */
+(function(){
+  try{if(localStorage.getItem('efeks-sound')==='off')return;}catch(e){}
+  var el=document.getElementById('ldSnd'),AC=window.AudioContext||window.webkitAudioContext;if(!el||!AC)return;
+  var T0=performance.now(),ac;try{ac=new AC();}catch(e){return;}
+  var src=el.getAttribute('src')||'';
+  var get=src.indexOf('data:')===0?Promise.resolve().then(function(){var bin=atob(src.split(',')[1]),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u.buffer;})
+    :fetch(src).then(function(r){return r.arrayBuffer();});
+  get.then(function(ab){return new Promise(function(res,rej){ac.decodeAudioData(ab,res,rej);});}).then(function(buf){
+    function go(){var off=(performance.now()-T0)/1000;if(off>.5||!document.getElementById('loader'))return;
+      var s=ac.createBufferSource(),g=ac.createGain();s.buffer=buf;g.gain.value=1;s.connect(g);g.connect(ac.destination);s.start(0,off);}
+    if(ac.state==='running')go();else{var p=ac.resume();if(p&&p.then)p.then(function(){if(ac.state==='running')go();}).catch(function(){});}
+  }).catch(function(){});
+})();
 /* loading page: crosshairs lock onto Fig. 01 while the page really loads (images, Fig. 01, gear loop, fonts) */
 (function(){
   var L=document.getElementById('loader');if(!L)return;
