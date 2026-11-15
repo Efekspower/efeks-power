@@ -485,7 +485,7 @@
   html.loading body>*:not(#loader),html.loading body>*:not(#loader) *{animation-play-state:paused!important}
   html.loading,html.loading body{overflow:hidden}
 .bar.t1{gap:10px!important}.bar.t1 .logo{margin-right:0!important}.bar.t1 nav a{padding:0 4px!important;letter-spacing:.1em!important}.bar.t2 .snd .snd-l{display:none}.bar.t3 .vol{width:40px!important}.bar.t3 nav a{padding:0 2px!important;letter-spacing:.04em!important}.bar.t4 .scheme-name{display:none}@media (min-width:700px){.bar{justify-content:center;gap:32px}.bar>*{height:24px;margin:0!important;display:flex;align-items:center}.bar .logo{line-height:24px}.bar nav{margin-left:0!important;gap:0}.bar nav a{min-height:24px;height:24px}.snd{min-height:24px;height:24px;padding:0}.vol{height:24px}.theme{height:24px}}
-.snd .bars{border:0!important;width:auto!important;height:12px!important;padding:0!important;align-self:center}.theme{border:0!important;padding:0!important}</style>
+.snd .bars{border:0!important;width:auto!important;height:12px!important;padding:0!important;align-self:center}.theme{border:0!important;padding:0!important}.snd .vinyl{flex-shrink:0;width:14px;height:14px;border:.5px solid currentColor;border-radius:50%;position:relative;display:inline-block}.snd .vinyl::before{content:"";position:absolute;inset:4px;border:.5px solid currentColor;border-radius:50%}.snd .vinyl::after{content:"";position:absolute;left:50%;top:1px;width:1px;height:4px;background:currentColor;transform:translateX(-50%)}.snd[aria-pressed="true"] .vinyl{animation:vinylSpin 2.4s linear infinite}@keyframes vinylSpin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.snd[aria-pressed="true"] .vinyl{animation-duration:8s}}html.loading .snd .vinyl{animation-play-state:paused}</style>
 </head>
 <body>
 <div id="loader" role="status" aria-live="polite" aria-label="Loading Efeks Power">
@@ -553,7 +553,7 @@
 <header>
   <div class="bar">
     <a class="logo" href="#top" aria-label="Efeks Power, back to top"><svg viewBox="36 22 230 60" height="36" aria-hidden="true" style="display:block;overflow:visible"><text x="138" y="64" text-anchor="end" font-family="Big Shoulders Display" font-size="36" font-weight="200" letter-spacing="6" class="fi">EFEKS</text><path class="fi" d="M150 40 Q150 50 160 50 Q150 50 150 60 Q150 50 140 50 Q150 50 150 40Z"/><path class="ln" d="M132 50 h3 M165 50 h3 M150 32 v3 M150 65 v3"/><text x="166" y="64" font-family="Big Shoulders Display" font-size="36" font-weight="200" letter-spacing="6" class="fi">POWER</text><line class="ln" x1="40" y1="78" x2="262" y2="78" stroke-dasharray="2 4"/></svg></a>
-    <button type="button" class="snd" id="sndBtn" aria-pressed="false" aria-label="Play background music"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="snd-l" id="sndLbl">Music off</span></button>
+    <button type="button" class="snd" id="sndBtn" aria-pressed="false" aria-label="Play background music"><span class="vinyl" aria-hidden="true"></span><span class="snd-l" id="sndLbl">Music off</span></button>
     <input type="range" class="vol" id="vol" min="0" max="100" step="1" value="20" aria-label="Music volume">
     <nav aria-label="Main">
       <a href="#specimens">Specimens</a>
