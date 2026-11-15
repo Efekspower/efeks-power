@@ -483,6 +483,28 @@
   .ld-bar i{position:absolute;left:1.5px;top:1.5px;bottom:1.5px;right:1.5px;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
   .ld-row{width:100%;display:flex;justify-content:space-between;margin-top:8px;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--fine)}
   .ld-row .ld-pct{color:var(--ink)}
+
+  #loader{--n1:#C04BFF;--n2:#38D9FF}
+  .ld-hx,.ld-vy,.ld-ret,.ld-co{display:none!important}
+  .ld-name,.ld-bar,.ld-row{opacity:.5}
+  .ld-nl{position:absolute;left:0;right:0;top:50%;height:0;pointer-events:none;z-index:0}
+  .ld-nl b{position:absolute;top:-.5px;height:1px;width:50%;transform:scaleX(0);opacity:0;animation:ldin 1.6s cubic-bezier(.9,0,.6,1) .25s both}
+  .ld-L{left:0;transform-origin:left;background:linear-gradient(90deg,transparent,var(--n1) 55%,#fff);box-shadow:0 0 4px var(--n1),0 0 12px var(--n1)}
+  .ld-R{right:0;transform-origin:right;background:linear-gradient(270deg,transparent,var(--n2) 55%,#fff);box-shadow:0 0 4px var(--n2),0 0 12px var(--n2)}
+  @keyframes ldin{0%{transform:scaleX(0);opacity:1}20%{transform:scaleX(1);opacity:1}45%{opacity:1}100%{transform:scaleX(1);opacity:0}}
+  .ld{z-index:1}
+  .ld-figw{transform-origin:50% var(--ldoy,-300px);animation:ldsw 4.6s ease-in-out infinite}
+  @keyframes ldsw{0%,100%{transform:rotate(-1.4deg)}50%{transform:rotate(1.4deg)}}
+  .ld-hang{position:absolute;left:50%;bottom:83.8%;width:1px;height:100vh;margin-left:-.5px;z-index:0;background:linear-gradient(to bottom,transparent,var(--n1) 45%,var(--n2) 90%,#fff);filter:drop-shadow(0 0 2px var(--n1)) drop-shadow(0 0 6px var(--n2))}
+  .ld-fig{position:relative;z-index:1;opacity:1!important;transform-origin:50% 55%;animation:ldbam .55s cubic-bezier(.2,.9,.3,1) .56s both!important}
+  @keyframes ldbam{0%{transform:scale(1)}10%{transform:scale(1.09) translate(-2.5px,.5px)}22%{transform:scale(.97) translate(2.5px,-.5px)}34%{transform:scale(1.03) translate(-1px,0)}48%{transform:scale(.995) translate(.5px,0)}100%{transform:scale(1)}}
+  .ld-gh{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0;mix-blend-mode:screen;pointer-events:none}
+  .ld-g1{filter:brightness(.7) sepia(1) hue-rotate(230deg) saturate(6);animation:ldg1 .4s ease-out .56s both}
+  .ld-g2{filter:brightness(.7) sepia(1) hue-rotate(150deg) saturate(6);animation:ldg2 .4s ease-out .56s both}
+  @keyframes ldg1{0%{opacity:0}12%{opacity:.65;transform:translateX(-6px) scale(1.04)}100%{opacity:0;transform:none}}
+  @keyframes ldg2{0%{opacity:0}12%{opacity:.65;transform:translateX(6px) scale(1.04)}100%{opacity:0;transform:none}}
+  .ld-noise{z-index:2}
+  @media (prefers-reduced-motion:reduce){.ld-figw,.ld-fig,.ld-gh{animation:none!important}.ld-nl b{animation-duration:3s!important}}
   html.loading body>*:not(#loader),html.loading body>*:not(#loader) *{animation-play-state:paused!important}
   html.loading,html.loading body{overflow:hidden}
 .bar.t1{gap:10px!important}.bar.t1 .logo{margin-right:0!important}.bar.t1 nav a{padding:0 4px!important;letter-spacing:.1em!important}.bar.t2 .snd .snd-l{display:none}.bar.t3 .vol{width:40px!important}.bar.t3 nav a{padding:0 2px!important;letter-spacing:.04em!important}.bar.t4 .scheme-name{display:none}@media (min-width:700px){.bar{justify-content:center;gap:32px}.bar>*{height:24px;margin:0!important;display:flex;align-items:center}.bar .logo{line-height:24px}.bar nav{margin-left:0!important;gap:0}.bar nav a{min-height:24px;height:24px}.snd{min-height:24px;height:24px;padding:0}.vol{height:24px}.theme{height:24px}}
@@ -490,9 +512,9 @@
 </head>
 <body>
 <div id="loader" role="status" aria-live="polite" aria-label="Loading Efeks Power">
-  <i class="ld-hx" id="ldhx"></i><i class="ld-vy" id="ldvy"></i><i class="ld-ret" id="ldret"></i><div class="ld-co" id="ldco"></div>
+  <i class="ld-nl" id="ldnl"><b class="ld-L"></b><b class="ld-R"></b></i><i class="ld-hx" id="ldhx"></i><i class="ld-vy" id="ldvy"></i><i class="ld-ret" id="ldret"></i><div class="ld-co" id="ldco"></div>
   <div class="ld">
-    <div class="ld-figw"><img class="ld-fig" id="ldfig" src="media/f3d7093d06.webp" alt="" aria-hidden="true"><i class="ld-noise" id="ldnoise"></i></div>
+    <div class="ld-figw" id="ldfw"><i class="ld-hang" aria-hidden="true"></i><img class="ld-gh ld-g1" alt="" aria-hidden="true"><img class="ld-gh ld-g2" alt="" aria-hidden="true"><img class="ld-fig" id="ldfig" src="media/f3d7093d06.webp" alt="" aria-hidden="true"><i class="ld-noise" id="ldnoise"></i></div>
     <div class="ld-name" id="ldname" aria-hidden="true">EFEKS POWER</div>
     <div class="ld-bar"><i id="ldbar"></i></div>
     <div class="ld-row"><span id="ldmsg">Aligning the stars</span><span class="ld-pct" id="ldpct">0%</span></div>
@@ -510,7 +532,7 @@
   var WORD='EFEKS POWER',G='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   nm.innerHTML=WORD.split('').map(function(c){return '<span>'+(c===' '?'&nbsp;':c)+'</span>';}).join('');
   var sp=[].slice.call(nm.children);
-  var nz=document.getElementById('ldnoise');if(nz){nz.style.webkitMaskImage=nz.style.maskImage='url('+fg.src+')';}
+  [].forEach.call(L.querySelectorAll('.ld-gh'),function(g){g.src=fg.src;});var nl=document.getElementById('ldnl'),fwEl=document.getElementById('ldfw');var nz=document.getElementById('ldnoise');if(nz){nz.style.webkitMaskImage=nz.style.maskImage='url('+fg.src+')';}
   /* the title is exactly as wide as the bar */
   function fit(){sp.forEach(function(x,i){x.textContent=WORD[i]===' '?'\u00a0':WORD[i];x.style.width='';});nm.style.fontSize='40px';
     var r=document.createRange();r.selectNodeContents(nm);var w=r.getBoundingClientRect().width,ls=40*.12,want=nm.clientWidth+ls;
@@ -518,7 +540,8 @@
     /* the robot's lowest point sits on the title's centre line (half the letter height) */
     var fw=fg.parentNode,H=fw.offsetWidth,cap=fs*.72,lh=nm.offsetHeight,capTop=(lh-cap)/2;
     var cr=.72;try{var c=document.createElement('canvas').getContext('2d');c.font=getComputedStyle(nm).fontWeight+' 100px '+getComputedStyle(nm).fontFamily;var m=c.measureText('E');if(m.actualBoundingBoxAscent)cr=m.actualBoundingBoxAscent/100;}catch(e){}
-    cap=fs*cr;capTop=(lh-cap)/2;fw.style.marginBottom=(-(0.129*H+capTop+cap/2)).toFixed(1)+'px';}
+    cap=fs*cr;capTop=(lh-cap)/2;fw.style.marginBottom=(-(0.129*H+capTop+cap/2)).toFixed(1)+'px';
+    var an=fw.style.animation;fw.style.animation='none';var rr=fw.getBoundingClientRect();fw.style.animation=an;fw.style.setProperty('--ldoy',(-rr.top).toFixed(1)+'px');nl.style.top=(rr.top+rr.height/2).toFixed(1)+'px';}
   fit();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);addEventListener('resize',fit);
   function setName(k){sp.forEach(function(x,i){if(WORD[i]===' ')return;x.textContent=i<k?WORD[i]:G[Math.random()*G.length|0];});}
   var total=1,doneN=0,shown=0,finished=false,t0=performance.now(),MIN=2700,MAX=9000;
@@ -536,7 +559,7 @@
     var el=performance.now()-t0,real=doneN/Math.max(1,total),cap=Math.min(1,el/MIN),target=Math.min(real,cap)*100;if(real<1)target=Math.min(target,96);
     shown+=(target-shown)*(RM?1:.09);if(target-shown<.4)shown=target;var u=shown/100;
     bar.style.transform='scaleX('+u.toFixed(4)+')';pct.textContent=Math.round(shown)+'%';
-    msg.textContent=u>=1?'Ready':MSG[Math.min(MSG.length-1,Math.floor(u*MSG.length))];setName(Math.floor(u*11.4));
+    msg.textContent=u>=1?'Ready':MSG[Math.min(MSG.length-1,Math.floor(u*MSG.length))];setName(u<.5?0:u>=.7?99:Math.floor((u-.5)/.2*11));
     /* crosshairs drift, then lock onto the centre of Fig. 01 */
     var fr=fg.getBoundingClientRect(),cx=fr.left+fr.width/2,cy=fr.top+fr.height/2,W=innerWidth,H=innerHeight,ph=Math.min(1,u*1.2),ex=RM?1:1-Math.pow(1-ph,3);
     var x=cx+(1-ex)*(-W*.28+W*.06*Math.sin(t/300)),y=cy+(1-ex)*(H*.24+H*.05*Math.cos(t/350));
