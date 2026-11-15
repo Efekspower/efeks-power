@@ -1156,7 +1156,7 @@
     {vid:document.getElementById('gVid10'),open:document.getElementById('gOpen10'),title:'Fig. 10 · Psychedeliiks 28 · Slate',lazy:true},
     {vid:document.getElementById('gVid11'),open:document.getElementById('gOpen11'),title:'Fig. 11 · Psychedeliiks 29 · Lilac',lazy:true}
   ];
-  var pinVid=document.getElementById('pinVid');pinVid.src=document.getElementById('figVid').src;
+  var pinVid=document.getElementById('pinVid');pinVid.src=document.getElementById('figVid').src;if(document.getElementById('figVid').poster)pinVid.poster=document.getElementById('figVid').poster;
   figs.push({vid:pinVid,btn:document.getElementById('pinBtn'),open:document.getElementById('pinOpen'),title:'Fig. 01 · The Listener · Robotic head · Light',pin:true});
   figs.forEach(function(f){
     f.frame=f.open.parentNode;
