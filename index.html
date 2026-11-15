@@ -505,6 +505,17 @@
   @keyframes ldg2{0%{opacity:0}12%{opacity:.65;transform:translateX(6px) scale(1.04)}100%{opacity:0;transform:none}}
   .ld-noise{z-index:2}
   @media (prefers-reduced-motion:reduce){.ld-figw,.ld-fig,.ld-gh{animation:none!important}.ld-nl b{animation-duration:3s!important}}
+
+  /* enter screen: the loader waits for one tap, which also lets the browser play sound */
+  #loader:not(.go) .ld-nl b,#loader:not(.go) .ld-fig,#loader:not(.go) .ld-gh{animation:none!important}
+  #loader:not(.go) .ld-bar,#loader:not(.go) .ld-row{visibility:hidden}
+  .ld-gate{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:14px;z-index:4;transition:opacity .4s ease}
+  #loader.go .ld-gate{opacity:0;pointer-events:none}
+  .ld-enter{margin-top:22px;min-width:150px;height:40px;padding:0 26px;background:none;border:.5px solid color-mix(in srgb,var(--ink) 55%,transparent);color:var(--ink);font:300 11px 'IBM Plex Mono',monospace;letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s,border-color .3s,box-shadow .3s}
+  .ld-enter:focus-visible{outline:1px solid var(--ink);outline-offset:4px}.ld-enter:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);outline:none;box-shadow:-6px 0 14px -6px var(--n1),6px 0 14px -6px var(--n2)}
+  .ld-quiet{background:none;border:0;padding:6px 8px;color:var(--fine);font:300 9px 'IBM Plex Mono',monospace;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;opacity:.7}
+  .ld-quiet:hover,.ld-quiet:focus-visible{opacity:1;color:var(--ink);outline:none;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:.5px}
+  .ld{position:absolute}.ld-gate{top:calc(100% - 26px)}
   html.loading body>*:not(#loader),html.loading body>*:not(#loader) *{animation-play-state:paused!important}
   html.loading,html.loading body{overflow:hidden}
 .bar.t1{gap:10px!important}.bar.t1 .logo{margin-right:0!important}.bar.t1 nav a{padding:0 4px!important;letter-spacing:.1em!important}.bar.t2 .snd .snd-l{display:none}.bar.t3 .vol{width:40px!important}.bar.t3 nav a{padding:0 2px!important;letter-spacing:.04em!important}.bar.t4 .scheme-name{display:none}@media (min-width:700px){.bar{justify-content:center;gap:32px}.bar>*{height:24px;margin:0!important;display:flex;align-items:center}.bar .logo{line-height:24px}.bar nav{margin-left:0!important;gap:0}.bar nav a{min-height:24px;height:24px}.snd{min-height:24px;height:24px;padding:0}.vol{height:24px}.theme{height:24px}}
@@ -516,25 +527,24 @@
   <div class="ld">
     <div class="ld-figw" id="ldfw"><i class="ld-hang" aria-hidden="true"></i><img class="ld-gh ld-g1" alt="" aria-hidden="true"><img class="ld-gh ld-g2" alt="" aria-hidden="true"><img class="ld-fig" id="ldfig" src="media/f3d7093d06.webp" alt="" aria-hidden="true"><i class="ld-noise" id="ldnoise"></i></div>
     <div class="ld-name" id="ldname" aria-hidden="true">EFEKS POWER</div>
+    <div class="ld-gate" id="ldGate"><button type="button" class="ld-enter" id="ldEnter">Enter</button><button type="button" class="ld-quiet" id="ldQuiet">Enter without sound</button></div>
     <div class="ld-bar"><i id="ldbar"></i></div>
     <audio id="ldSnd" preload="auto" aria-hidden="true" src="media/acf9de40c1.mp3"></audio>
     <div class="ld-row"><span id="ldmsg">Aligning the stars</span><span class="ld-pct" id="ldpct">0%</span></div>
   </div>
 </div>
 <script>
-/* loading sound (M1 · The drop, from Chasing Echoes): its drop lands as the neon lines hit Fig. 01.
-   Browsers only allow it once the visitor has interacted with the site before; otherwise the loader stays silent. */
+/* loading sound (M1 · The drop, from Chasing Echoes): starts on "Enter", its drop lands as the neon lines hit Fig. 01 */
 (function(){
   var el=document.getElementById('ldSnd'),AC=window.AudioContext||window.webkitAudioContext;if(!el||!AC)return;
-  var T0=performance.now(),ac;try{ac=new AC();}catch(e){return;}
+  var ac,buf=null,want=false;try{ac=new AC();}catch(e){return;}
   var src=el.getAttribute('src')||'';
   var get=src.indexOf('data:')===0?Promise.resolve().then(function(){var bin=atob(src.split(',')[1]),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u.buffer;})
     :fetch(src).then(function(r){return r.arrayBuffer();});
-  get.then(function(ab){return new Promise(function(res,rej){ac.decodeAudioData(ab,res,rej);});}).then(function(buf){
-    function go(){var off=(performance.now()-T0)/1000;if(off>.5||!document.getElementById('loader'))return;
-      var s=ac.createBufferSource(),g=ac.createGain();s.buffer=buf;g.gain.value=1;s.connect(g);g.connect(ac.destination);s.start(0,off);}
-    if(ac.state==='running')go();else{var p=ac.resume();if(p&&p.then)p.then(function(){if(ac.state==='running')go();}).catch(function(){});}
-  }).catch(function(){});
+  var T=0;function go(){var off=(performance.now()-T)/1000;if(off>.5)return;var s=ac.createBufferSource();s.buffer=buf;s.connect(ac.destination);s.start(0,off);}
+  get.then(function(ab){return new Promise(function(res,rej){ac.decodeAudioData(ab,res,rej);});}).then(function(b){buf=b;if(want)go();}).catch(function(){});
+  /* called inside the Enter tap, so the browser allows it */
+  window.__ldSound=function(){T=performance.now();want=true;try{if(navigator.audioSession)navigator.audioSession.type='playback';}catch(e){}var p=ac.resume();if(buf){if(p&&p.then)p.then(go);else go();}};
 })();
 /* loading page: crosshairs lock onto Fig. 01 while the page really loads (images, Fig. 01, gear loop, fonts) */
 (function(){
@@ -583,7 +593,13 @@
     if(shown>=100&&!finished){finished=true;setName(99);
       setTimeout(function(){L.classList.add('out');de.classList.remove('loading');setTimeout(function(){if(L.parentNode)L.parentNode.removeChild(L);},1300);},600);}
     if(L.parentNode)requestAnimationFrame(frame);}
-  requestAnimationFrame(frame);
+  var gate=document.getElementById('ldGate'),eb=document.getElementById('ldEnter'),qb=document.getElementById('ldQuiet');
+  function enter(withSound){if(L.classList.contains('go'))return;
+    if(withSound){if(window.__ldSound)window.__ldSound();if(window.__musicEnter)window.__musicEnter(3600);}
+    else if(window.__musicQuiet)window.__musicQuiet();
+    t0=performance.now();shown=0;L.classList.add('go');requestAnimationFrame(frame);}
+  if(eb){eb.onclick=function(){enter(true);};qb.onclick=function(){enter(false);};document.addEventListener('keydown',function k(e){if(L.classList.contains('go')){document.removeEventListener('keydown',k);return;}if(e.key==='Enter'||e.key===' '){e.preventDefault();enter(true);}});}
+  else requestAnimationFrame(frame);
 })();
 </script>
 
@@ -1383,11 +1399,14 @@
     var EV=['pointerdown','keydown','touchend'];
     function cleanup(){EV.forEach(function(ev){removeEventListener(ev,firstGesture,true);});}
     function firstGesture(e){
-      if(e&&e.target&&e.target.closest&&e.target.closest('#sndBtn,#vol'))return cleanup();
+      if(e&&e.target&&e.target.closest&&e.target.closest('#sndBtn,#vol,#loader'))return cleanup();
       if(au.paused||(ctx&&ctx.state!=='running'))start();
       cleanup();
     }
-    if(!wantOff){
+    window.__musicEnter=function(delay){cleanup();graph();if(ctx&&ctx.state==='suspended')ctx.resume();cancelAnimationFrame(raf);setV(0);var pr=au.play();if(pr&&pr.catch)pr.catch(function(){set(false);});set(true);startSway();try{localStorage.setItem('efeks-sound','on');}catch(x){}setTimeout(function(){ramp(TARGET,2600);},delay||0);};
+    window.__musicQuiet=function(){cleanup();set(false);};
+    var gated=!!document.getElementById('ldEnter');
+    if(!wantOff&&!gated){
       EV.forEach(function(ev){addEventListener(ev,firstGesture,true);});
       var pr=start();
       if(pr&&pr.catch)pr.catch(function(){cancelAnimationFrame(raf);set(false);setV(0);});
