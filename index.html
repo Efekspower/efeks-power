@@ -493,7 +493,7 @@
   function setName(k){var h='';letters.forEach(function(c,i){if(c===null){h+='<span class="ld-s">✦</span>';return;}h+=(i<k?c:G[Math.random()*G.length|0]);});nm.innerHTML=h;}
   function glitch(){if(RM)return;gb.classList.remove('gl');void gb.offsetWidth;gb.classList.add('gl');}
   gb.addEventListener('animationend',function(e){if(e.target===gb)gb.classList.remove('gl');});
-  var total=1,doneN=0,shown=0,finished=false,t0=performance.now(),MIN=3200,MAX=9000;
+  var total=1,doneN=0,shown=0,finished=false,t0=performance.now(),MIN=2700,MAX=9000;
   function tick1(){doneN++;}
   document.addEventListener('DOMContentLoaded',function(){
     var items=[];
