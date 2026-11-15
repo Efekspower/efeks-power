@@ -1409,7 +1409,7 @@
       if(tab){top=Math.max(aY+30,h1.offsetTop+h1.offsetHeight+28);avail=220;}
       if(avail<(sm?80:110)){rift.style.display='none';return;}
       rift.style.display='';
-      var h=Math.min(avail,300),w=Math.round(h*.78);
+      var h=Math.min(avail,300);if(sm)h=Math.round(h*.68);var w=Math.round(h*.78);
       if(tab){var nb=top+avail+6;if(window.__riftBottom!==nb){window.__riftBottom=nb;if(window.__heroAlign)setTimeout(window.__heroAlign,0);}}else window.__riftBottom=0;
       /* fixed to the screen at the spot it occupies when the page is at the top, so it freezes there while scrolling */
       var heroDocTop=hr.top+scrollY,fixedTop=Math.round(heroDocTop+top+(avail-h)/2);
@@ -1513,7 +1513,7 @@
   /* hero title never runs off the screen, whatever the device */
   (function(){
     var h1=document.getElementById('title');if(!h1)return;
-    function fit(){if(innerWidth>560&&window.__heroAlign){window.__heroAlign();return;}h1.style.fontSize='';var avail=h1.clientWidth;
+    function fit(){if(window.__heroAlign){window.__heroAlign();return;}h1.style.fontSize='';var avail=h1.clientWidth;
       var w=h1.scrollWidth;if(w>avail){var fs=parseFloat(getComputedStyle(h1).fontSize);h1.style.fontSize=(fs*avail/w*.98).toFixed(1)+'px';}}
     fit();addEventListener('resize',function(){clearTimeout(fit.t);fit.t=setTimeout(fit,150);});addEventListener('load',fit);
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);setTimeout(fit,1600);
