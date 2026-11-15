@@ -500,10 +500,10 @@
   function fit(){sp.forEach(function(x,i){x.textContent=WORD[i]===' '?'\u00a0':WORD[i];x.style.width='';});nm.style.fontSize='40px';
     var r=document.createRange();r.selectNodeContents(nm);var w=r.getBoundingClientRect().width,ls=40*.12,want=nm.clientWidth+ls;
     var f=40*want/w;nm.style.fontSize=f.toFixed(2)+'px';var fs=f;sp.forEach(function(x){x.style.width=(x.getBoundingClientRect().width/fs).toFixed(4)+'em';x.style.textAlign='center';});nm.style.marginRight=(-.12*fs).toFixed(1)+'px';
-    /* tuck the bottom 50% of the robot (its visible body, not the empty PNG margin) behind the title's letters */
+    /* the robot's lowest point sits on the title's centre line (half the letter height) */
     var fw=fg.parentNode,H=fw.offsetWidth,cap=fs*.72,lh=nm.offsetHeight,capTop=(lh-cap)/2;
     var cr=.72;try{var c=document.createElement('canvas').getContext('2d');c.font=getComputedStyle(nm).fontWeight+' 100px '+getComputedStyle(nm).fontFamily;var m=c.measureText('E');if(m.actualBoundingBoxAscent)cr=m.actualBoundingBoxAscent/100;}catch(e){}
-    cap=fs*cr;capTop=(lh-cap)/2;fw.style.marginBottom=(-(0.5325*H+capTop)).toFixed(1)+'px';}
+    cap=fs*cr;capTop=(lh-cap)/2;fw.style.marginBottom=(-(0.129*H+capTop+cap/2)).toFixed(1)+'px';}
   fit();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);addEventListener('resize',fit);
   function setName(k){sp.forEach(function(x,i){if(WORD[i]===' ')return;x.textContent=i<k?WORD[i]:G[Math.random()*G.length|0];});}
   var total=1,doneN=0,shown=0,finished=false,t0=performance.now(),MIN=2700,MAX=9000;
