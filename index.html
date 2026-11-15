@@ -484,7 +484,8 @@
   .ld-row .ld-pct{color:var(--ink)}
   html.loading body>*:not(#loader),html.loading body>*:not(#loader) *{animation-play-state:paused!important}
   html.loading,html.loading body{overflow:hidden}
-.bar.t1{gap:10px!important}.bar.t1 .logo{margin-right:0!important}.bar.t1 nav a{padding:0 4px!important;letter-spacing:.1em!important}.bar.t2 .snd .snd-l{display:none}.bar.t3 .vol{width:40px!important}.bar.t3 nav a{padding:0 2px!important;letter-spacing:.04em!important}.bar.t4 .scheme-name{display:none}</style>
+.bar.t1{gap:10px!important}.bar.t1 .logo{margin-right:0!important}.bar.t1 nav a{padding:0 4px!important;letter-spacing:.1em!important}.bar.t2 .snd .snd-l{display:none}.bar.t3 .vol{width:40px!important}.bar.t3 nav a{padding:0 2px!important;letter-spacing:.04em!important}.bar.t4 .scheme-name{display:none}@media (min-width:700px){.bar{justify-content:center;gap:32px}.bar>*{height:24px;margin:0!important;display:flex;align-items:center}.bar .logo{line-height:24px}.bar nav{margin-left:0!important;gap:0}.bar nav a{min-height:24px;height:24px}.snd{min-height:24px;height:24px;padding:0}.vol{height:24px}.theme{height:24px}}
+.snd .bars{border:0!important;width:auto!important;height:12px!important;padding:0!important;align-self:center}.theme{border:0!important;padding:0!important}</style>
 </head>
 <body>
 <div id="loader" role="status" aria-live="polite" aria-label="Loading Efeks Power">
@@ -1014,20 +1015,12 @@
   window.__heroAlign=function(){placeLink();};
   /* header: the small logo starts exactly above the big title */
   (function(){var bar=document.querySelector('header .bar'),logo=bar&&bar.querySelector('.logo');if(!logo)return;
-    function al(){bar.style.paddingLeft='';bar.style.paddingRight='';if(innerWidth<=560)return;
-      var ts=logo.querySelectorAll('svg text,svg path'),lx=1e9;[].forEach.call(ts,function(t){var r=t.getBoundingClientRect();if(r.width)lx=Math.min(lx,r.left);});if(lx===1e9)lx=logo.getBoundingClientRect().left;
-      var rg=document.createRange();rg.selectNodeContents(h1El);var tl=rg.getBoundingClientRect().left;
-      var pl=parseFloat(getComputedStyle(bar).paddingLeft)+(tl-lx);bar.style.paddingLeft=Math.max(8,pl).toFixed(1)+'px';
-      /* keep the right side matched to the content edge too */
-      var cs=getComputedStyle(heroEl),cr=heroEl.getBoundingClientRect().right-parseFloat(cs.paddingRight),bR=bar.getBoundingClientRect().right;
-      /* where the connector line runs down the right gutter, end the header there */
-      var tsv=document.querySelector('svg.traces'),tp=tsv&&tsv.querySelector('path'),m=tp&&/H([\d.]+)/.exec(tp.getAttribute('d')||'');
-      if(m&&innerWidth>820)cr=tsv.getBoundingClientRect().left+parseFloat(m[1]);
-      bar.style.paddingRight=Math.max(8,bR-cr).toFixed(1)+'px';
-         /* if the items don't fit before the line, tighten step by step */
-         bar.classList.remove('t1','t2','t3','t4');var th=bar.querySelector('.theme'),k=0;
-         while(th&&th.getBoundingClientRect().right>cr+.5&&k<4){bar.classList.add('t'+(++k));}}
-    window.__barAlign=al;al();addEventListener('resize',function(){setTimeout(al,60);});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(al);setTimeout(al,1800);setTimeout(al,4000);})();
+  function al(){bar.style.paddingLeft='';bar.style.paddingRight='';bar.classList.remove('t1','t2','t3','t4');if(innerWidth<700)return;
+    /* row is centred; if it doesn't fit, tighten step by step */
+    var cs=getComputedStyle(bar),r=bar.getBoundingClientRect(),L=r.left+parseFloat(cs.paddingLeft),R=r.right-parseFloat(cs.paddingRight),k=0;
+    function over(){var c=bar.children;return c[0].getBoundingClientRect().left<L-.5||c[c.length-1].getBoundingClientRect().right>R+.5;}
+    while(over()&&k<4)bar.classList.add('t'+(++k));}
+  window.__barAlign=al;al();addEventListener('resize',function(){setTimeout(al,60);});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(al);setTimeout(al,1800);setTimeout(al,4000);})();
   function placeLink(){
     alignHero();
     if(innerWidth<=820){link.setAttribute('d','');linkDot.setAttribute('r',0);sky.style.transform='';return;}
