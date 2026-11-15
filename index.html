@@ -511,7 +511,7 @@
   #loader:not(.go) .ld-bar,#loader:not(.go) .ld-row{visibility:hidden}
   .ld-gate{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:14px;z-index:4;transition:opacity .4s ease}
   #loader.go .ld-gate{opacity:0;pointer-events:none}
-  .ld-enter{margin-top:22px;min-width:150px;height:40px;padding:0 26px;background:none;border:.5px solid color-mix(in srgb,var(--ink) 55%,transparent);color:var(--ink);font:300 11px 'IBM Plex Mono',monospace;letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s,border-color .3s,box-shadow .3s}
+  .ld-enter{margin-top:6px;min-width:150px;height:40px;padding:0 26px;background:none;border:.5px solid color-mix(in srgb,var(--ink) 55%,transparent);color:var(--ink);font:300 11px 'IBM Plex Mono',monospace;letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s,border-color .3s,box-shadow .3s}
   .ld-enter:focus-visible{outline:1px solid var(--ink);outline-offset:4px}.ld-enter:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);outline:none;box-shadow:-6px 0 14px -6px var(--n1),6px 0 14px -6px var(--n2)}
   .ld-quiet{background:none;border:0;padding:6px 8px;color:var(--fine);font:300 9px 'IBM Plex Mono',monospace;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;opacity:.7}
   .ld-quiet:hover,.ld-quiet:focus-visible{opacity:1;color:var(--ink);outline:none;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:.5px}
@@ -527,7 +527,7 @@
   <div class="ld">
     <div class="ld-figw" id="ldfw"><i class="ld-hang" aria-hidden="true"></i><img class="ld-gh ld-g1" alt="" aria-hidden="true"><img class="ld-gh ld-g2" alt="" aria-hidden="true"><img class="ld-fig" id="ldfig" src="media/f3d7093d06.webp" alt="" aria-hidden="true"><i class="ld-noise" id="ldnoise"></i></div>
     <div class="ld-name" id="ldname" aria-hidden="true">EFEKS POWER</div>
-    <div class="ld-gate" id="ldGate"><button type="button" class="ld-enter" id="ldEnter">Enter</button><button type="button" class="ld-quiet" id="ldQuiet">Enter without sound</button></div>
+    <div class="ld-gate" id="ldGate"><button type="button" class="ld-enter" id="ldEnter">Enter</button></div>
     <div class="ld-bar"><i id="ldbar"></i></div>
     <audio id="ldSnd" preload="auto" aria-hidden="true" src="media/acf9de40c1.mp3"></audio>
     <div class="ld-row"><span id="ldmsg">Aligning the stars</span><span class="ld-pct" id="ldpct">0%</span></div>
@@ -593,12 +593,12 @@
     if(shown>=100&&!finished){finished=true;setName(99);
       setTimeout(function(){L.classList.add('out');de.classList.remove('loading');setTimeout(function(){if(L.parentNode)L.parentNode.removeChild(L);},1300);},600);}
     if(L.parentNode)requestAnimationFrame(frame);}
-  var gate=document.getElementById('ldGate'),eb=document.getElementById('ldEnter'),qb=document.getElementById('ldQuiet');
+  var gate=document.getElementById('ldGate'),eb=document.getElementById('ldEnter'),qb=null;
   function enter(withSound){if(L.classList.contains('go'))return;
     if(withSound){if(window.__ldSound)window.__ldSound();if(window.__musicEnter)window.__musicEnter(3600);}
     else if(window.__musicQuiet)window.__musicQuiet();
     t0=performance.now();shown=0;L.classList.add('go');requestAnimationFrame(frame);}
-  if(eb){eb.onclick=function(){enter(true);};qb.onclick=function(){enter(false);};document.addEventListener('keydown',function k(e){if(L.classList.contains('go')){document.removeEventListener('keydown',k);return;}if(e.key==='Enter'||e.key===' '){e.preventDefault();enter(true);}});}
+  if(eb){eb.onclick=function(){enter(true);};document.addEventListener('keydown',function k(e){if(L.classList.contains('go')){document.removeEventListener('keydown',k);return;}if(e.key==='Enter'||e.key===' '){e.preventDefault();enter(true);}});}
   else requestAnimationFrame(frame);
 })();
 </script>
