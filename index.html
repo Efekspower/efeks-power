@@ -437,6 +437,7 @@
     .bar{padding:10px 10px}
     .schemes button{width:22px}
     .vol{display:none}
+    .volw{display:none}
     .bar nav{margin-left:auto}.bar nav a{padding:0 4px;font-size:10px;letter-spacing:.18em}
     .bar nav a::after{left:4px;right:4px}
     .hero h1{font-size:8.6vw;letter-spacing:.04em}
@@ -485,7 +486,7 @@
   html.loading body>*:not(#loader),html.loading body>*:not(#loader) *{animation-play-state:paused!important}
   html.loading,html.loading body{overflow:hidden}
 .bar.t1{gap:10px!important}.bar.t1 .logo{margin-right:0!important}.bar.t1 nav a{padding:0 4px!important;letter-spacing:.1em!important}.bar.t2 .snd .snd-l{display:none}.bar.t3 .vol{width:40px!important}.bar.t3 nav a{padding:0 2px!important;letter-spacing:.04em!important}.bar.t4 .scheme-name{display:none}@media (min-width:700px){.bar{justify-content:center;gap:32px}.bar>*{height:24px;margin:0!important;display:flex;align-items:center}.bar .logo{line-height:24px}.bar nav{margin-left:0!important;gap:0}.bar nav a{min-height:24px;height:24px}.snd{min-height:24px;height:24px;padding:0}.vol{height:24px}.theme{height:24px}}
-.snd .bars{border:0!important;width:auto!important;height:12px!important;padding:0!important;align-self:center}.theme{border:0!important;padding:0!important}.snd .vinyl{flex-shrink:0;width:14px;height:14px;border:.5px solid currentColor;border-radius:50%;position:relative;display:inline-block}.snd .vinyl::before{content:"";position:absolute;inset:4px;border:.5px solid currentColor;border-radius:50%}.snd .vinyl::after{content:"";position:absolute;left:50%;top:1px;width:1px;height:4px;background:currentColor;transform:translateX(-50%)}.snd[aria-pressed="true"] .vinyl{animation:vinylSpin 2.4s linear infinite}@keyframes vinylSpin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.snd[aria-pressed="true"] .vinyl{animation-duration:8s}}html.loading .snd .vinyl{animation-play-state:paused}</style>
+.snd .bars{border:0!important;width:auto!important;height:12px!important;padding:0!important;align-self:center}.theme{border:0!important;padding:0!important}.snd .vinyl{flex-shrink:0;width:14px;height:14px;border:.5px solid currentColor;border-radius:50%;position:relative;display:inline-block}.snd .vinyl::before{content:"";position:absolute;inset:4px;border:.5px solid currentColor;border-radius:50%}.snd .vinyl::after{content:"";position:absolute;left:50%;top:1px;width:1px;height:4px;background:currentColor;transform:translateX(-50%)}.snd[aria-pressed="true"] .vinyl{animation:vinylSpin 2.4s linear infinite}@keyframes vinylSpin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){.snd[aria-pressed="true"] .vinyl{animation-duration:8s}}html.loading .snd .vinyl{animation-play-state:paused}.volw{position:relative;flex-shrink:0;width:58px;height:24px;display:flex;align-items:center}.vseg{display:flex;align-items:center;gap:2px;width:100%;pointer-events:none}.vseg i{flex:1;height:9px;background:color-mix(in srgb,var(--ink) 20%,transparent);transition:background .15s}.vseg i.on{background:var(--ink)}.volw:hover .vseg i:not(.on){background:color-mix(in srgb,var(--ink) 32%,transparent)}.bar .volw .vol{position:absolute;inset:0;width:100%!important;height:100%;margin:0;opacity:0;cursor:pointer}.volw:has(.vol:focus-visible){outline:1px solid var(--ink);outline-offset:3px}.bar.t3 .volw{width:44px}@media (max-width:560px){.volw{display:none!important}}</style>
 </head>
 <body>
 <div id="loader" role="status" aria-live="polite" aria-label="Loading Efeks Power">
@@ -554,7 +555,7 @@
   <div class="bar">
     <a class="logo" href="#top" aria-label="Efeks Power, back to top"><svg viewBox="36 22 230 60" height="36" aria-hidden="true" style="display:block;overflow:visible"><text x="138" y="64" text-anchor="end" font-family="Big Shoulders Display" font-size="36" font-weight="200" letter-spacing="6" class="fi">EFEKS</text><path class="fi" d="M150 40 Q150 50 160 50 Q150 50 150 60 Q150 50 140 50 Q150 50 150 40Z"/><path class="ln" d="M132 50 h3 M165 50 h3 M150 32 v3 M150 65 v3"/><text x="166" y="64" font-family="Big Shoulders Display" font-size="36" font-weight="200" letter-spacing="6" class="fi">POWER</text><line class="ln" x1="40" y1="78" x2="262" y2="78" stroke-dasharray="2 4"/></svg></a>
     <button type="button" class="snd" id="sndBtn" aria-pressed="false" aria-label="Play background music"><span class="vinyl" aria-hidden="true"></span><span class="snd-l" id="sndLbl">Music off</span></button>
-    <input type="range" class="vol" id="vol" min="0" max="100" step="1" value="20" aria-label="Music volume">
+    <span class="volw"><span class="vseg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><input type="range" class="vol" id="vol" min="0" max="100" step="1" value="20" aria-label="Music volume"></span>
     <nav aria-label="Main">
       <a href="#specimens">Specimens</a>
       <a href="#drawings">Garis</a>
@@ -869,7 +870,7 @@
   </div>
 </div>
 
-<audio id="bed" loop preload="auto" src="media/7a0a42f933.mp3"></audio>
+<audio id="bed" loop preload="auto" src="media/414792f9b7.mp3"></audio>
 
 <div class="clb" id="clb" role="dialog" aria-modal="true" aria-label="Artwork, enlarged" hidden>
   <figure><img id="clbImg" alt=""><figcaption><span id="clbCap"></span><button type="button" id="clbClose" aria-label="Close">✕ Close</button></figcaption></figure>
@@ -1305,7 +1306,7 @@
     var au=document.getElementById('bed'),b=document.getElementById('sndBtn'),lbl=document.getElementById('sndLbl'),vol=document.getElementById('vol'),TARGET=.2,raf=null;
     var ctx=null,gain=null,an=null,buf=null,fbuf=null,level=0,peak=.02,swayOn=false;
     try{var sv=localStorage.getItem('efeks-vol20');if(sv!==null){vol.value=sv;}}catch(e){}
-    function readVol(){TARGET=vol.value/100;vol.style.setProperty('--v',vol.value+'%');}
+    var segs=document.querySelectorAll('.vseg i');function readVol(){TARGET=vol.value/100;vol.style.setProperty('--v',vol.value+'%');var n=Math.ceil(vol.value/10);segs.forEach(function(c,k){c.classList.toggle('on',k<n);});}
     readVol();
     function graph(){
       if(ctx)return;
