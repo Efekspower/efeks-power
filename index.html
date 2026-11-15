@@ -372,9 +372,11 @@
   .chart{margin-top:6px}
   .studio h2{margin:0;font-size:clamp(54px,8vw,128px)}
   .studio h2 .ln2{display:table;white-space:nowrap}
-  .studio h2#wireH .ln2{display:inline}.studio h2#wireH .ln2+.ln2::before{content:" "}
-  .studio h2#wireH{font-size:13px!important;line-height:1.7;letter-spacing:.24em;align-self:start;margin-top:2px}
-  .studio{align-items:start}
+  .studio h2#wireH .ln2{display:inline;white-space:normal}.studio h2#wireH .ln2+.ln2::before{content:" "}
+  .studio{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:56px}
+  .studio h2#wireH{font-family:'Big Shoulders Display',sans-serif;font-weight:300;font-size:clamp(26px,2.6vw,36px)!important;line-height:1.1;letter-spacing:.06em;text-transform:uppercase;margin:0 0 18px;color:var(--ink)}
+  .studio-chart .chartbox{max-width:none;margin:0}
+  .studio-text p:last-child{margin-bottom:0}
   .studio p{max-width:420px;margin:0 0 18px}
   .chart{width:100%;height:auto;margin-top:26px}
 
@@ -706,12 +708,14 @@
   <section id="studio">
     <div class="sec-head rv"><span class="label">05 · The workshop</span><div class="hairline"></div></div>
     <div class="studio">
-      <h2 class="tall rv" id="wireH" aria-label="Machines that dream in wire."><span class="ln2" aria-hidden="true">Machines</span><span class="ln2" aria-hidden="true">that dream</span><span class="ln2" aria-hidden="true">in wire.</span></h2>
-      <div class="rv">
+      <div class="studio-chart rv">
         <div class="chartbox rv"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i>
           <span class="label">From drawing to machine · four stages</span>
           <svg class="chart" viewBox="0 0 420 150" aria-hidden="true" id="chart"></svg>
         </div>
+      </div>
+      <div class="studio-text rv">
+        <h2 class="rv" id="wireH" aria-label="Machines that dream in wire."><span class="ln2" aria-hidden="true">Machines</span><span class="ln2" aria-hidden="true">that dream</span><span class="ln2" aria-hidden="true">in wire.</span></h2>
         <p>Every machine I make begins as a drawing: a few bright points and the thinnest lines between them. Then the points become lights, the lines become wires, and the drawing slowly learns to move.</p>
         <p>Each one is modelled, lit and animated piece by piece, then left to loop quietly, like something alive behind glass. They are not made to work. They are made to watch, listen and glow.</p>
       </div>
@@ -1358,7 +1362,7 @@
   })();
   /* workshop: heading grows to the same height as the chart + text column */
   (function(){
-    var h=document.getElementById('wireH');if(!h||getComputedStyle(h).fontSize==='13px')return;var col=h.nextElementSibling;
+    var h=document.getElementById('wireH');if(!h||!h.classList.contains('tall'))return;var col=h.nextElementSibling;
     function fit(){
       h.style.fontSize='100px';
       var lines=[].slice.call(h.querySelectorAll('.ln2')),wid=Math.max.apply(null,lines.map(function(l){return l.getBoundingClientRect().width;}));
