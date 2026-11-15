@@ -525,7 +525,6 @@
 /* loading sound (M1 · The drop, from Chasing Echoes): its drop lands as the neon lines hit Fig. 01.
    Browsers only allow it once the visitor has interacted with the site before; otherwise the loader stays silent. */
 (function(){
-  try{if(localStorage.getItem('efeks-sound')==='off')return;}catch(e){}
   var el=document.getElementById('ldSnd'),AC=window.AudioContext||window.webkitAudioContext;if(!el||!AC)return;
   var T0=performance.now(),ac;try{ac=new AC();}catch(e){return;}
   var src=el.getAttribute('src')||'';
@@ -1354,7 +1353,7 @@
   (function(){
     var au=document.getElementById('bed'),b=document.getElementById('sndBtn'),lbl=document.getElementById('sndLbl'),vol=document.getElementById('vol'),TARGET=.1,raf=null;
     var ctx=null,gain=null,an=null,buf=null,fbuf=null,level=0,peak=.02,swayOn=false;
-    try{var sv=localStorage.getItem('efeks-vol10');if(sv!==null){vol.value=sv;}}catch(e){}
+    vol.value=10;/* every visit starts at 1 bar */
     var segs=document.querySelectorAll('.vseg i');function readVol(){TARGET=vol.value/100;vol.style.setProperty('--v',vol.value+'%');var n=Math.ceil(vol.value/10);segs.forEach(function(c,k){c.classList.toggle('on',k<n);});}
     readVol();
     function graph(){
@@ -1380,7 +1379,7 @@
       else{stop();try{localStorage.setItem('efeks-sound','off');}catch(x){}}
     };
     /* auto on: try straight away; the first click, tap or key press starts or unlocks it */
-    var wantOff=false;try{wantOff=localStorage.getItem('efeks-sound')==='off';}catch(x){}
+    var wantOff=false;/* music is always on at each visit */
     var EV=['pointerdown','keydown','touchend'];
     function cleanup(){EV.forEach(function(ev){removeEventListener(ev,firstGesture,true);});}
     function firstGesture(e){
