@@ -419,7 +419,7 @@
   }
   @media (max-width:1799px){.coords{display:none}}
   @media (max-width:1799px){.scheme-name{display:none}}
-  @media (min-width:700px) and (max-width:1799px){.bar{gap:16px}.bar nav a{padding:0 6px;letter-spacing:.16em}.vol{width:56px}.snd{margin-left:0}.bar .logo{margin-right:0}}
+  @media (min-width:700px){.bar{gap:16px}.bar nav a{padding:0 6px;letter-spacing:.16em}.vol{width:56px}.snd{margin-left:0}.bar .logo{margin-right:0}}
   @media (min-width:700px) and (max-width:1599px){.bar nav a{padding:0 5px;font-size:10px;letter-spacing:.12em}.snd .snd-l{display:none}}
   @media (min-width:1200px) and (max-width:1279px){.bar nav a{padding:0 4px;letter-spacing:.08em}.bar{gap:12px}}
   @media (min-width:1800px){.bar{max-width:1520px}}
@@ -484,7 +484,7 @@
   .ld-row .ld-pct{color:var(--ink)}
   html.loading body>*:not(#loader),html.loading body>*:not(#loader) *{animation-play-state:paused!important}
   html.loading,html.loading body{overflow:hidden}
-</style>
+.bar.t1{gap:10px!important}.bar.t1 .logo{margin-right:0!important}.bar.t1 nav a{padding:0 4px!important;letter-spacing:.1em!important}.bar.t2 .snd .snd-l{display:none}.bar.t3 .vol{width:40px!important}.bar.t3 nav a{padding:0 2px!important;letter-spacing:.04em!important}.bar.t4 .scheme-name{display:none}</style>
 </head>
 <body>
 <div id="loader" role="status" aria-live="polite" aria-label="Loading Efeks Power">
@@ -1019,8 +1019,14 @@
       var rg=document.createRange();rg.selectNodeContents(h1El);var tl=rg.getBoundingClientRect().left;
       var pl=parseFloat(getComputedStyle(bar).paddingLeft)+(tl-lx);bar.style.paddingLeft=Math.max(8,pl).toFixed(1)+'px';
       /* keep the right side matched to the content edge too */
-      var cs=getComputedStyle(heroEl),cr=heroEl.getBoundingClientRect().right-parseFloat(cs.paddingRight),br=bar.getBoundingClientRect().right;
-      bar.style.paddingRight=Math.max(8,parseFloat(getComputedStyle(bar).paddingRight)+(br-cr)).toFixed(1)+'px';}
+      var cs=getComputedStyle(heroEl),cr=heroEl.getBoundingClientRect().right-parseFloat(cs.paddingRight),bR=bar.getBoundingClientRect().right;
+      /* where the connector line runs down the right gutter, end the header there */
+      var tsv=document.querySelector('svg.traces'),tp=tsv&&tsv.querySelector('path'),m=tp&&/H([\d.]+)/.exec(tp.getAttribute('d')||'');
+      if(m&&innerWidth>820)cr=tsv.getBoundingClientRect().left+parseFloat(m[1]);
+      bar.style.paddingRight=Math.max(8,bR-cr).toFixed(1)+'px';
+         /* if the items don't fit before the line, tighten step by step */
+         bar.classList.remove('t1','t2','t3','t4');var th=bar.querySelector('.theme'),k=0;
+         while(th&&th.getBoundingClientRect().right>cr+.5&&k<4){bar.classList.add('t'+(++k));}}
     window.__barAlign=al;al();addEventListener('resize',function(){setTimeout(al,60);});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(al);setTimeout(al,1800);setTimeout(al,4000);})();
   function placeLink(){
     alignHero();
