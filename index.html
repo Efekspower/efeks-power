@@ -444,9 +444,82 @@
   }
   .conn{stroke:var(--hair2)}
   #sky circle.fi,.chart circle.fi,.traces circle.fi,.clasp circle.fi{fill:color-mix(in srgb,var(--ink) 48%,transparent)}
+  /* ---------- the loader ---------- */
+  #loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:grid;place-items:center;transition:clip-path 1.1s cubic-bezier(.7,0,.2,1),opacity .6s ease .7s;clip-path:inset(0 0 0 0)}
+  #loader.out{clip-path:inset(0 0 100% 0);opacity:0}
+  #loader::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,color-mix(in srgb,var(--ink) 9%,transparent) 1px,transparent 1.2px);background-size:26px 26px}
+  .ld{position:relative;width:min(560px,86vw);text-align:center}
+  .ld-name{margin-top:0;font:200 clamp(30px,8.5vw,92px)/1 'Big Shoulders Display',sans-serif;letter-spacing:.12em;padding-left:.12em;white-space:nowrap}
+  .ld-box{position:relative;display:inline-block;padding:22px 34px 18px;border:.5px solid color-mix(in srgb,var(--ink) 35%,transparent)}
+  .ld-box .ld-ck{position:absolute;width:9px;height:9px;border-color:var(--ink);border-style:solid;border-width:0}
+  .ld-box .c1{left:-4px;top:-4px;border-left-width:1px;border-top-width:1px}.ld-box .c2{right:-4px;top:-4px;border-right-width:1px;border-top-width:1px}
+  .ld-box .c3{left:-4px;bottom:-4px;border-left-width:1px;border-bottom-width:1px}.ld-box .c4{right:-4px;bottom:-4px;border-right-width:1px;border-bottom-width:1px}
+  .ld-box::before,.ld-box::after{content:"";position:absolute;inset:-1px;border:1.5px solid;pointer-events:none;opacity:0}
+  .ld-box::before{border-color:#ff2e6a}.ld-box::after{border-color:#19d3e6}
+  .ld-box.gl::before{opacity:.9;animation:glA .42s steps(2) both}
+  .ld-box.gl::after{opacity:.9;animation:glB .42s steps(2) both}
+  .ld-box.gl{animation:glF .42s steps(3) both}
+  @keyframes glF{0%,100%{border-color:color-mix(in srgb,var(--ink) 35%,transparent)}33%{border-color:rgba(236,235,230,.05)}66%{border-color:rgba(236,235,230,.7)}}
+  .ld-name .ld-s{display:inline-block;color:var(--ink);transform:scale(.6);margin:0 .08em}
+  .ld-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:26px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--fine)}
+  .ld-bar{flex:1;height:10px;border:.5px solid color-mix(in srgb,var(--ink) 35%,transparent);padding:2px;position:relative}
+  .ld-bar i{position:absolute;left:2px;top:2px;bottom:2px;right:2px;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
+  .ld-bar b{display:none}
+  .ld-pct{min-width:4ch;text-align:right;color:var(--ink)}
+  .ld-msg{margin-top:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--fine);height:16px}
+
+  html.loading body>*:not(#loader),html.loading body>*:not(#loader) *{animation-play-state:paused!important}
+  html.loading,html.loading body{overflow:hidden}
 </style>
 </head>
 <body>
+<div id="loader" role="status" aria-live="polite" aria-label="Loading Efeks Power">
+  <div class="ld">
+    <div class="ld-box" id="ldbox"><i class="ld-ck c1"></i><i class="ld-ck c2"></i><i class="ld-ck c3"></i><i class="ld-ck c4"></i><div class="ld-name" id="ldname" aria-hidden="true">EFEKS<span class="ld-s">✦</span>POWER</div></div>
+    <div class="ld-meta"><span class="ld-bar"><i id="ldbar"></i><b id="ldtip"></b></span><span class="ld-pct" id="ldpct">0%</span></div>
+    <div class="ld-msg" id="ldmsg">Aligning the stars</div>
+  </div>
+</div>
+
+<script>
+/* loading page: progress follows the real loading of the page (images, Fig. 01, gear loop, fonts) */
+(function(){
+  var L=document.getElementById('loader');if(!L)return;
+  var de=document.documentElement,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var seen=false;try{seen=sessionStorage.getItem('efeks-loaded')==='1';}catch(e){}
+  if(seen){L.parentNode.removeChild(L);return;}
+  de.classList.add('loading');
+  var bar=document.getElementById('ldbar'),pct=document.getElementById('ldpct'),msg=document.getElementById('ldmsg'),nm=document.getElementById('ldname'),gb=document.getElementById('ldbox');
+  var MSG=['Aligning the stars','Tuning the turbines','Polishing chrome','Wiring the halo','Waking the machine'];
+  var letters=['E','F','E','K','S',null,'P','O','W','E','R'],G='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  function setName(k){var h='';letters.forEach(function(c,i){if(c===null){h+='<span class="ld-s">✦</span>';return;}h+=(i<k?c:G[Math.random()*G.length|0]);});nm.innerHTML=h;}
+  function glitch(){if(RM)return;gb.classList.remove('gl');void gb.offsetWidth;gb.classList.add('gl');}
+  gb.addEventListener('animationend',function(e){if(e.target===gb)gb.classList.remove('gl');});
+  var total=1,doneN=0,shown=0,finished=false,t0=performance.now(),MIN=1600,MAX=9000;
+  function tick1(){doneN++;}
+  document.addEventListener('DOMContentLoaded',function(){
+    var items=[];
+    [].forEach.call(document.querySelectorAll('img:not([loading=lazy])'),function(im){items.push(im.complete?null:new Promise(function(r){im.addEventListener('load',r,{once:true});im.addEventListener('error',r,{once:true});}));});
+    ['figVid','riftVid'].forEach(function(id){var v=document.getElementById(id);if(v)items.push(v.readyState>=2?null:new Promise(function(r){v.addEventListener('loadeddata',r,{once:true});v.addEventListener('error',r,{once:true});}));});
+    if(document.fonts&&document.fonts.ready)items.push(document.fonts.ready);
+    items.push(new Promise(function(r){if(document.readyState==='complete')r();else addEventListener('load',r,{once:true});}));
+    total=items.length;items.forEach(function(p){if(!p)tick1();else p.then(tick1,tick1);});
+  });
+  setTimeout(function(){doneN=total;},MAX);
+  (function loop(){if(finished)return;glitch();setTimeout(loop,500+Math.random()*900);})();
+  function frame(){
+    var el=performance.now()-t0,real=doneN/Math.max(1,total),cap=Math.min(1,el/MIN),target=Math.min(real,cap)*100;if(real<1)target=Math.min(target,96);
+    shown+=(target-shown)*(RM?1:.09);if(target-shown<.4)shown=target;
+    var u=shown/100;bar.style.transform='scaleX('+u.toFixed(4)+')';pct.textContent=Math.round(shown)+'%';
+    msg.textContent=MSG[Math.min(MSG.length-1,Math.floor(u*MSG.length))];setName(Math.floor(u*11.2));
+    if(shown>=100){finished=true;setName(11);glitch();msg.textContent='Ready';
+      try{sessionStorage.setItem('efeks-loaded','1');}catch(e){}
+      setTimeout(function(){L.classList.add('out');de.classList.remove('loading');setTimeout(function(){if(L.parentNode)L.parentNode.removeChild(L);},1300);},600);return;}
+    requestAnimationFrame(frame);}
+  requestAnimationFrame(frame);
+})();
+</script>
+
 <canvas id="field" aria-hidden="true"></canvas>
 
 <header>
