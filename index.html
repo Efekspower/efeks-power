@@ -444,58 +444,55 @@
   }
   .conn{stroke:var(--hair2)}
   #sky circle.fi,.chart circle.fi,.traces circle.fi,.clasp circle.fi{fill:color-mix(in srgb,var(--ink) 48%,transparent)}
-  /* ---------- the loader ---------- */
-  #loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:grid;place-items:center;transition:clip-path 1.1s cubic-bezier(.7,0,.2,1),opacity .6s ease .7s;clip-path:inset(0 0 0 0)}
+  /* ---------- the loader (target) ---------- */
+  #loader{position:fixed;inset:0;z-index:9999;background:var(--bg);overflow:hidden;transition:clip-path 1.1s cubic-bezier(.7,0,.2,1),opacity .6s ease .7s;clip-path:inset(0 0 0 0)}
   #loader.out{clip-path:inset(0 0 100% 0);opacity:0}
   #loader::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,color-mix(in srgb,var(--ink) 9%,transparent) 1px,transparent 1.2px);background-size:26px 26px}
-  .ld{position:relative;width:min(280px,60vw);text-align:center}
-  .ld-fig{display:block;width:100%;aspect-ratio:1;margin:0 auto 10px;opacity:0;animation:ldfig 1.2s ease .1s forwards}
+  .ld-hx,.ld-vy{position:absolute;background:color-mix(in srgb,var(--ink) 30%,transparent);pointer-events:none}
+  .ld-hx{left:0;right:0;height:1px}.ld-vy{top:0;bottom:0;width:1px}
+  .ld-ret{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border:.5px solid var(--ink);pointer-events:none}
+  .ld-co{position:absolute;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--fine);white-space:nowrap;pointer-events:none}
+  .ld{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(300px,62vw);display:flex;flex-direction:column;align-items:center}
+  .ld-fig{display:block;width:60%;aspect-ratio:1;margin:0 0 14px;opacity:0;animation:ldfig 1.2s ease .1s forwards}
   @keyframes ldfig{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
-  .ld-name{margin-top:0;font:200 clamp(22px,4.25vw,46px)/1 'Big Shoulders Display',sans-serif;letter-spacing:.12em;padding-left:.12em;white-space:nowrap}
-  .ld-box{position:relative;display:inline-block;padding:11px 17px 9px;border:.5px solid color-mix(in srgb,var(--ink) 35%,transparent)}
-  .ld-box .ld-ck{position:absolute;width:6px;height:6px;border-color:var(--ink);border-style:solid;border-width:0}
-  .ld-box .c1{left:-4px;top:-4px;border-left-width:1px;border-top-width:1px}.ld-box .c2{right:-4px;top:-4px;border-right-width:1px;border-top-width:1px}
-  .ld-box .c3{left:-4px;bottom:-4px;border-left-width:1px;border-bottom-width:1px}.ld-box .c4{right:-4px;bottom:-4px;border-right-width:1px;border-bottom-width:1px}
-  .ld-box::before,.ld-box::after{content:"";position:absolute;inset:-1px;border:1.5px solid;pointer-events:none;opacity:0}
-  .ld-box::before{border-color:#ff2e6a}.ld-box::after{border-color:var(--ink)}
-  .ld-box.gl::before{opacity:.9;animation:glA .42s steps(2) both}
-  .ld-box.gl::after{opacity:.9;animation:glB .42s steps(2) both}
-  .ld-box.gl{animation:glF .42s steps(3) both}
-  @keyframes glF{0%,100%{border-color:color-mix(in srgb,var(--ink) 35%,transparent)}33%{border-color:rgba(236,235,230,.05)}66%{border-color:rgba(236,235,230,.7)}}
-  .ld-name .ld-s{display:inline-block;color:var(--ink);transform:scale(.6);margin:0 .08em}
-  .ld-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--fine)}
-  .ld-bar{flex:1;height:6px;border:.5px solid color-mix(in srgb,var(--ink) 35%,transparent);padding:2px;position:relative}
+  .ld-name{width:100%;font-family:'Big Shoulders Display',sans-serif;font-weight:200;line-height:1;white-space:nowrap;text-align:center;font-size:40px;letter-spacing:.12em}
+  .ld-name span{display:inline-block}
+  .ld-bar{position:relative;width:100%;height:8px;margin-top:14px;border:.5px solid color-mix(in srgb,var(--ink) 35%,transparent)}
   .ld-bar i{position:absolute;left:1.5px;top:1.5px;bottom:1.5px;right:1.5px;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
-  .ld-bar b{display:none}
-  .ld-pct{min-width:4ch;text-align:right;color:var(--ink)}
-  .ld-msg{margin-top:8px;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--fine);height:16px}
-
+  .ld-row{width:100%;display:flex;justify-content:space-between;margin-top:8px;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--fine)}
+  .ld-row .ld-pct{color:var(--ink)}
   html.loading body>*:not(#loader),html.loading body>*:not(#loader) *{animation-play-state:paused!important}
   html.loading,html.loading body{overflow:hidden}
 </style>
 </head>
 <body>
 <div id="loader" role="status" aria-live="polite" aria-label="Loading Efeks Power">
+  <i class="ld-hx" id="ldhx"></i><i class="ld-vy" id="ldvy"></i><i class="ld-ret" id="ldret"></i><div class="ld-co" id="ldco"></div>
   <div class="ld">
-    <img class="ld-fig" src="media/f3d7093d06.webp" alt="" aria-hidden="true">
-    <div class="ld-box" id="ldbox"><i class="ld-ck c1"></i><i class="ld-ck c2"></i><i class="ld-ck c3"></i><i class="ld-ck c4"></i><div class="ld-name" id="ldname" aria-hidden="true">EFEKS<span class="ld-s">✦</span>POWER</div></div>
-    <div class="ld-meta"><span class="ld-bar"><i id="ldbar"></i><b id="ldtip"></b></span><span class="ld-pct" id="ldpct">0%</span></div>
-    <div class="ld-msg" id="ldmsg">Aligning the stars</div>
+    <img class="ld-fig" id="ldfig" src="media/f3d7093d06.webp" alt="" aria-hidden="true">
+    <div class="ld-name" id="ldname" aria-hidden="true">EFEKS POWER</div>
+    <div class="ld-bar"><i id="ldbar"></i></div>
+    <div class="ld-row"><span id="ldmsg">Aligning the stars</span><span class="ld-pct" id="ldpct">0%</span></div>
   </div>
 </div>
-
 <script>
-/* loading page: progress follows the real loading of the page (images, Fig. 01, gear loop, fonts) */
+/* loading page: crosshairs lock onto Fig. 01 while the page really loads (images, Fig. 01, gear loop, fonts) */
 (function(){
   var L=document.getElementById('loader');if(!L)return;
   var de=document.documentElement,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
   de.classList.add('loading');
-  var bar=document.getElementById('ldbar'),pct=document.getElementById('ldpct'),msg=document.getElementById('ldmsg'),nm=document.getElementById('ldname'),gb=document.getElementById('ldbox');
+  var bar=document.getElementById('ldbar'),pct=document.getElementById('ldpct'),msg=document.getElementById('ldmsg'),nm=document.getElementById('ldname'),fg=document.getElementById('ldfig'),
+      hx=document.getElementById('ldhx'),vy=document.getElementById('ldvy'),ret=document.getElementById('ldret'),co=document.getElementById('ldco');
   var MSG=['Aligning the stars','Tuning the turbines','Polishing chrome','Wiring the halo','Waking the machine'];
-  var letters=['E','F','E','K','S',null,'P','O','W','E','R'],G='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  function setName(k){var h='';letters.forEach(function(c,i){if(c===null){h+='<span class="ld-s">✦</span>';return;}h+=(i<k?c:G[Math.random()*G.length|0]);});nm.innerHTML=h;}
-  function glitch(){if(RM)return;gb.classList.remove('gl');void gb.offsetWidth;gb.classList.add('gl');}
-  gb.addEventListener('animationend',function(e){if(e.target===gb)gb.classList.remove('gl');});
+  var WORD='EFEKS POWER',G='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  nm.innerHTML=WORD.split('').map(function(c){return '<span>'+(c===' '?'&nbsp;':c)+'</span>';}).join('');
+  var sp=[].slice.call(nm.children);
+  /* the title is exactly as wide as the bar */
+  function fit(){sp.forEach(function(x,i){x.textContent=WORD[i]===' '?'\u00a0':WORD[i];x.style.width='';});nm.style.fontSize='40px';
+    var r=document.createRange();r.selectNodeContents(nm);var w=r.getBoundingClientRect().width,ls=40*.12,want=nm.clientWidth+ls;
+    var f=40*want/w;nm.style.fontSize=f.toFixed(2)+'px';var fs=f;sp.forEach(function(x){x.style.width=(x.getBoundingClientRect().width/fs).toFixed(4)+'em';x.style.textAlign='center';});nm.style.marginRight=(-.12*fs).toFixed(1)+'px';}
+  fit();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);addEventListener('resize',fit);
+  function setName(k){sp.forEach(function(x,i){if(WORD[i]===' ')return;x.textContent=i<k?WORD[i]:G[Math.random()*G.length|0];});}
   var total=1,doneN=0,shown=0,finished=false,t0=performance.now(),MIN=2700,MAX=9000;
   function tick1(){doneN++;}
   document.addEventListener('DOMContentLoaded',function(){
@@ -507,15 +504,19 @@
     total=items.length;items.forEach(function(p){if(!p)tick1();else p.then(tick1,tick1);});
   });
   setTimeout(function(){doneN=total;},MAX);
-  (function loop(){if(finished)return;glitch();setTimeout(loop,500+Math.random()*900);})();
-  function frame(){
+  function frame(t){
     var el=performance.now()-t0,real=doneN/Math.max(1,total),cap=Math.min(1,el/MIN),target=Math.min(real,cap)*100;if(real<1)target=Math.min(target,96);
-    shown+=(target-shown)*(RM?1:.09);if(target-shown<.4)shown=target;
-    var u=shown/100;bar.style.transform='scaleX('+u.toFixed(4)+')';pct.textContent=Math.round(shown)+'%';
-    msg.textContent=MSG[Math.min(MSG.length-1,Math.floor(u*MSG.length))];setName(Math.floor(u*11.2));
-    if(shown>=100){finished=true;setName(11);glitch();msg.textContent='Ready';
-      setTimeout(function(){L.classList.add('out');de.classList.remove('loading');setTimeout(function(){if(L.parentNode)L.parentNode.removeChild(L);},1300);},600);return;}
-    requestAnimationFrame(frame);}
+    shown+=(target-shown)*(RM?1:.09);if(target-shown<.4)shown=target;var u=shown/100;
+    bar.style.transform='scaleX('+u.toFixed(4)+')';pct.textContent=Math.round(shown)+'%';
+    msg.textContent=u>=1?'Ready':MSG[Math.min(MSG.length-1,Math.floor(u*MSG.length))];setName(Math.floor(u*11.4));
+    /* crosshairs drift, then lock onto the centre of Fig. 01 */
+    var fr=fg.getBoundingClientRect(),cx=fr.left+fr.width/2,cy=fr.top+fr.height/2,W=innerWidth,H=innerHeight,ph=Math.min(1,u*1.2),ex=RM?1:1-Math.pow(1-ph,3);
+    var x=cx+(1-ex)*(-W*.28+W*.06*Math.sin(t/300)),y=cy+(1-ex)*(H*.24+H*.05*Math.cos(t/350));
+    hx.style.top=y+'px';vy.style.left=x+'px';ret.style.left=x+'px';ret.style.top=y+'px';ret.style.transform='rotate('+(45*(1-ex)).toFixed(1)+'deg) scale('+(1+.6*(1-ex)).toFixed(3)+')';
+    co.style.left=(x+22)+'px';co.style.top=(y-30)+'px';co.textContent=ph>=1?'Locked':'RA '+(x/W*24).toFixed(2)+'h · DEC '+((cy-y)/H*90).toFixed(1)+'°';
+    if(shown>=100&&!finished){finished=true;setName(99);
+      setTimeout(function(){L.classList.add('out');de.classList.remove('loading');setTimeout(function(){if(L.parentNode)L.parentNode.removeChild(L);},1300);},600);}
+    if(L.parentNode)requestAnimationFrame(frame);}
   requestAnimationFrame(frame);
 })();
 </script>
