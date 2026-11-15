@@ -18,12 +18,12 @@
   .fi{fill:var(--ink);transition:fill .9s}.fa{fill:var(--accent);transition:fill .9s}.fb{fill:var(--bg);transition:fill .9s}
   .ln{transition:stroke .9s}
   .chart .ln{stroke:var(--star-line)}
-  .schemes{display:flex;align-items:center;gap:0}
-  .schemes button{width:30px;height:44px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
-  .schemes button i{display:block;width:11px;height:11px;transform:rotate(45deg);border:.5px solid var(--ink);transition:transform .5s cubic-bezier(.3,1.8,.5,1)}
+  .schemes{display:flex;align-items:center;gap:6px;padding:0 6px;height:24px;border:.5px solid color-mix(in srgb,var(--ink) 35%,transparent)}
+  .schemes button{width:16px;height:22px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+  .schemes button i{display:block;width:11px;height:11px;transform:rotate(180deg);border:.5px solid var(--ink);outline:.5px solid transparent;outline-offset:2px;transition:outline-color .3s}
   .schemes button i b{display:block;width:100%;height:50%}
-  .schemes button:hover i{transform:rotate(45deg) scale(1.3)}
-  .schemes button[aria-pressed="true"] i{transform:rotate(225deg) scale(1.35)}
+  .schemes button:hover i{outline-color:color-mix(in srgb,var(--ink) 45%,transparent)}
+  .schemes button[aria-pressed="true"] i{outline-color:var(--ink)}
   .scheme-name{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--fine);min-width:88px}
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
