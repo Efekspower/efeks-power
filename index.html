@@ -1416,7 +1416,7 @@
       var bar=document.querySelector('header').getBoundingClientRect().height;
       rift.style.top=fixedTop+'px';rift.style.height=h+'px';rift.style.width=w+'px';
       rift.style.left='12px';
-      rift.style.setProperty('--thread',Math.max(40,fixedTop-bar)+'px');
+      rift.style.setProperty('--thread',Math.max(40,sm?Math.round((fixedTop-bar)*.45):fixedTop-bar)+'px');
       /* asterism clasp: diamond loop on the thread, an anchor star, two hanger wires to pins on the torn rim */
       var cx=w/2,sy=-18,dy=-30,p1=[w*.36,h*.0788-2],p2=[w*.64,h*.015-2];
       function S(x,y,s){return 'M'+x+' '+(y-s)+' Q'+x+' '+y+' '+(x+s)+' '+y+' Q'+x+' '+y+' '+x+' '+(y+s)+' Q'+x+' '+y+' '+(x-s)+' '+y+' Q'+x+' '+y+' '+x+' '+(y-s)+' Z';}
