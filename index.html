@@ -18,7 +18,9 @@
   .fi{fill:var(--ink);transition:fill .9s}.fa{fill:var(--accent);transition:fill .9s}.fb{fill:var(--bg);transition:fill .9s}
   .ln{transition:stroke .9s}
   .chart .ln{stroke:var(--star-line)}
-  .schemes{display:flex;align-items:center;gap:6px;padding:0 6px;height:24px;border:.5px solid color-mix(in srgb,var(--ink) 35%,transparent)}
+  .theme{display:flex;align-items:center;gap:10px;height:24px;padding:0 10px 0 6px;border:.5px solid color-mix(in srgb,var(--ink) 35%,transparent);flex-shrink:0}
+  .schemes{display:flex;align-items:center;gap:6px}
+  .theme .scheme-name{min-width:0;font-size:10px;line-height:1}
   .schemes button{width:16px;height:22px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
   .schemes button i{display:block;width:11px;height:11px;transform:rotate(180deg);border:.5px solid var(--ink);outline:.5px solid transparent;outline-offset:2px;transition:outline-color .3s}
   .schemes button i b{display:block;width:100%;height:50%}
@@ -44,7 +46,7 @@
   .bar nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:11px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;position:relative;color:var(--fine);transition:color .3s}
   .bar nav a:hover,.bar nav a:focus-visible{color:var(--ink)}
   .snd{white-space:nowrap}.snd .snd-l{white-space:nowrap}
-  .bar .schemes{margin-left:6px}
+  .bar .theme{margin-left:6px}
   .bar nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:12px;height:.5px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
   .bar nav a:hover::after,.bar nav a:focus-visible::after{transform:scaleX(1)}
   a:focus-visible,button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
@@ -415,7 +417,8 @@
   @media (min-width:1200px){
     section,.hero,footer{max-width:min(1240px,calc(100vw - 380px))}
   }
-  @media (max-width:1799px){.coords,.scheme-name{display:none}}
+  @media (max-width:1799px){.coords{display:none}}
+  @media (max-width:1799px){.scheme-name{display:none}}
   @media (min-width:1800px){.bar{max-width:1520px}}
   @media (min-width:561px){.bar .logo{margin-right:14px}}
   @media (max-width:699px){.bar nav{display:none}}
@@ -546,7 +549,6 @@
 <header>
   <div class="bar">
     <a class="logo" href="#top" aria-label="Efeks Power, back to top"><svg viewBox="36 22 230 60" height="36" aria-hidden="true" style="display:block;overflow:visible"><text x="138" y="64" text-anchor="end" font-family="Big Shoulders Display" font-size="36" font-weight="200" letter-spacing="6" class="fi">EFEKS</text><path class="fi" d="M150 40 Q150 50 160 50 Q150 50 150 60 Q150 50 140 50 Q150 50 150 40Z"/><path class="ln" d="M132 50 h3 M165 50 h3 M150 32 v3 M150 65 v3"/><text x="166" y="64" font-family="Big Shoulders Display" font-size="36" font-weight="200" letter-spacing="6" class="fi">POWER</text><line class="ln" x1="40" y1="78" x2="262" y2="78" stroke-dasharray="2 4"/></svg></a>
-    <span class="coords" id="coords" aria-hidden="true">RA 00h 00m · DEC +00°00′</span>
     <button type="button" class="snd" id="sndBtn" aria-pressed="false" aria-label="Play background music"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="snd-l" id="sndLbl">Music off</span></button>
     <input type="range" class="vol" id="vol" min="0" max="100" step="1" value="20" aria-label="Music volume">
     <nav aria-label="Main">
@@ -557,7 +559,7 @@
       <a href="#studio">Workshop</a>
       <a href="#contact">Nightfall</a>
     </nav>
-    <div class="schemes" role="group" aria-label="Colour scheme" id="schemes"></div><span class="scheme-name" id="schemeName" aria-live="polite">Midnight</span>
+    <div class="theme"><div class="schemes" role="group" aria-label="Colour scheme" id="schemes"></div><span class="scheme-name" id="schemeName" aria-live="polite">Midnight</span></div>
   </div>
   <div class="hairline"></div>
 </header>
@@ -1097,7 +1099,7 @@
     cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
     var ra=e.clientX/innerWidth*24,dec=(.5-e.clientY/innerHeight)*180;
     var h=Math.floor(ra),m=Math.floor((ra-h)*60),dg=Math.floor(Math.abs(dec)),dm=Math.floor((Math.abs(dec)-dg)*60);
-    coords.textContent='RA '+String(h).padStart(2,'0')+'h '+String(m).padStart(2,'0')+'m · DEC '+(dec<0?'−':'+')+String(dg).padStart(2,'0')+'°'+String(dm).padStart(2,'0')+'′';
+    if(coords)coords.textContent='RA '+String(h).padStart(2,'0')+'h '+String(m).padStart(2,'0')+'m · DEC '+(dec<0?'−':'+')+String(dg).padStart(2,'0')+'°'+String(dm).padStart(2,'0')+'′';
     if(RM)frame();
   });
   document.addEventListener('pointerover',function(e){cur.classList.toggle('big',!!e.target.closest('a,button'));});
