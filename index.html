@@ -449,6 +449,8 @@
   #loader.out{clip-path:inset(0 0 100% 0);opacity:0}
   #loader::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,color-mix(in srgb,var(--ink) 9%,transparent) 1px,transparent 1.2px);background-size:26px 26px}
   .ld{position:relative;width:min(280px,60vw);text-align:center}
+  .ld-fig{display:block;width:100%;aspect-ratio:1;margin:0 auto 10px;-webkit-mask-image:radial-gradient(closest-side,#000 74%,transparent 100%);mask-image:radial-gradient(closest-side,#000 74%,transparent 100%);opacity:0;animation:ldfig 1.2s ease .1s forwards}
+  @keyframes ldfig{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
   .ld-name{margin-top:0;font:200 clamp(22px,4.25vw,46px)/1 'Big Shoulders Display',sans-serif;letter-spacing:.12em;padding-left:.12em;white-space:nowrap}
   .ld-box{position:relative;display:inline-block;padding:11px 17px 9px;border:.5px solid color-mix(in srgb,var(--ink) 35%,transparent)}
   .ld-box .ld-ck{position:absolute;width:6px;height:6px;border-color:var(--ink);border-style:solid;border-width:0}
@@ -475,6 +477,7 @@
 <body>
 <div id="loader" role="status" aria-live="polite" aria-label="Loading Efeks Power">
   <div class="ld">
+    <img class="ld-fig" src="media/17577c4446.webp" alt="" aria-hidden="true">
     <div class="ld-box" id="ldbox"><i class="ld-ck c1"></i><i class="ld-ck c2"></i><i class="ld-ck c3"></i><i class="ld-ck c4"></i><div class="ld-name" id="ldname" aria-hidden="true">EFEKS<span class="ld-s">✦</span>POWER</div></div>
     <div class="ld-meta"><span class="ld-bar"><i id="ldbar"></i><b id="ldtip"></b></span><span class="ld-pct" id="ldpct">0%</span></div>
     <div class="ld-msg" id="ldmsg">Aligning the stars</div>
