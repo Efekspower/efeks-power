@@ -39,9 +39,12 @@
   header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(6px)}
   .bar{max-width:1240px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;gap:28px}
   .bar .logo{font-size:22px;font-weight:200;letter-spacing:.32em}
-  .coords{font-size:11px;letter-spacing:.14em;color:var(--fine);white-space:nowrap}
+  .coords{font-size:11px;letter-spacing:.2em;color:var(--fine);white-space:nowrap}
   .bar nav{margin-left:auto;display:flex;gap:6px}
-  .bar nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;position:relative}
+  .bar nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;font-size:11px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;position:relative;color:var(--fine);transition:color .3s}
+  .bar nav a:hover,.bar nav a:focus-visible{color:var(--ink)}
+  .snd{white-space:nowrap}.snd .snd-l{white-space:nowrap}
+  .bar .schemes{margin-left:6px}
   .bar nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:12px;height:.5px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
   .bar nav a:hover::after,.bar nav a:focus-visible::after{transform:scaleX(1)}
   a:focus-visible,button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
@@ -543,8 +546,7 @@
   <div class="bar">
     <a class="logo" href="#top" aria-label="Efeks Power, back to top"><svg viewBox="36 22 230 60" height="36" aria-hidden="true" style="display:block;overflow:visible"><text x="138" y="64" text-anchor="end" font-family="Big Shoulders Display" font-size="36" font-weight="200" letter-spacing="6" class="fi">EFEKS</text><path class="fi" d="M150 40 Q150 50 160 50 Q150 50 150 60 Q150 50 140 50 Q150 50 150 40Z"/><path class="ln" d="M132 50 h3 M165 50 h3 M150 32 v3 M150 65 v3"/><text x="166" y="64" font-family="Big Shoulders Display" font-size="36" font-weight="200" letter-spacing="6" class="fi">POWER</text><line class="ln" x1="40" y1="78" x2="262" y2="78" stroke-dasharray="2 4"/></svg></a>
     <span class="coords" id="coords" aria-hidden="true">RA 00h 00m · DEC +00°00′</span>
-    <div class="schemes" role="group" aria-label="Colour scheme" id="schemes"></div><span class="scheme-name" id="schemeName" aria-live="polite">Midnight</span>
-    <button type="button" class="snd" id="sndBtn" aria-pressed="false" aria-label="Play background music"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="snd-l" id="sndLbl">Sound off</span></button>
+    <button type="button" class="snd" id="sndBtn" aria-pressed="false" aria-label="Play background music"><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="snd-l" id="sndLbl">Music off</span></button>
     <input type="range" class="vol" id="vol" min="0" max="100" step="1" value="20" aria-label="Music volume">
     <nav aria-label="Main">
       <a href="#specimens">Specimens</a>
@@ -554,6 +556,7 @@
       <a href="#studio">Workshop</a>
       <a href="#contact">Nightfall</a>
     </nav>
+    <div class="schemes" role="group" aria-label="Colour scheme" id="schemes"></div><span class="scheme-name" id="schemeName" aria-live="polite">Midnight</span>
   </div>
   <div class="hairline"></div>
 </header>
@@ -1302,7 +1305,7 @@
     setV(0);
     function ramp(to,ms,done){cancelAnimationFrame(raf);var from=getV(),t0=performance.now();
       (function step(now){var k=Math.min(1,(now-t0)/ms);setV(from+(to-from)*k);if(k<1)raf=requestAnimationFrame(step);else if(done)done();})(t0);}
-    function set(on){b.setAttribute('aria-pressed',on);lbl.textContent=on?'Sound on':'Sound off';b.setAttribute('aria-label',on?'Stop background music':'Play background music');}
+    function set(on){b.setAttribute('aria-pressed',on);lbl.textContent=on?'Music on':'Music off';b.setAttribute('aria-label',on?'Stop background music':'Play background music');}
     vol.addEventListener('input',function(){readVol();if(!au.paused&&b.getAttribute('aria-pressed')==='true'){cancelAnimationFrame(raf);setV(TARGET);}
       try{localStorage.setItem('efeks-vol20',vol.value);}catch(e){}});
     function start(){graph();if(ctx&&ctx.state==='suspended')ctx.resume();var pr=au.play();set(true);ramp(TARGET,2200);startSway();return pr;}
