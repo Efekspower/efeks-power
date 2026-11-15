@@ -555,7 +555,7 @@
   <div class="bar">
     <a class="logo" href="#top" aria-label="Efeks Power, back to top"><svg viewBox="36 22 230 60" height="36" aria-hidden="true" style="display:block;overflow:visible"><text x="138" y="64" text-anchor="end" font-family="Big Shoulders Display" font-size="36" font-weight="200" letter-spacing="6" class="fi">EFEKS</text><path class="fi" d="M150 40 Q150 50 160 50 Q150 50 150 60 Q150 50 140 50 Q150 50 150 40Z"/><path class="ln" d="M132 50 h3 M165 50 h3 M150 32 v3 M150 65 v3"/><text x="166" y="64" font-family="Big Shoulders Display" font-size="36" font-weight="200" letter-spacing="6" class="fi">POWER</text><line class="ln" x1="40" y1="78" x2="262" y2="78" stroke-dasharray="2 4"/></svg></a>
     <button type="button" class="snd" id="sndBtn" aria-pressed="false" aria-label="Play background music"><span class="vinyl" aria-hidden="true"></span><span class="snd-l" id="sndLbl">Music off</span></button>
-    <span class="volw"><span class="vseg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><input type="range" class="vol" id="vol" min="0" max="100" step="1" value="20" aria-label="Music volume"></span>
+    <span class="volw"><span class="vseg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><input type="range" class="vol" id="vol" min="0" max="100" step="1" value="10" aria-label="Music volume"></span>
     <nav aria-label="Main">
       <a href="#specimens">Specimens</a>
       <a href="#drawings">Garis</a>
@@ -1303,9 +1303,9 @@
   /* background music: very quiet bed sound, fades in and out, play and stop.
      Routed through Web Audio so the volume works everywhere and Fig. 01 can sway with the sound. */
   (function(){
-    var au=document.getElementById('bed'),b=document.getElementById('sndBtn'),lbl=document.getElementById('sndLbl'),vol=document.getElementById('vol'),TARGET=.2,raf=null;
+    var au=document.getElementById('bed'),b=document.getElementById('sndBtn'),lbl=document.getElementById('sndLbl'),vol=document.getElementById('vol'),TARGET=.1,raf=null;
     var ctx=null,gain=null,an=null,buf=null,fbuf=null,level=0,peak=.02,swayOn=false;
-    try{var sv=localStorage.getItem('efeks-vol20');if(sv!==null){vol.value=sv;}}catch(e){}
+    try{var sv=localStorage.getItem('efeks-vol10');if(sv!==null){vol.value=sv;}}catch(e){}
     var segs=document.querySelectorAll('.vseg i');function readVol(){TARGET=vol.value/100;vol.style.setProperty('--v',vol.value+'%');var n=Math.ceil(vol.value/10);segs.forEach(function(c,k){c.classList.toggle('on',k<n);});}
     readVol();
     function graph(){
@@ -1323,7 +1323,7 @@
       (function step(now){var k=Math.min(1,(now-t0)/ms);setV(from+(to-from)*k);if(k<1)raf=requestAnimationFrame(step);else if(done)done();})(t0);}
     function set(on){b.setAttribute('aria-pressed',on);lbl.textContent=on?'Music on':'Music off';b.setAttribute('aria-label',on?'Stop background music':'Play background music');}
     vol.addEventListener('input',function(){readVol();if(!au.paused&&b.getAttribute('aria-pressed')==='true'){cancelAnimationFrame(raf);setV(TARGET);}
-      try{localStorage.setItem('efeks-vol20',vol.value);}catch(e){}});
+      try{localStorage.setItem('efeks-vol10',vol.value);}catch(e){}});
     function start(){graph();if(ctx&&ctx.state==='suspended')ctx.resume();var pr=au.play();set(true);ramp(TARGET,2200);startSway();return pr;}
     function stop(){set(false);ramp(0,900,function(){au.pause();});}
     b.onclick=function(){
