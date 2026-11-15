@@ -453,7 +453,15 @@
   .ld-ret{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border:.5px solid var(--ink);pointer-events:none}
   .ld-co{position:absolute;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--fine);white-space:nowrap;pointer-events:none}
   .ld{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(300px,62vw);display:flex;flex-direction:column;align-items:center}
-  .ld-fig{display:block;width:60%;aspect-ratio:1;margin:0 0 14px;opacity:0;animation:ldfig 1.2s ease .1s forwards}
+  .ld-figw{position:relative;width:60%;aspect-ratio:1;margin:0 0 -6%;z-index:0}
+  .ld-fig{display:block;width:100%;height:100%;opacity:0;animation:ldfig 1.2s ease .1s forwards,ldflick 3.2s steps(1) 1.3s infinite}
+  .ld-noise{position:absolute;inset:0;pointer-events:none;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:110px 110px;opacity:1;mix-blend-mode:overlay;filter:contrast(1.6);animation:ldgrain .5s steps(5) infinite}
+  @keyframes ldgrain{0%{background-position:0 0}20%{background-position:-37px 21px}40%{background-position:52px -44px}60%{background-position:-18px 63px}80%{background-position:71px 12px}100%{background-position:0 0}}
+  @keyframes ldflick{0%,100%{filter:none}31%{filter:brightness(1.18) contrast(1.05)}32%{filter:none}67%{filter:brightness(.82)}68%{filter:none}}
+  @media (prefers-reduced-motion:reduce){.ld-noise,.ld-fig{animation:none!important;opacity:1}}
+  .ld-name{position:relative;z-index:1}
   @keyframes ldfig{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
   .ld-name{width:100%;font-family:'Big Shoulders Display',sans-serif;font-weight:200;line-height:1;white-space:nowrap;text-align:center;font-size:40px;letter-spacing:.12em}
   .ld-name span{display:inline-block}
@@ -469,7 +477,7 @@
 <div id="loader" role="status" aria-live="polite" aria-label="Loading Efeks Power">
   <i class="ld-hx" id="ldhx"></i><i class="ld-vy" id="ldvy"></i><i class="ld-ret" id="ldret"></i><div class="ld-co" id="ldco"></div>
   <div class="ld">
-    <img class="ld-fig" id="ldfig" src="media/f3d7093d06.webp" alt="" aria-hidden="true">
+    <div class="ld-figw"><img class="ld-fig" id="ldfig" src="media/f3d7093d06.webp" alt="" aria-hidden="true"><i class="ld-noise" id="ldnoise"></i></div>
     <div class="ld-name" id="ldname" aria-hidden="true">EFEKS POWER</div>
     <div class="ld-bar"><i id="ldbar"></i></div>
     <div class="ld-row"><span id="ldmsg">Aligning the stars</span><span class="ld-pct" id="ldpct">0%</span></div>
@@ -487,6 +495,7 @@
   var WORD='EFEKS POWER',G='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   nm.innerHTML=WORD.split('').map(function(c){return '<span>'+(c===' '?'&nbsp;':c)+'</span>';}).join('');
   var sp=[].slice.call(nm.children);
+  var nz=document.getElementById('ldnoise');if(nz){nz.style.webkitMaskImage=nz.style.maskImage='url('+fg.src+')';}
   /* the title is exactly as wide as the bar */
   function fit(){sp.forEach(function(x,i){x.textContent=WORD[i]===' '?'\u00a0':WORD[i];x.style.width='';});nm.style.fontSize='40px';
     var r=document.createRange();r.selectNodeContents(nm);var w=r.getBoundingClientRect().width,ls=40*.12,want=nm.clientWidth+ls;
