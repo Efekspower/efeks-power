@@ -419,6 +419,9 @@
   }
   @media (max-width:1799px){.coords{display:none}}
   @media (max-width:1799px){.scheme-name{display:none}}
+  @media (min-width:700px) and (max-width:1799px){.bar{gap:16px}.bar nav a{padding:0 6px;letter-spacing:.16em}.vol{width:56px}.snd{margin-left:0}.bar .logo{margin-right:0}}
+  @media (min-width:700px) and (max-width:1599px){.bar nav a{padding:0 5px;font-size:10px;letter-spacing:.12em}.snd .snd-l{display:none}}
+  @media (min-width:1200px) and (max-width:1279px){.bar nav a{padding:0 4px;letter-spacing:.08em}.bar{gap:12px}}
   @media (min-width:1800px){.bar{max-width:1520px}}
   @media (min-width:561px){.bar .logo{margin-right:14px}}
   @media (max-width:699px){.bar nav{display:none}}
@@ -1009,6 +1012,16 @@
     var m=c.measureText('E');if(m.actualBoundingBoxAscent){var r=m.actualBoundingBoxAscent/100;if(document.fonts&&document.fonts.check(wt+' 100px '+ff))_cap=r;return r;}}catch(e){}return .72;}
   if(document.fonts)document.fonts.addEventListener&&document.fonts.addEventListener('loadingdone',function(){_cap=0;placeLink();});
   window.__heroAlign=function(){placeLink();};
+  /* header: the small logo starts exactly above the big title */
+  (function(){var bar=document.querySelector('header .bar'),logo=bar&&bar.querySelector('.logo');if(!logo)return;
+    function al(){bar.style.paddingLeft='';bar.style.paddingRight='';if(innerWidth<=560)return;
+      var ts=logo.querySelectorAll('svg text,svg path'),lx=1e9;[].forEach.call(ts,function(t){var r=t.getBoundingClientRect();if(r.width)lx=Math.min(lx,r.left);});if(lx===1e9)lx=logo.getBoundingClientRect().left;
+      var rg=document.createRange();rg.selectNodeContents(h1El);var tl=rg.getBoundingClientRect().left;
+      var pl=parseFloat(getComputedStyle(bar).paddingLeft)+(tl-lx);bar.style.paddingLeft=Math.max(8,pl).toFixed(1)+'px';
+      /* keep the right side matched to the content edge too */
+      var cs=getComputedStyle(heroEl),cr=heroEl.getBoundingClientRect().right-parseFloat(cs.paddingRight),br=bar.getBoundingClientRect().right;
+      bar.style.paddingRight=Math.max(8,parseFloat(getComputedStyle(bar).paddingRight)+(br-cr)).toFixed(1)+'px';}
+    window.__barAlign=al;al();addEventListener('resize',function(){setTimeout(al,60);});if(document.fonts&&document.fonts.ready)document.fonts.ready.then(al);setTimeout(al,1800);setTimeout(al,4000);})();
   function placeLink(){
     alignHero();
     if(innerWidth<=820){link.setAttribute('d','');linkDot.setAttribute('r',0);sky.style.transform='';return;}
