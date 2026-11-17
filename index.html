@@ -556,6 +556,8 @@
 @media (min-width:701px){.spread{grid-template-columns:repeat(4,minmax(0,1fr));max-width:80%;margin-left:auto;margin-right:auto}}
 /* no star in the hero title */
 .hero h1 .h1star{visibility:hidden;width:.22em!important;margin:0!important}
+/* compact hero: info columns tucked under the title, Specimens follows close */
+@media (min-width:1200px){.hero .meta{margin-top:26px!important;max-width:80%}.hero{padding-bottom:8px!important}}
 </style>
 </head>
 <body>
@@ -1526,7 +1528,7 @@
       var tab=innerWidth>560&&innerWidth<1200;
       var sm=innerWidth<=560,top=Math.max(sm?90:110,aY+(sm?26:40)),avail=titleTop-(sm?18:36)-top;
       if(tab){top=Math.max(aY+30,h1.offsetTop+h1.offsetHeight+28);avail=220;}
-      if(sm||avail<110){rift.style.display='none';return;}
+      if(innerWidth>=1200)avail=Math.max(avail,240);if(sm||avail<110){rift.style.display='none';return;}
       rift.style.display='';
       var h=Math.min(avail,300);if(sm)h=Math.round(h*.68);var ff=document.querySelector('.hero .fig .frame');if(ff){var fh=ff.getBoundingClientRect().height;if(fh>60)h=Math.round(fh);}var w=Math.round(h*.78);
       if(tab){var nb=top+avail+6;if(window.__riftBottom!==nb){window.__riftBottom=nb;if(window.__heroAlign)setTimeout(window.__heroAlign,0);}}else window.__riftBottom=0;
