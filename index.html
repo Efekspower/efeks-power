@@ -659,7 +659,7 @@
     if(L.parentNode)requestAnimationFrame(frame);}
   var gate=document.getElementById('ldGate'),eb=document.getElementById('ldEnter'),qb=null;
   function enter(withSound){if(L.classList.contains('go'))return;
-    if(withSound){if(window.__ldSound)window.__ldSound();if(window.__musicEnter)window.__musicEnter(3600);}
+    if(withSound){if(window.__ldSound)window.__ldSound();if(window.__musicQuiet)window.__musicQuiet();}
     else if(window.__musicQuiet)window.__musicQuiet();
     t0=performance.now();shown=0;L.classList.add('go');requestAnimationFrame(frame);}
   if(eb){eb.onclick=function(){enter(true);};document.addEventListener('keydown',function k(e){if(L.classList.contains('go')){document.removeEventListener('keydown',k);return;}if(e.key==='Enter'||e.key===' '){e.preventDefault();enter(true);}});}
