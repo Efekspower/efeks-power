@@ -552,6 +552,7 @@
 @media (max-width:1199px){#pinFig .frame{padding:6px!important}}
 .fc-long{font-style:normal}
 @media (max-width:600px){.hero .fig:not(.pin) .fc-long{display:none}.hero .fig:not(.pin) .frame{padding:6px 6px 20px!important}.hero .fig:not(.pin) figcaption{left:6px;bottom:7px;font-size:7px}}
+.sec-title .sec-sub{margin:6px 0 0!important}
 </style>
 </head>
 <body>
@@ -1557,7 +1558,7 @@
       var n=document.createElement('span');n.className='num';n.textContent=num;
       var big=document.createElement('span');big.className='big';big.setAttribute('aria-label',title);
       var letters=title.split('').map(function(ch){var s=document.createElement('span');s.textContent=ch===' '?'\u00a0':ch;s.setAttribute('aria-hidden','true');big.appendChild(s);return {el:s,ch:s.textContent};});
-      wrap.appendChild(n);wrap.appendChild(big);head.replaceChild(wrap,lab);
+      wrap.appendChild(n);wrap.appendChild(big);head.replaceChild(wrap,lab);var sub=head.querySelector(':scope > .label');if(sub){sub.classList.add('sec-sub');wrap.appendChild(sub);}
       var running=false;
       function fix(){letters.forEach(function(l){l.el.textContent=l.ch;l.el.style.width='';});letters.forEach(function(l){l.el.style.width=l.el.getBoundingClientRect().width+'px';l.el.style.textAlign='center';});}
       function scramble(){
