@@ -558,6 +558,18 @@
 .hero h1 .h1star{visibility:hidden;width:.22em!important;margin:0!important}
 /* compact hero: info columns tucked under the title, Specimens follows close */
 @media (min-width:1200px){.hero .meta{margin-top:26px!important;max-width:80%}.hero{padding-bottom:8px!important}}
+/* enlarged specimen: specimen plate like Fig. 00 / Fig. 01 */
+#lb .lb-inner .frame{background:var(--bg);border:.5px solid var(--hair)!important;padding:12px 12px 34px!important;filter:drop-shadow(0 10px 22px rgba(0,0,0,.5))}
+#lb .lb-inner .frame #lbVid{border:.5px solid var(--hair);box-sizing:border-box}
+#lb .lb-inner .lb-hd{left:12px;top:12px;width:calc(100% - 24px);height:auto;aspect-ratio:1/1}
+#lb .lb-inner .tick{border-color:var(--hair2)!important}
+#lb .lb-inner .tl{border-left-width:1px!important;border-top-width:1px!important}
+#lb .lb-inner .tr{border-right-width:1px!important;border-top-width:1px!important}
+#lb .lb-inner .bl{border-left-width:1px!important;border-bottom-width:1px!important}
+#lb .lb-inner .br{border-right-width:1px!important;border-bottom-width:1px!important}
+.lb-pcap{position:absolute;left:12px;right:12px;bottom:12px;z-index:3;pointer-events:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;line-height:1;text-transform:uppercase;color:var(--fine);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#lb .lb-cap #lbTitle{display:none}
+#lb .lb-cap{justify-content:flex-end}
 </style>
 </head>
 <body>
@@ -1008,6 +1020,7 @@
   <div class="lb-inner" id="lbInner">
     <span class="lb-line" aria-hidden="true"></span>
     <div class="frame" style="position:relative;border:.5px solid var(--hair)"><i class="tick tl" style="position:absolute;border-color:var(--hair2);border-style:solid;border-width:0;border-left-width:.5px;border-top-width:.5px"></i><i class="tick tr" style="position:absolute;border-color:var(--hair2);border-style:solid;border-width:0;border-right-width:.5px;border-top-width:.5px"></i><i class="tick bl" style="position:absolute;border-color:var(--hair2);border-style:solid;border-width:0;border-left-width:.5px;border-bottom-width:.5px"></i><i class="tick br" style="position:absolute;border-color:var(--hair2);border-style:solid;border-width:0;border-right-width:.5px;border-bottom-width:.5px"></i>
+      <span class="lb-pcap" id="lbPcap" aria-hidden="true"></span>
       <video id="lbVid" muted loop playsinline aria-label="The Listener, a robotic head sculpture with antennae, turbine eyes and glowing blue rings"></video>
     </div>
     <div class="lb-cap"><span id="lbTitle">Fig. 01 · The Listener · Robotic head · Light</span><button type="button" id="lbClose">Close</button></div>
@@ -1755,5 +1768,6 @@
   function fix(){line(nav.querySelector('.on'));}fix();addEventListener('resize',fix);if(document.fonts)document.fonts.ready.then(fix);setTimeout(fix,1500);
 });
 </script>
+<script>(function(){var t=document.getElementById('lbTitle'),p=document.getElementById('lbPcap');if(!t||!p)return;function u(){p.textContent=t.textContent;}u();new MutationObserver(u).observe(t,{childList:true,characterData:true,subtree:true});})();</script>
 </body>
 </html>
