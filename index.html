@@ -523,7 +523,7 @@
 .sg-tabs button{background:none;border:0;padding:6px 0;color:var(--fine);font:inherit;font-size:11px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer;transition:color .3s}
 .sg-tabs button:hover,.sg-tabs button.on{color:var(--ink)}.sg-tabs button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
 .sg-ul{position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--ink);transition:left .4s cubic-bezier(.3,.8,.2,1),width .4s cubic-bezier(.3,.8,.2,1)}
-.sg-panel[hidden]{display:none}.sg-panel.in{animation:sgIn .45s ease}@keyframes sgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sg-panel>.sec-note{margin-top:0!important;padding-top:4px}.sg-panel[hidden]{display:none}.sg-panel.in{animation:sgIn .45s ease}@keyframes sgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .sg-panel .rv{opacity:1!important;transform:none!important}
 @media (max-width:560px){.sg-tabs{gap:20px}.sg-tabs button{font-size:10px;letter-spacing:.16em}}
 </style>
@@ -620,8 +620,7 @@
     <nav aria-label="Main">
       <a href="#specimens">Specimens</a>
       <a href="#drawings">Seni Garis</a>
-      <a href="#transmissions">Transmissions</a>
-      <a href="#covers">Covers</a>
+      <a href="#transmissions">Collage Art</a>
       <a href="#studio">Workshop</a>
       <a href="#contact">Nightfall</a>
     </nav>
@@ -852,7 +851,9 @@
 
 
   <section id="transmissions">
-    <div class="sec-head rv"><span class="label">03 · Transmissions</span><div class="hairline"></div></div>
+    <div class="sec-head rv"><span class="label">03 · Collage Art</span><div class="hairline"></div></div>
+    <nav class="sg-tabs rv" role="tablist" aria-label="Collage Art"><button type="button" role="tab" class="on" aria-selected="true" data-k="tx" id="sgt-tx">Transmissions</button><button type="button" role="tab" aria-selected="false" data-k="cv" id="sgt-cv">Covers</button><i class="sg-ul" aria-hidden="true"></i></nav>
+    <div class="sg-panel" role="tabpanel" data-k="tx" aria-labelledby="sgt-tx">
     <p class="sec-note rv">Transmission — the passage of light, energy and celestial influence across the cosmic field, where stars, asterisms and their spatial relationships become expressions of connection, movement and exchange.</p>
     <div class="galbox txbox" id="txBox"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i>
     <div class="garis-grid tx-grid">
@@ -883,10 +884,8 @@
       </figure>
     </div>
     </div>
-  </section>
-
-  <section id="covers">
-    <div class="sec-head rv"><span class="label">04 · Covers</span><div class="hairline"></div></div>
+  </div>
+    <div class="sg-panel" role="tabpanel" data-k="cv" aria-labelledby="sgt-cv" hidden>
     <div class="galbox cvbox" id="cvBox"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i>
     <div class="garis-grid cv-grid">
       <figure class="gp cv rv" style="transition-delay:0.00s">
@@ -915,11 +914,14 @@
       </figure>
     </div>
     </div>
+  </div>
   </section>
+
+  
 
 
   <section id="studio">
-    <div class="sec-head rv"><span class="label">05 · The workshop</span><div class="hairline"></div></div>
+    <div class="sec-head rv"><span class="label">04 · The workshop</span><div class="hairline"></div></div>
     <div class="studio">
       <div class="studio-text rv">
         <h2 class="rv" id="wireH" aria-label="Machines that dream in wire."><span class="ln2" aria-hidden="true">Machines</span><span class="ln2" aria-hidden="true">that dream</span><span class="ln2" aria-hidden="true">in wire.</span></h2>
@@ -937,7 +939,7 @@
   </section>
 
   <section id="contact" class="contact">
-    <div class="sec-head rv"><span class="label">06 · Nightfall</span><div class="hairline"></div></div>
+    <div class="sec-head rv"><span class="label">05 · Nightfall</span><div class="hairline"></div></div>
     <span class="label rv">Commission a machine, or come and see one move</span>
   </section>
 </main>
@@ -958,16 +960,16 @@
 </div>
 </figure>
 
-<nav class="pinrow" id="pinRow" aria-label="Sections"><div class="pr-idx"><span class="pr-lbl">Index</span><ol class="pr-list"><li><a href="#specimens" data-sec="specimens"><span class="pr-n">01</span><span class="pr-t">Specimens</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#drawings" data-sec="drawings"><span class="pr-n">02</span><span class="pr-t">Seni Garis</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#transmissions" data-sec="transmissions"><span class="pr-n">03</span><span class="pr-t">Transmissions</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#covers" data-sec="covers"><span class="pr-n">04</span><span class="pr-t">Covers</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#studio" data-sec="studio"><span class="pr-n">05</span><span class="pr-t">The Workshop</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#contact" data-sec="contact"><span class="pr-n">06</span><span class="pr-t">Nightfall</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li></ol></div></nav>
+<nav class="pinrow" id="pinRow" aria-label="Sections"><div class="pr-idx"><span class="pr-lbl">Index</span><ol class="pr-list"><li><a href="#specimens" data-sec="specimens"><span class="pr-n">01</span><span class="pr-t">Specimens</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#drawings" data-sec="drawings"><span class="pr-n">02</span><span class="pr-t">Seni Garis</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#transmissions" data-sec="transmissions"><span class="pr-n">03</span><span class="pr-t">Collage Art</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#studio" data-sec="studio"><span class="pr-n">04</span><span class="pr-t">The Workshop</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#contact" data-sec="contact"><span class="pr-n">05</span><span class="pr-t">Nightfall</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li></ol></div></nav>
 
 <nav class="sidx" id="sidx" aria-label="Index">
   <span class="sidx-lbl">Index</span>
   <ol>
     <li><a href="#specimens" data-sec="specimens"><span class="n">01</span><span class="t">Specimens</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
     <li><a href="#drawings" data-sec="drawings"><span class="n">02</span><span class="t">Seni Garis</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
-    <li><a href="#transmissions" data-sec="transmissions"><span class="n">03</span><span class="t">Transmissions</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li><li><a href="#covers" data-sec="covers"><span class="n">04</span><span class="t">Covers</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
-    <li><a href="#studio" data-sec="studio"><span class="n">05</span><span class="t">The Workshop</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
-    <li><a href="#contact" data-sec="contact"><span class="n">06</span><span class="t">Nightfall</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
+    <li><a href="#transmissions" data-sec="transmissions"><span class="n">03</span><span class="t">Collage Art</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
+    <li><a href="#studio" data-sec="studio"><span class="n">04</span><span class="t">The Workshop</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
+    <li><a href="#contact" data-sec="contact"><span class="n">05</span><span class="t">Nightfall</span><svg viewBox="-6 -6 12 12" aria-hidden="true"><path class="fa" d="M0 -5 Q0 0 5 0 Q0 0 0 5 Q0 0 -5 0 Q0 0 0 -5Z"/></svg></a></li>
   </ol>
 </nav>
 
@@ -1609,7 +1611,7 @@
   /* phones & tablets: a frozen row under the header that holds the pinned Fig. 01 and names the section you're in */
   (function(){
     var row=document.getElementById('pinRow'),pin=document.getElementById('pinFig'),hd=document.querySelector('header');if(!row||!pin)return;
-    var secs=[['specimens','01','Specimens'],['drawings','02','Seni Garis'],['transmissions','03','Transmissions'],['covers','04','Covers'],['studio','05','The Workshop'],['contact','06','Nightfall']];
+    var secs=[['specimens','01','Specimens'],['drawings','02','Seni Garis'],['transmissions','03','Collage Art'],['studio','04','The Workshop'],['contact','05','Nightfall']];
     var idx=row.querySelector('.pr-idx');
     function lay(){
       if(innerWidth>=1200){pin.style.top='';pin.style.width='';pin.style.right='';return;}
@@ -1712,15 +1714,15 @@
 </script>
 
 <script>
-/* Seni Garis: one section, three tabs */
-(function(){var nav=document.querySelector('.sg-tabs');if(!nav)return;var bs=[].slice.call(nav.querySelectorAll('button')),ul=nav.querySelector('.sg-ul'),ps=[].slice.call(document.querySelectorAll('.sg-panel'));
+/* grouped sections (Seni Garis, Collage Art): tabs switch the gallery */
+[].forEach.call(document.querySelectorAll('.sg-tabs'),function(nav){var sec=nav.closest('section'),bs=[].slice.call(nav.querySelectorAll('button')),ul=nav.querySelector('.sg-ul'),ps=[].slice.call(sec.querySelectorAll('.sg-panel'));
   function line(b){ul.style.left=b.offsetLeft+'px';ul.style.width=b.offsetWidth+'px';}
   function go(b,focus){bs.forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;});
     ps.forEach(function(p){var on=p.dataset.k===b.dataset.k;if(on&&p.hidden){p.hidden=false;p.classList.remove('in');void p.offsetWidth;p.classList.add('in');}else if(!on)p.hidden=true;});
     line(b);if(focus)b.focus();dispatchEvent(new Event('resize'));}
   bs.forEach(function(b,i){b.onclick=function(){go(b);};b.onkeydown=function(e){var k=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(k){e.preventDefault();go(bs[(i+k+bs.length)%bs.length],true);}};b.tabIndex=i?-1:0;});
   function fix(){line(nav.querySelector('.on'));}fix();addEventListener('resize',fix);if(document.fonts)document.fonts.ready.then(fix);setTimeout(fix,1500);
-})();
+});
 </script>
 </body>
 </html>
