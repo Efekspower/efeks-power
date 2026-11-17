@@ -553,6 +553,7 @@
 .fc-long{font-style:normal}
 @media (max-width:600px){.hero .fig:not(.pin) .fc-long{display:none}.hero .fig:not(.pin) .frame{padding:6px 6px 20px!important}.hero .fig:not(.pin) figcaption{left:6px;bottom:7px;font-size:7px}}
 .sec-title .sec-sub{margin:6px 0 0!important}
+@media (min-width:701px){.spread{grid-template-columns:repeat(4,minmax(0,1fr));max-width:80%;margin-left:auto;margin-right:auto}}
 </style>
 </head>
 <body>
@@ -782,7 +783,7 @@
 
   <section id="drawings">
     <div class="sec-head rv"><span class="label">02 · Seni Garis</span><div class="hairline"></div></div>
-    <nav class="sg-tabs rv" role="tablist" aria-label="Seni Garis"><button type="button" role="tab" class="on" aria-selected="true" data-k="garis" id="sgt-garis">Garis Frekuensi</button><button type="button" role="tab" aria-selected="false" data-k="dim" id="sgt-dim">Dimensionless</button><button type="button" role="tab" aria-selected="false" data-k="sym" id="sgt-sym">Symbolism</button><i class="sg-ul" aria-hidden="true"></i></nav>
+    <nav class="sg-tabs rv" role="tablist" aria-label="Seni Garis"><button type="button" role="tab" class="on" aria-selected="true" data-k="garis" id="sgt-garis">Garis Frekuensi</button><button type="button" role="tab" aria-selected="false" data-k="halus" id="sgt-halus">Garis Halus</button><button type="button" role="tab" aria-selected="false" data-k="dim" id="sgt-dim">Dimensionless</button><button type="button" role="tab" aria-selected="false" data-k="sym" id="sgt-sym">Symbolism</button><i class="sg-ul" aria-hidden="true"></i></nav>
     <div class="sg-panel" role="tabpanel" data-k="garis" aria-labelledby="sgt-garis">
     <div class="galbox garisbox" id="garisBox"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i>
     <div class="garis-grid">
@@ -820,25 +821,24 @@
       </figure>
     </div>
     </div>
+    </div>
+    <div class="sg-panel" role="tabpanel" data-k="halus" aria-labelledby="sgt-halus" hidden>
     <div class="galbox varbox"><i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i>
     <div class="spread" id="spread">
-      <button type="button" class="card" style="--r:-9deg;--y:34px;--i:0;--dx:2" data-name="Garis Bintang 1.0" data-no="08" aria-label="Enlarge Garis Bintang 1.0">
+      <button type="button" class="card mid" style="--r:-7deg;--y:24px;--i:0;--dx:1.5" data-name="Garis Bintang 1.0" data-no="08" aria-label="Enlarge Garis Bintang 1.0">
         <i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i><i class="grain" aria-hidden="true"></i><img src="media/9608dc8022.webp" alt="Garis Bintang 1.0, gold line labyrinth artwork by Efeks Power" loading="lazy" decoding="async">
       </button>
-      <button type="button" class="card" style="--r:-4.5deg;--y:10px;--i:1;--dx:1" data-name="Garis Frekuensi" data-no="07" aria-label="Enlarge Garis Frekuensi">
+      <button type="button" class="card" style="--r:-2.5deg;--y:6px;--i:1;--dx:.5" data-name="Garis Frekuensi" data-no="07" aria-label="Enlarge Garis Frekuensi">
         <i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i><i class="grain" aria-hidden="true"></i><img src="media/86a0525a6e.webp" alt="Garis Frekuensi, gold line labyrinth artwork by Efeks Power" loading="lazy" decoding="async">
       </button>
-      <button type="button" class="card mid" style="--r:0deg;--y:0px;--i:2;--dx:0" data-name="Garis Halus" data-no="06" aria-label="Enlarge Garis Halus">
-        <i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i><i class="grain" aria-hidden="true"></i><img src="media/b9cf38c3d3.webp" alt="Garis Halus, gold line labyrinth artwork by Efeks Power" loading="lazy" decoding="async">
-      </button>
-      <button type="button" class="card" style="--r:4.5deg;--y:10px;--i:3;--dx:-1" data-name="Garis Halus · Plain" data-no="06" aria-label="Enlarge Garis Halus · Plain">
+      <button type="button" class="card" style="--r:2.5deg;--y:6px;--i:2;--dx:-.5" data-name="Garis Halus · Plain" data-no="06" aria-label="Enlarge Garis Halus · Plain">
         <i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i><i class="grain" aria-hidden="true"></i><img src="media/884165ed58.webp" alt="Garis Halus · Plain, gold line labyrinth artwork by Efeks Power" loading="lazy" decoding="async">
       </button>
-      <button type="button" class="card" style="--r:9deg;--y:34px;--i:4;--dx:-2" data-name="Garis Bintang 1.1" data-no="08" aria-label="Enlarge Garis Bintang 1.1">
+      <button type="button" class="card" style="--r:7deg;--y:24px;--i:3;--dx:-1.5" data-name="Garis Bintang 1.1" data-no="08" aria-label="Enlarge Garis Bintang 1.1">
         <i class="ctk c1"></i><i class="ctk c2"></i><i class="ctk c3"></i><i class="ctk c4"></i><i class="grain" aria-hidden="true"></i><img src="media/9778e77a35.webp" alt="Garis Bintang 1.1, gold line labyrinth artwork by Efeks Power" loading="lazy" decoding="async">
       </button>
     </div>
-    <p class="spread-cap" id="spreadCap" aria-live="polite"><span class="cap-no">06</span> · <span class="cap-name">Garis Halus</span></p>
+    <p class="spread-cap" id="spreadCap" aria-live="polite"><span class="cap-no">08</span> · <span class="cap-name">Garis Bintang 1.0</span></p>
     </div>
   </div>
     <div class="sg-panel" role="tabpanel" data-k="dim" aria-labelledby="sgt-dim" hidden>
