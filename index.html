@@ -581,6 +581,8 @@
 .cp4{right:-7px;bottom:-7px;border-right-width:1px;border-bottom-width:1px}
 .clb-pcap{position:absolute;left:12px;right:12px;bottom:12px;pointer-events:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;line-height:1;text-transform:uppercase;color:var(--fine);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #clbCap{display:none}
+/* phones: open straight into the pinned view (index + Fig. 01 row), no big hero title */
+@media (max-width:560px){.hero h1,.hero .fig,.hero .tw,.rift{display:none!important}.hero{min-height:0!important;justify-content:flex-start!important;padding-bottom:20px!important}.hero .meta{margin-top:0!important}}
 </style>
 </head>
 <body>
@@ -1327,7 +1329,7 @@
     if(!('IntersectionObserver' in window))return;
     var pinned=false;
     new IntersectionObserver(function(es){var e=es[0];
-      var out=!e.isIntersecting&&e.boundingClientRect.top<0;
+      var out=matchMedia('(max-width:560px)').matches||(!e.isIntersecting&&e.boundingClientRect.top<0);
       if(out&&!pinned){pinned=true;box.classList.add('show');handoff(orig,pinF);}
       else if(!out&&pinned){pinned=false;box.classList.remove('show');handoff(pinF,orig);}
     },{threshold:0,rootMargin:'-80px 0px 0px 0px'}).observe(heroFig);
@@ -1549,7 +1551,7 @@
       var aY=ap.matrixTransform(sk.getScreenCTM()).y-hr.top;
       if(titleTop<aY){var mt=hero.querySelector('.meta');if(mt)titleTop=mt.offsetTop;}
       if(innerWidth>=1200&&titleTop<aY+150)titleTop=hero.offsetHeight-10;
-      var tab=innerWidth>560&&innerWidth<1200;
+      var tab=innerWidth>560&&innerWidth<1200;if(tab){rift.style.display='none';if(window.__riftBottom){window.__riftBottom=0;if(window.__heroAlign)setTimeout(window.__heroAlign,0);}return;}
       var sm=innerWidth<=560,top=Math.max(sm?90:110,aY+(sm?26:40)),avail=titleTop-(sm?18:36)-top;
       if(tab){top=Math.max(aY+30,h1.offsetTop+h1.offsetHeight+28);avail=220;}
       if(innerWidth>=1200)avail=Math.max(avail,240);if(sm||avail<110){rift.style.display='none';return;}
@@ -1675,7 +1677,7 @@
       /* Fig. 01 frame is square-ish: match its height to the index */
       pin.style.width=Math.round(ih*.98)+'px';pin.style.right=(pad+6)+'px';
       var ph=pin.offsetHeight;pin.style.top=Math.round(hh+(rh-ph)/2)+'px';
-      document.documentElement.style.setProperty('--pinrow',(hh+rh)+'px');
+      document.documentElement.style.setProperty('--pinrow',(hh+rh)+'px');var hz=document.querySelector('.hero');if(hz)hz.style.paddingTop=innerWidth<=560?(rh+22)+'px':'';
     }
     var links=[].slice.call(row.querySelectorAll('a'));
     function cur(){var y=innerHeight*.45,c=null;secs.forEach(function(q){var e=document.getElementById(q[0]);if(e&&e.getBoundingClientRect().top<y)c=q[0];});
