@@ -537,6 +537,20 @@
 .rp3{left:-4px;bottom:-4px;border-left-width:1px;border-bottom-width:1px}.rp4{right:-4px;bottom:-4px;border-right-width:1px;border-bottom-width:1px}
 .rp-cap{position:absolute;left:9px;right:9px;bottom:8px;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--fine);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rift-hole{inset:9px 9px 26px!important;clip-path:none!important;-webkit-clip-path:none!important;border:.5px solid var(--hair)}
+
+/* Fig 01 specimen plate (matches Fig. 00) */
+.hero .fig:not(.pin) .hang{filter:drop-shadow(0 8px 16px rgba(0,0,0,.45))}
+.hero .fig:not(.pin) .frame{background:var(--bg);border:.5px solid var(--hair);padding:9px 9px 26px!important}
+.hero .fig:not(.pin) .frame video{border:.5px solid var(--hair);box-sizing:border-box}
+.hero .fig:not(.pin) .tick{width:10px;height:10px;border-color:var(--ink)}
+.hero .fig:not(.pin) .tl{border-left-width:1px;border-top-width:1px}
+.hero .fig:not(.pin) .tr{border-right-width:1px;border-top-width:1px}
+.hero .fig:not(.pin) .bl{border-left-width:1px;border-bottom-width:1px}
+.hero .fig:not(.pin) .br{border-right-width:1px;border-bottom-width:1px}
+.hero .fig:not(.pin) figcaption{position:absolute;left:9px;right:9px;bottom:8px;margin:0;z-index:3;pointer-events:none;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.2em;line-height:1;color:var(--fine)}
+.hero .fig:not(.pin) figcaption span{display:inline!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fc-long{font-style:normal}
+@media (max-width:600px){.hero .fig:not(.pin) .fc-long{display:none}.hero .fig:not(.pin) .frame{padding:6px 6px 20px!important}.hero .fig:not(.pin) figcaption{left:6px;bottom:7px;font-size:7px}}
 </style>
 </head>
 <body>
@@ -662,7 +676,7 @@
         <video poster="media/cbfcd0aa2d.webp" id="figVid" data-hd="media/hd_de90eecb81.mp4" autoplay muted loop playsinline preload="auto" aria-label="Looping animation of The Listener, a robotic head sculpture with antennae, turbine eyes and glowing blue rings" src="media/82c3637684.mp4"></video>
       </div>
       <button type="button" id="figBtn" class="vbtn">Pause</button>
-      <figcaption><span>Fig. 01 · The Listener</span></figcaption>
+      <figcaption><span>Fig. 01<em class="fc-long"> · The Listener</em></span></figcaption>
     </div>
 </figure>
     <h1 class="tall" aria-label="Efeks Power" id="title"></h1>
@@ -967,7 +981,7 @@
     <video id="pinVid" muted loop playsinline preload="none" aria-label="Looping animation of The Listener, a robotic head sculpture with antennae, turbine eyes and glowing blue rings"></video>
   </div>
   <button type="button" id="pinBtn" class="vbtn">Pause</button>
-  <figcaption><span>Fig. 01 · The Listener</span></figcaption>
+  <figcaption><span>Fig. 01<em class="fc-long"> · The Listener</em></span></figcaption>
 </div>
 </figure>
 
