@@ -570,6 +570,17 @@
 .lb-pcap{position:absolute;left:12px;right:12px;bottom:12px;z-index:3;pointer-events:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;line-height:1;text-transform:uppercase;color:var(--fine);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #lb .lb-cap #lbTitle{display:none}
 #lb .lb-cap{justify-content:flex-end}
+/* enlarged Seni Garis / Collage Art: specimen plate like Fig. 00 / Fig. 01 */
+.clb-plate{position:relative;background:var(--bg);border:.5px solid var(--hair);padding:12px 12px 34px;filter:drop-shadow(0 10px 22px rgba(0,0,0,.5));transition:rotate .55s cubic-bezier(.2,.8,.2,1),scale .55s cubic-bezier(.2,.8,.2,1)}
+.clb .clb-plate img{max-height:calc(min(80vh,80dvh,1600px) - 46px);max-width:calc(90vw - 24px);box-shadow:none;border:.5px solid var(--hair);box-sizing:border-box}
+#clbImg{transition:none}
+.cpt{position:absolute;width:12px;height:12px;border:0 solid var(--hair2)}
+.cp1{left:-7px;top:-7px;border-left-width:1px;border-top-width:1px}
+.cp2{right:-7px;top:-7px;border-right-width:1px;border-top-width:1px}
+.cp3{left:-7px;bottom:-7px;border-left-width:1px;border-bottom-width:1px}
+.cp4{right:-7px;bottom:-7px;border-right-width:1px;border-bottom-width:1px}
+.clb-pcap{position:absolute;left:12px;right:12px;bottom:12px;pointer-events:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;line-height:1;text-transform:uppercase;color:var(--fine);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#clbCap{display:none}
 </style>
 </head>
 <body>
@@ -1030,7 +1041,7 @@
 <audio id="bed" loop preload="auto" src="media/414792f9b7.mp3"></audio>
 
 <div class="clb" id="clb" role="dialog" aria-modal="true" aria-label="Artwork, enlarged" hidden>
-  <figure><img id="clbImg" alt=""><figcaption><span id="clbCap"></span><button type="button" id="clbClose" aria-label="Close">✕ Close</button></figcaption></figure>
+  <figure><div class="clb-plate" id="clbPlate"><i class="cpt cp1"></i><i class="cpt cp2"></i><i class="cpt cp3"></i><i class="cpt cp4"></i><img id="clbImg" alt=""><span class="clb-pcap" id="clbPcap" aria-hidden="true"></span></div><figcaption><span id="clbCap"></span><button type="button" id="clbClose" aria-label="Close">✕ Close</button></figcaption></figure>
   <div class="clb-tools" id="clbTools"><button type="button" id="clbRotL" aria-label="Rotate left">↺</button><button type="button" id="clbRotR" aria-label="Rotate right">↻</button></div>
 </div>
 
@@ -1608,19 +1619,19 @@
     function fl(a,b,rev,done){b.style.transformOrigin='top left';var A=a.getBoundingClientRect(),B=b.getBoundingClientRect();
       var k=[{transform:'translate('+(A.left-B.left)+'px,'+(A.top-B.top)+'px) scale('+(A.width/B.width)+')'},{transform:'none'}];if(rev)k.reverse();
       var an=b.animate(k,{duration:RM?1:650,easing:'cubic-bezier(.2,.8,.2,1)'});an.onfinish=done||null;b.style.transformOrigin='top left';}
-    function open(c){from=c;setRot(0,true);img.src=c.querySelector('img').src;img.alt=c.querySelector('img').alt;ccap.textContent=c.dataset.no+' · '+c.dataset.name;
+    var plate=document.getElementById('clbPlate');function open(c){from=c;setRot(0,true);img.src=c.querySelector('img').src;img.alt=c.querySelector('img').alt;ccap.textContent=c.dataset.no+' · '+c.dataset.name;document.getElementById('clbPcap').textContent=ccap.textContent;
       clb.hidden=false;void clb.offsetWidth;clb.classList.add('open');
-      (img.complete?Promise.resolve():new Promise(function(r){img.onload=r;})).then(function(){fl(c,img,false);});
+      (img.complete?Promise.resolve():new Promise(function(r){img.onload=r;})).then(function(){fl(c,plate,false);});
       cls.focus();document.body.style.overflow='hidden';}
     var rot=0,tools=document.getElementById('clbTools');
-    function setRot(d,instant){rot=d;if(instant)img.style.transition='none';if(rot)img.style.transformOrigin='50% 50%';img.style.rotate=rot+'deg';
+    function setRot(d,instant){rot=d;if(instant)plate.style.transition='none';if(rot)plate.style.transformOrigin='50% 50%';plate.style.rotate=rot+'deg';
       var side=((rot%180)+180)%180===90,k=1;
-      if(side){var w=img.offsetWidth,h=img.offsetHeight;k=Math.min(innerWidth*.9/h,innerHeight*.82/w);}
-      img.style.scale=k.toFixed(3);if(instant){void img.offsetWidth;img.style.transition='';}}
+      if(side){var w=plate.offsetWidth,h=plate.offsetHeight;k=Math.min(innerWidth*.9/h,innerHeight*.82/w);}
+      plate.style.scale=k.toFixed(3);if(instant){void plate.offsetWidth;plate.style.transition='';}}
     document.getElementById('clbRotL').onclick=function(e){e.stopPropagation();setRot(rot-90);};
     document.getElementById('clbRotR').onclick=function(e){e.stopPropagation();setRot(rot+90);};
     addEventListener('resize',function(){if(!clb.hidden)setRot(rot,true);});
-    function close(){if(!from)return;var f=from;from=null;setRot(0,true);clb.classList.remove('open');fl(f,img,true,function(){clb.hidden=true;});document.body.style.overflow='';f.focus({preventScroll:true});}
+    function close(){if(!from)return;var f=from;from=null;setRot(0,true);clb.classList.remove('open');fl(f,plate,true,function(){clb.hidden=true;});document.body.style.overflow='';f.focus({preventScroll:true});}
     cards.forEach(function(c){c.addEventListener('click',function(){open(c);});});
     [].forEach.call(document.querySelectorAll('.gp-frame'),function(c){c.addEventListener('click',function(){open(c);});});
     cls.onclick=function(e){e.stopPropagation();close();};clb.addEventListener('click',function(e){if(e.target!==cls&&!tools.contains(e.target))close();});
